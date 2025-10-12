@@ -1,7 +1,7 @@
 import { TextInput } from "@/components/text-input/text-input";
 import environment from "@/constants/environment";
 import { Colors } from "@/constants/theme";
-import { asyncSetAuthUser } from "@/states/auth-user/action";
+import { asyncLogoutGoogle, asyncSetAuthUser, asyncSignInWithGoogle } from "@/states/auth-user/action";
 import { Image } from "expo-image";
 import { Formik } from "formik";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
@@ -27,6 +27,14 @@ export default function LoginScreen() {
 
   const handleButtonRegister = () => {
     console.log("oke regist")
+  }
+
+  const handleSignInGoogle = () => {
+    dispatch(asyncSignInWithGoogle() as any)
+  }
+
+  const handleLogoutGoogle = () => {
+    dispatch(asyncLogoutGoogle() as any)
   }
 
   return (
@@ -107,7 +115,7 @@ export default function LoginScreen() {
 
         <View>
           <Text style={{ color: Colors.grey[500], textAlign: "center" }}>Or continue with</Text>
-          <TouchableOpacity style={styles.buttonSingInGoogle}>
+          <TouchableOpacity style={styles.buttonSingInGoogle} onPress={() => handleSignInGoogle()}>
             <Image
               source={require('@/assets/images/google-icon.webp')}
               style={{ width: 30, height: 30 }}
@@ -117,6 +125,10 @@ export default function LoginScreen() {
           </TouchableOpacity>
         </View>
       </View>
+
+      <TouchableOpacity onPress={() => handleLogoutGoogle()}>
+        <Text>Logout</Text>
+      </TouchableOpacity>
     </View>
   );
 }

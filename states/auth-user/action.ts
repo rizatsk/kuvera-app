@@ -51,16 +51,28 @@ export function asyncUnsetAuth() {
 export function asyncSignInWithGoogle() {
     return async (dispatch: any) => {
         try {
+            GoogleSignin.configure();
             await GoogleSignin.hasPlayServices();
             const response = await GoogleSignin.signIn();
             if (isSuccessResponse(response)) {
                 console.log('Sign in with google', response)
+                const tokenGoogle = await GoogleSignin.getTokens();
+                console.log('Tokgn sign in google', tokenGoogle)
             } else {
-                // sign in was cancelled by user
-                console.log('Cancel by user', response)
+                console.log("Google sign in cancel by user")
             }
         } catch (error) {
             console.log("Error sign in with google", error)
+        }
+    }
+}
+
+export function asyncLogoutGoogle() {
+    return async (dispatch: any) => {
+        try {
+            await GoogleSignin.signOut();
+        } catch (error) {
+            console.log("Error logout google", error)
         }
     }
 }

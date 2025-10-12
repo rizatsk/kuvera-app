@@ -9,11 +9,12 @@ export default {
         "userInterfaceStyle": "automatic",
         "newArchEnabled": true,
         "ios": {
+            "bundleIdentifier": "com.rjshubkuvera",
             "supportsTablet": true,
             "googleServicesFile": "./GoogleService-Info.plist",
         },
         "android": {
-            "package": "com.rjshub.kuvera",
+            "package": "com.rjshubkuvera",
             "adaptiveIcon": {
                 "backgroundColor": "#E6F4FE",
                 "foregroundImage": "./assets/images/android-icon-foreground.png",
@@ -50,7 +51,6 @@ export default {
                 }
             ],
             ["@react-native-google-signin/google-signin"],
-
         ],
         "experiments": {
             "typedRoutes": true,
