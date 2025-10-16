@@ -7,12 +7,20 @@ import { Platform } from 'react-native';
 
 const tintColorLight = '#0a48a4';
 const tintColorDark = '#fff';
-const blueKuvera = "#476EAE";
+const blueKuvera = "#1a1280ff";
 const tealKuvera = "#48B3AF";
 const greenKuvera = "#A7E399";
 const yellowKuvera = "#F6FF99";
+const greyBackground = "#F7FBFC";
+const greyBackground2 = "#DEFCF9";
 
 export const Colors = {
+  blueKuvera,
+  tealKuvera,
+  yellowKuvera,
+  greenKuvera,
+  greyBackground,
+  greyBackground2,
   light: {
     text: '#11181C',
     background: '#fff',
@@ -29,8 +37,6 @@ export const Colors = {
     tabIconDefault: '#9BA1A6',
     tabIconSelected: tintColorDark,
   },
-  blueKuvera,
-  tealKuvera,
   red: {
     900: '#C6000A',
     800: '#D40F1B',

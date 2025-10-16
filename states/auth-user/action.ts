@@ -4,7 +4,7 @@ import {
     isSuccessResponse
 } from '@react-native-google-signin/google-signin';
 import { ActionReducer } from "../action";
-import { AsyncSetAuthType, AuthUserType } from "./type";
+import { AsyncSetAuthType, AuthUserType, TypeAuth } from "./type";
 
 export function setAuthUserActionCreator(user: AuthUserType) {
     return {
@@ -29,8 +29,14 @@ export function asyncSetAuthUser({
 }: AsyncSetAuthType) {
     return async (dispatch: any) => {
         try {
-            await setItem("user-auth", JSON.stringify(dataUser))
-            dispatch(setAuthUserActionCreator(dataUser));
+            const user = {
+                name: 'Rizat',
+                email: dataUser.name,
+                photo_profile_url: 'https:123.com',
+                type: 'Local' as TypeAuth
+            }
+            await setItem("user-auth", JSON.stringify(user))
+            dispatch(setAuthUserActionCreator(user));
         } catch (error) {
             console.log("Error set auth", error)
         }
@@ -41,6 +47,8 @@ export function asyncUnsetAuth() {
     return async (dispatch: any) => {
         try {
             await deleteItem("user-auth")
+            GoogleSignin.configure();
+            await GoogleSignin.signOut().catch((error) => console.log('Fail google signin to logout', error));
             dispatch(unsetAuthUserActionCreator())
         } catch (error) {
             console.log("Error unset auth", error)
@@ -57,22 +65,21 @@ export function asyncSignInWithGoogle() {
             if (isSuccessResponse(response)) {
                 console.log('Sign in with google', response)
                 const tokenGoogle = await GoogleSignin.getTokens();
-                console.log('Tokgn sign in google', tokenGoogle)
+                console.log('Token signin google', tokenGoogle);
+
+                const user = {
+                    name: response.data.user.name || '',
+                    email: response.data.user.name || '',
+                    photo_profile_url: response.data.user.photo || '',
+                    type: 'Google' as TypeAuth
+                };
+                await setItem("user-auth", JSON.stringify(user))
+                dispatch(setAuthUserActionCreator(user))
             } else {
                 console.log("Google sign in cancel by user")
             }
         } catch (error) {
             console.log("Error sign in with google", error)
-        }
-    }
-}
-
-export function asyncLogoutGoogle() {
-    return async (dispatch: any) => {
-        try {
-            await GoogleSignin.signOut();
-        } catch (error) {
-            console.log("Error logout google", error)
         }
     }
 }

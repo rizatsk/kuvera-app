@@ -1,7 +1,10 @@
 import { ActionReducerType } from "../action"
 
 export type AuthUserType = {
-    name: string
+    name: string,
+    email: string,
+    photo_profile_url: string,
+    type: TypeAuth,
 }
 
 export type AsyncSetAuthType = {
@@ -16,3 +19,5 @@ export type ActionAuthUserReducer = {
     user: AuthUserType | null;
   };
 }
+
+export type TypeAuth = 'Google' | 'Local'

@@ -1,108 +1,102 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
-
-import { HelloWave } from '@/components/hello-wave';
-import ParallaxScrollView from '@/components/parallax-scroll-view';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { asyncUnsetAuth } from '@/states/auth-user/action';
-import { Button } from '@react-navigation/elements';
-import { Link } from 'expo-router';
-import { useDispatch } from 'react-redux';
+import CardCategoryOutput from '@/components/card/cardCategoryOutput';
+import CardRecent from '@/components/card/cardRecent';
+import { Colors } from '@/constants/theme';
+import { categoryOutput, recentPayment } from '@/helper/mock-data';
+import AntDesign from '@expo/vector-icons/AntDesign';
+import Entypo from '@expo/vector-icons/Entypo';
+import FontAwesome from '@expo/vector-icons/FontAwesome';
+import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
+import { ScrollView, Text, View } from 'react-native';
+import HeaderHome from '../../../components/home/header';
 
 export default function HomeScreen() {
-  const dispatch = useDispatch();
-
-  const handleLogout = async () => {
-    dispatch(asyncUnsetAuth() as any)
-  }
-
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12',
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <Link href="/modal">
-          <Link.Trigger>
-            <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-          </Link.Trigger>
-          <Link.Preview />
-          <Link.Menu>
-            <Link.MenuAction title="Action" icon="cube" onPress={() => alert('Action pressed')} />
-            <Link.MenuAction
-              title="Share"
-              icon="square.and.arrow.up"
-              onPress={() => alert('Share pressed')}
-            />
-            <Link.Menu title="More" icon="ellipsis">
-              <Link.MenuAction
-                title="Delete"
-                icon="trash"
-                destructive
-                onPress={() => alert('Delete pressed')}
+    <View style={{ flex: 1, backgroundColor: "white" }}>
+      <HeaderHome />
+      <ScrollView style={{ paddingVertical: 30 }} showsVerticalScrollIndicator={false}>
+        {/* Invest Account value */}
+        <View style={{ alignItems: "center", flex: 1, flexDirection: "column", paddingHorizontal: 14, }}>
+          <Text style={{ fontWeight: "500" }}>Your invest account value is</Text>
+          <View style={{ marginVertical: 14, width: "80%", height: 0.8, backgroundColor: Colors.grey[400], }} />
+          <Text style={{ fontWeight: '600', fontSize: 25 }}>Rp. 1.500.532.000</Text>
+        </View>
+        {/* Home Menu */}
+        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', marginTop: 20, gap: 35, backgroundColor: Colors.greyBackground2, paddingVertical: 10 }}>
+          {/* Card */}
+          <View style={{ alignItems: 'center' }}>
+            <View style={{ width: 50, height: 50, backgroundColor: Colors.tealKuvera, borderRadius: 10, justifyContent: 'center', alignItems: 'center', position: "static" }}>
+              <View style={{ position: "absolute", top: 5, left: 10 }}>
+                <FontAwesome name="plus-circle" size={16} color="white" />
+              </View>
+              <FontAwesome6 name="shopify" size={24} color="white" />
+            </View>
+            <Text style={{ fontWeight: '500', color: Colors.grey[500], fontSize: 13 }}>Spending</Text>
+          </View>
+          <View style={{ alignItems: 'center' }}>
+            <View style={{ width: 50, height: 50, backgroundColor: Colors.tealKuvera, borderRadius: 10, justifyContent: 'center', alignItems: 'center', position: "static" }}>
+              <View style={{ position: "absolute", top: 5, left: 4 }}>
+                <FontAwesome name="plus-circle" size={16} color="white" />
+              </View>
+              <AntDesign name="dollar" size={24} color="white" />
+            </View>
+            <Text style={{ fontWeight: '500', color: Colors.grey[500], fontSize: 13 }}>Income</Text>
+          </View>
+          <View style={{ alignItems: 'center' }}>
+            <View style={{ width: 50, height: 50, backgroundColor: Colors.tealKuvera, borderRadius: 10, justifyContent: 'center', alignItems: 'center', position: "static" }}>
+              <View style={{ position: "absolute", top: 5, left: 5 }}>
+                <FontAwesome name="plus-circle" size={16} color="white" />
+              </View>
+              <FontAwesome6 name="credit-card" size={24} color="white" />
+            </View>
+            <Text style={{ fontWeight: '500', color: Colors.grey[500], fontSize: 13 }}>Category</Text>
+          </View>
+        </View>
+        {/* Category Output */}
+        <View style={{ flex: 1, marginTop: 30, paddingHorizontal: 14, }}>
+          <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: 15 }}>
+            <Text style={{ fontWeight: "500", fontSize: 16 }}>Category</Text>
+            <Entypo name="chevron-right" size={24} color="black" />
+          </View>
+          {/* Component Card */}
+          <ScrollView
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={{ gap: 10 }}
+          >
+            {/* Card */}
+            {categoryOutput.map((category, index) => (
+              <CardCategoryOutput
+                key={index}
+                title={category.title}
+                subTitle={category.subTitle}
+                money={category.money}
+                icon={category.icon}
               />
-            </Link.Menu>
-          </Link.Menu>
-        </Link>
-
-        <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          {`When you're ready, run `}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-      <Button onPress={handleLogout}>Logout</Button>
-    </ParallaxScrollView>
+            ))}
+          </ScrollView>
+        </View>
+        {/* Recent */}
+        <View style={{ flex: 1, marginVertical: 30, backgroundColor: Colors.greyBackground, paddingVertical: 10 }}>
+          <View style={{ paddingHorizontal: 14 }}>
+            <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: 15 }}>
+              <Text style={{ fontWeight: "500", fontSize: 16 }}>Recent</Text>
+              <Entypo name="chevron-right" size={24} color="black" />
+            </View>
+            <View style={{ gap: 10 }}>
+              {/* Card */}
+              {recentPayment.map((recent, index) => (
+                <CardRecent
+                  key={index}
+                  title={recent.title}
+                  date={recent.date}
+                  icon={recent.icon}
+                  amount={recent.amount}
+                />
+              ))}
+            </View>
+          </View>
+        </View>
+      </ScrollView>
+    </View>
   );
 }
-
-const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-  },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-  },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
-  },
-});

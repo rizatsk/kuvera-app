@@ -1,7 +1,7 @@
 import { TextInput } from "@/components/text-input/text-input";
 import environment from "@/constants/environment";
 import { Colors } from "@/constants/theme";
-import { asyncLogoutGoogle, asyncSetAuthUser, asyncSignInWithGoogle } from "@/states/auth-user/action";
+import { asyncSetAuthUser, asyncSignInWithGoogle } from "@/states/auth-user/action";
 import { Image } from "expo-image";
 import { Formik } from "formik";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
@@ -32,11 +32,7 @@ export default function LoginScreen() {
   const handleSignInGoogle = () => {
     dispatch(asyncSignInWithGoogle() as any)
   }
-
-  const handleLogoutGoogle = () => {
-    dispatch(asyncLogoutGoogle() as any)
-  }
-
+  
   return (
     <View style={styles.container}>
       <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
@@ -113,6 +109,7 @@ export default function LoginScreen() {
         {/* Line */}
         <View style={styles.line} />
 
+        {/* Sign in with google */}
         <View>
           <Text style={{ color: Colors.grey[500], textAlign: "center" }}>Or continue with</Text>
           <TouchableOpacity style={styles.buttonSingInGoogle} onPress={() => handleSignInGoogle()}>
@@ -125,10 +122,6 @@ export default function LoginScreen() {
           </TouchableOpacity>
         </View>
       </View>
-
-      <TouchableOpacity onPress={() => handleLogoutGoogle()}>
-        <Text>Logout</Text>
-      </TouchableOpacity>
     </View>
   );
 }
