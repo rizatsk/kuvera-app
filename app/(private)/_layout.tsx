@@ -1,3 +1,4 @@
+import BackNavigation from "@/components/back-navigation";
 import { useAppSelector } from "@/states";
 import { router, Stack } from "expo-router";
 import { useEffect } from "react";
@@ -16,7 +17,26 @@ export default function PrivateLayout() {
     return (
         <>
             {authUser && (
-                <Stack screenOptions={{ headerShown: false }} />
+                <Stack>
+                    <Stack.Screen
+                        name="(tabs)"
+                        options={{
+                            headerShown: false,
+                        }}
+                    />
+                    <Stack.Screen
+                        name="spending/form-add-spending"
+                        options={{
+                            title: "Form Add Spending",
+                            headerShown: true,
+                            headerTitleAlign: 'center',
+                            headerTitleStyle: {
+                                fontSize: 17,
+                            },
+                            headerLeft: () => <BackNavigation />
+                        }}
+                    />
+                </Stack>
             )}
         </>
     )

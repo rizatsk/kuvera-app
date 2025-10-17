@@ -13,6 +13,7 @@ const greenKuvera = "#A7E399";
 const yellowKuvera = "#F6FF99";
 const greyBackground = "#F7FBFC";
 const greyBackground2 = "#DEFCF9";
+const tealKuvera2 = "#016B61";
 
 export const Colors = {
   blueKuvera,
@@ -21,6 +22,7 @@ export const Colors = {
   greenKuvera,
   greyBackground,
   greyBackground2,
+  tealKuvera2,
   light: {
     text: '#11181C',
     background: '#fff',

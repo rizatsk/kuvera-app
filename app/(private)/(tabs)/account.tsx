@@ -1,14 +1,15 @@
 import { useAppSelector } from "@/states";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text } from "react-native";
+import { ScreenContentWrapper } from "react-native-screens";
 
 export default function AccountScreen() {
   const authUser = useAppSelector((states) => states.authUser);
 
   return (
-    <View style={styles.container}>
+    <ScreenContentWrapper style={styles.container}>
       <Text>Account Screen</Text>
       <Text>Name: {authUser.name}</Text>
-    </View>
+    </ScreenContentWrapper>
   );
 }
 
