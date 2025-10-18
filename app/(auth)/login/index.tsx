@@ -1,4 +1,4 @@
-import { TextInput } from "@/components/text-input/text-input";
+import { TextInput } from "@/components/input/text-input/text-input";
 import environment from "@/constants/environment";
 import { Colors } from "@/constants/theme";
 import { asyncSetAuthUser, asyncSignInWithGoogle } from "@/states/auth-user/action";
