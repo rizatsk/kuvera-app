@@ -1,8 +1,8 @@
 import { Colors } from "@/constants/theme";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Animated, GestureResponderEvent, LayoutChangeEvent, Text, View } from "react-native";
+import { Animated, GestureResponderEvent, LayoutChangeEvent, Modal, Text, TouchableOpacity, View } from "react-native";
 import MaskInput from "react-native-mask-input";
-import { getStyle } from "./style";
+import { getStyle, modalStyles } from "./style";
 import { TextInputProps } from "./type";
 
 export const TextInput: React.FunctionComponent<TextInputProps> = (props) => {
@@ -20,9 +20,12 @@ export const TextInput: React.FunctionComponent<TextInputProps> = (props) => {
     showSoftInputOnFocus = true,
     inputType = 'text',
     onChangeText,
+    selectOptions,
+    onSelect,
     ...rest
   } = props;
 
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const [labelWidth, setLabelWidth] = useState(0);
   const [focused, setFocused] = useState(false);
 
@@ -57,7 +60,11 @@ export const TextInput: React.FunctionComponent<TextInputProps> = (props) => {
   }, [value, focused]);
 
   const handleOnFocus = () => {
-    setFocused(true);
+    if (selectOptions && onSelect) {
+      setIsModalVisible(true);
+    } else {
+      setFocused(true);
+    }
   };
   const handleOnBlur = () => {
     setFocused(false);
@@ -90,7 +97,7 @@ export const TextInput: React.FunctionComponent<TextInputProps> = (props) => {
   }, [value, inputType]);
 
   const handleOnTouchStart = (e: GestureResponderEvent) => {
-    onTouchStart?.(e);
+    if (!selectOptions || !onSelect) onTouchStart?.(e);
   };
 
   const handleOnchangeText = (
@@ -98,54 +105,97 @@ export const TextInput: React.FunctionComponent<TextInputProps> = (props) => {
     unmasked: string,
     obfuscated: string
   ) => {
-    onChangeText?.(masked, unmasked, obfuscated);
+    if (unmasked.length <= counter) {
+      onChangeText?.(masked, unmasked, obfuscated);
+    } else {
+      console.log("Batas input maksimum terlampaui!");
+    }
   }
 
+  const handleOptionSelect = (value: string) => {
+    onSelect?.(value);
+    setIsModalVisible(false);
+    setFocused(false)
+  };
+
   return (
-      <View style={computedStyle.fieldWrapper}>
-        <View style={computedStyle.fieldContainer}>
-          {label && (
-            <Animated.View
-              style={[
-                computedStyle.labelContainer,
-                {
-                  transform: [{ scale }, { translateY }, { translateX }],
-                },
-              ]}
-              onLayout={getLabelWidth}
-              pointerEvents="none"
-            >
-              <Text style={computedStyle.label}>
-                {label}
-              </Text>
-            </Animated.View>
-          )}
-          <View style={computedStyle.inputWrapper}>
-            <MaskInput
-              value={computedValue}
-              style={[computedStyle.textField]}
-              onFocus={handleOnFocus}
-              onBlur={handleOnBlur}
-              placeholderTextColor={
-                focused ? Colors.black[500] : 'transparent'
-              }
-              showSoftInputOnFocus={showSoftInputOnFocus}
-              onTouchStart={handleOnTouchStart}
-              onChangeText={handleOnchangeText}
-              {...rest}
-            />
-            {inputIcon && counter > 0 && inputIcon && (
-                <Text style={computedStyle.counter}>
-                  {`${computedValue?.length}/${counter}`}
-                </Text>
-              )}
-          </View>
-        </View>
-        {errorMessage && (
-          <Text style={computedStyle.messageHelper}>
-            {errorMessage}
-          </Text>
+    <View style={computedStyle.fieldWrapper}>
+      <View style={computedStyle.fieldContainer}>
+        {label && (
+          <Animated.View
+            style={[
+              computedStyle.labelContainer,
+              {
+                transform: [{ scale }, { translateY }, { translateX }],
+              },
+            ]}
+            onLayout={getLabelWidth}
+            pointerEvents="none"
+          >
+            <Text style={computedStyle.label}>
+              {label}
+            </Text>
+          </Animated.View>
         )}
+        <View style={computedStyle.inputWrapper}>
+          <MaskInput
+            value={computedValue}
+            style={[computedStyle.textField]}
+            onFocus={handleOnFocus}
+            onBlur={handleOnBlur}
+            placeholderTextColor={
+              focused ? Colors.black[500] : 'transparent'
+            }
+            showSoftInputOnFocus={showSoftInputOnFocus}
+            onTouchStart={handleOnTouchStart}
+            onChangeText={handleOnchangeText}
+            {...rest}
+          />
+          {counter > 0 && (
+            <Text style={computedStyle.counter}>
+              {`${computedValue?.length}/${counter}`}
+            </Text>
+          )}
+        </View>
       </View>
+      {errorMessage && (
+        <Text style={computedStyle.messageHelper}>
+          {errorMessage}
+        </Text>
+      )}
+
+      {/* Modal Pop up */}
+      {selectOptions && (
+        <Modal
+          animationType="fade"
+          transparent={true}
+          visible={isModalVisible}
+          onRequestClose={() => setIsModalVisible(false)}
+        >
+          <View style={modalStyles.centeredView}>
+            <View style={modalStyles.modalView}>
+              <Text style={modalStyles.modalTitle}>Pilih {label}</Text>
+
+              {selectOptions.map((option) => (
+                <TouchableOpacity
+                  key={option}
+                  style={modalStyles.optionButton}
+                  onPress={() => handleOptionSelect(option)}
+                >
+                  <Text style={modalStyles.optionText}>{option}</Text>
+                </TouchableOpacity>
+              ))}
+
+              <TouchableOpacity
+                style={modalStyles.closeButton}
+                onPress={() => setIsModalVisible(false)}
+              >
+                <Text style={modalStyles.closeText}>Tutup</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </Modal>
+      )}
+    </View>
   )
 }

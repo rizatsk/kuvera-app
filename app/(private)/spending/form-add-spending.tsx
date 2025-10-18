@@ -1,10 +1,11 @@
+import FormAddSpending from '@/components/page/spending/form'
 import React from 'react'
-import { Text, View } from 'react-native'
+import { View } from 'react-native'
 
-export default function FormAddSpending() {
+export default function PageFormAddSpending() {
   return (
-    <View style={{flex: 1, backgroundColor: "white", paddingVertical: 18, paddingHorizontal: 14}}>
-        <Text>Form Add Spending</Text>
+    <View style={{flex: 1, backgroundColor: "white", paddingVertical: 18, paddingHorizontal: 20}}>
+        <FormAddSpending />
     </View>
   )
 }

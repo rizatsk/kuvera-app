@@ -10,4 +10,6 @@ export interface TextInputProps extends MaskInputProps {
     counter?: number;
     inputIcon?: ReactNode;
     inputType?: 'text' | 'date';
+    selectOptions?: Array<string>,
+    onSelect?: (value: string) => void
 }

@@ -1,11 +1,11 @@
-import CardCategoryOutput from '@/components/home/card/cardCategoryOutput';
-import CardRecent from '@/components/home/card/cardRecent';
-import HomeMenu from '@/components/home/menu';
+import CardCategoryOutput from '@/components/page/home/card/cardCategoryOutput';
+import CardRecent from '@/components/page/home/card/cardRecent';
+import HomeMenu from '@/components/page/home/menu';
 import { Colors } from '@/constants/theme';
 import { categoryOutput, recentPayment } from '@/helper/mock-data';
 import Entypo from '@expo/vector-icons/Entypo';
 import { ScrollView, Text, View } from 'react-native';
-import HeaderHome from '../../../components/home/header';
+import HeaderHome from '../../../components/page/home/header';
 
 export default function HomeScreen() {
   return (
