@@ -28,7 +28,7 @@ export default function PrivateLayout() {
                     <Stack.Screen
                         name="spending/form-add-spending"
                         options={{
-                            title: "Form Add Spending",
+                            title: "Add Spending",
                             headerShown: true,
                             headerTitleAlign: 'center',
                             headerTitleStyle: {
