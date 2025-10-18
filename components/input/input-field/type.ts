@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import { MaskInputProps } from 'react-native-mask-input';
 
-export interface TextInputProps extends MaskInputProps {
+export interface InputProps extends MaskInputProps {
     label: string;
     helperMessage?: string;
     editable?: boolean;

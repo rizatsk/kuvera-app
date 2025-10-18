@@ -1,4 +1,4 @@
-import FormAddSpending from '@/components/page/spending/form'
+import FormAddSpending from '@/components/page/spending/form-add-spending'
 import React from 'react'
 import { View } from 'react-native'
 

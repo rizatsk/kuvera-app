@@ -86,12 +86,12 @@ export default function LoginScreen() {
               </View>
 
               {/* Forgot password */}
-              <TouchableOpacity style={[styles.buttonForgotPassword, { paddingTop: 15 }]} onPress={() => handleForgotPassword()}>
+              <TouchableOpacity activeOpacity={0.6} style={[styles.buttonForgotPassword, { paddingTop: 15 }]} onPress={() => handleForgotPassword()}>
                 <Text style={styles.buttonTextFogotPassword}>Forgot password ?</Text>
               </TouchableOpacity>
 
               {/* Button */}
-              <TouchableOpacity style={styles.button} onPress={() => handleSubmit()}>
+              <TouchableOpacity activeOpacity={0.6} style={styles.button} onPress={() => handleSubmit()}>
                 <Text style={styles.buttonText}>Login</Text>
               </TouchableOpacity>
             </>
@@ -101,7 +101,7 @@ export default function LoginScreen() {
         {/* Button register */}
         <View style={{ flexDirection: "row", paddingTop: 20 }}>
           <Text style={{ color: Colors.grey[500] }}>Not have a account ? </Text>
-          <TouchableOpacity style={styles.buttonForgotPassword} onPress={() => handleButtonRegister()}>
+          <TouchableOpacity activeOpacity={0.6} style={styles.buttonForgotPassword} onPress={() => handleButtonRegister()}>
             <Text style={styles.buttonTextFogotPassword}>Register Now</Text>
           </TouchableOpacity>
         </View>
@@ -112,7 +112,7 @@ export default function LoginScreen() {
         {/* Sign in with google */}
         <View>
           <Text style={{ color: Colors.grey[500], textAlign: "center" }}>Or continue with</Text>
-          <TouchableOpacity style={styles.buttonSingInGoogle} onPress={() => handleSignInGoogle()}>
+          <TouchableOpacity activeOpacity={0.6} style={styles.buttonSingInGoogle} onPress={() => handleSignInGoogle()}>
             <Image
               source={require('@/assets/images/google-icon.webp')}
               style={{ width: 30, height: 30 }}

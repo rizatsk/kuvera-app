@@ -1,8 +1,8 @@
 import { Colors } from "@/constants/theme";
 import { Platform, StyleSheet, TextStyle, ViewStyle } from "react-native";
-import { TextInputProps } from "./type";
+import { InputProps } from "./type";
 
-interface ComputedStyleProps {
+export interface ComputedStyleProps {
   fieldWrapper?: ViewStyle;
   fieldContainer?: ViewStyle;
   labelContainer?: ViewStyle;
@@ -57,7 +57,7 @@ export const modalStyles = StyleSheet.create({
   }
 });
 
-export const getStyle = (props: TextInputProps, isFocused: boolean): ComputedStyleProps => {
+export const getStyle = (props: InputProps, isFocused: boolean): ComputedStyleProps => {
   const { editable = true, isError, errorMessage } = props;
 
   const stateColor =
@@ -119,7 +119,7 @@ export const getStyle = (props: TextInputProps, isFocused: boolean): ComputedSty
 
   computedStyle.messageHelper = {
     alignSelf: 'flex-start',
-    marginTop: 4,
+    marginTop: 2,
     color: stateColor.text,
     fontSize: 13,
     paddingLeft: 3,

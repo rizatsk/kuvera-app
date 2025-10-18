@@ -7,6 +7,7 @@ export default function BackNavigation() {
     const navigation = useNavigation();
     return (
         <TouchableOpacity
+            activeOpacity={0.6}
             onPress={() => navigation.goBack()}
             style={{marginRight: 20}}
         >

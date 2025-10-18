@@ -54,6 +54,7 @@ export default function CutomTabs({ state, descriptors, navigation }: BottomTabB
 
           return (
             <TouchableOpacity
+              activeOpacity={0.6}
               key={label as string}
               accessibilityState={isFocused ? { selected: true } : {}}
               accessibilityLabel={options.tabBarAccessibilityLabel}

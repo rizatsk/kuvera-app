@@ -15,7 +15,7 @@ export default function HomeMenu() {
 
     return (
         <View style={style.HomeMenu}>
-            <TouchableOpacity style={{ alignItems: 'center' }} onPress={() => AddSpendingHandling()}>
+            <TouchableOpacity activeOpacity={0.6} style={{ alignItems: 'center' }} onPress={() => AddSpendingHandling()}>
                 <View style={style.squareIcon}>
                     <View style={{ position: "absolute", top: 5, left: 10 }}>
                         <FontAwesome name="plus-circle" size={16} color="white" />
@@ -24,7 +24,7 @@ export default function HomeMenu() {
                 </View>
                 <Text style={style.title}>Spending</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={{ alignItems: 'center' }}>
+            <TouchableOpacity activeOpacity={0.6} style={{ alignItems: 'center' }}>
                 <View style={style.squareIcon}>
                     <View style={{ position: "absolute", top: 5, left: 4 }}>
                         <FontAwesome name="plus-circle" size={16} color="white" />
@@ -33,7 +33,7 @@ export default function HomeMenu() {
                 </View>
                 <Text style={style.title}>Income</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={{ alignItems: 'center' }}>
+            <TouchableOpacity activeOpacity={0.6} style={{ alignItems: 'center' }}>
                 <View style={style.squareIcon}>
                     <View style={{ position: "absolute", top: 5, left: 5 }}>
                         <FontAwesome name="plus-circle" size={16} color="white" />

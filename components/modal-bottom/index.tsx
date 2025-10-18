@@ -62,7 +62,7 @@ export default function ModalKuvera({
         >
             <TouchableOpacity
                 style={modalStyles.backdrop}
-                activeOpacity={1}
+                activeOpacity={0.6}
                 onPress={onClose}
             >
                 <Animated.View
@@ -72,7 +72,7 @@ export default function ModalKuvera({
                     {/* Header */}
                     <View style={modalStyles.header}>
                         <Text style={modalStyles.title}>{title}</Text>
-                        <TouchableOpacity onPress={onClose} style={modalStyles.closeButton}>
+                        <TouchableOpacity activeOpacity={0.6} onPress={onClose} style={modalStyles.closeButton}>
                             <Ionicons name="close" size={24} color="#333" />
                         </TouchableOpacity>
                     </View>
