@@ -1,3 +1,4 @@
+
 import BackNavigation from "@/components/back-navigation";
 import { useAppSelector } from "@/states";
 import { router, Stack } from "expo-router";
@@ -27,7 +28,7 @@ export default function PrivateLayout() {
                     <Stack.Screen
                         name="spending/form-add-spending"
                         options={{
-                            title: "Add Spending",
+                            title: "Form Add Spending",
                             headerShown: true,
                             headerTitleAlign: 'center',
                             headerTitleStyle: {

@@ -9,7 +9,7 @@ import { ScrollView, Text, TouchableOpacity, View } from 'react-native'
 export default function FormAddSpending() {
     const [valueFormik, setValueFormik] = useState({
         category: "",
-        date: ""
+        date: `${new Date()}`
     });
 
     const ListCategories = ["Shopping", "Kebutuhan", "Bengkel"];

@@ -9,7 +9,7 @@ export default function BackNavigation() {
         <TouchableOpacity
             activeOpacity={0.6}
             onPress={() => navigation.goBack()}
-            style={{marginRight: 20}}
+            style={{ paddingHorizontal: 5, paddingVertical: 5}}
         >
             <FontAwesome5 name="chevron-left" size={22} color="black" />
         </TouchableOpacity>
