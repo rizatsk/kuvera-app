@@ -1,8 +1,9 @@
+import CustomText from '@/components/custom-text';
 import ModalKuvera from '@/components/modal-bottom';
 import { Colors } from '@/constants/theme';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import React, { useState } from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 import InputFieldKuvera from '../input-field';
 import { getStyle } from '../input-field/style';
 import { modalStyles } from './style';
@@ -64,7 +65,7 @@ const RadioInput: React.FunctionComponent<RadioInputProps> = (props) => {
                             style={modalStyles.optionItem}
                             onPress={() => setSelectedValue(option)}
                         >
-                            <Text style={modalStyles.optionLabel}>{option}</Text>
+                            <CustomText style={modalStyles.optionLabel}>{option}</CustomText>
                             <Ionicons
                                 name={selectedValue === option ? "radio-button-on" : "radio-button-off"}
                                 size={22}
@@ -75,7 +76,7 @@ const RadioInput: React.FunctionComponent<RadioInputProps> = (props) => {
                 </View>
 
                 <TouchableOpacity activeOpacity={0.6} style={modalStyles.buttonSave} onPress={() => handleSubmit()}>
-                    <Text style={{ color: "white", fontSize: 15, fontWeight: '500' }}>Simpan</Text>
+                    <CustomText style={{ color: "white", fontSize: 15, fontWeight: '500' }}>Simpan</CustomText>
                 </TouchableOpacity>
             </ModalKuvera>
         </InputFieldKuvera>

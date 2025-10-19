@@ -1,5 +1,4 @@
-
-import BackNavigation from "@/components/back-navigation";
+import { OptionStackScreen } from "@/components/option-stack-screen";
 import { useAppSelector } from "@/states";
 import { router, Stack } from "expo-router";
 import { useEffect } from "react";
@@ -29,12 +28,7 @@ export default function PrivateLayout() {
                         name="spending/form-add-spending"
                         options={{
                             title: "Add Spending",
-                            headerShown: true,
-                            headerTitleAlign: 'center',
-                            headerTitleStyle: {
-                                fontSize: 17,
-                            },
-                            headerLeft: () => <BackNavigation />
+                            ...OptionStackScreen,
                         }}
                     />
                 </Stack>

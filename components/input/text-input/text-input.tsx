@@ -66,6 +66,8 @@ export const TextInput: React.FunctionComponent<InputProps> = (props) => {
       handleOnBlur={handleOnBlur}
       showSoftInputOnFocus={showSoftInputOnFocus}
       handleOnchangeText={handleOnchangeText}
+      keyboardType={rest.keyboardType}
+      inputType={inputType}
     />
   )
 }

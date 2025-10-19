@@ -1,9 +1,10 @@
+import CustomText from '@/components/custom-text'
 import { Colors } from '@/constants/theme'
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5'
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6'
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons'
 import React from 'react'
-import { Text, View } from 'react-native'
+import { View } from 'react-native'
 
 type CardProps = {
     title: string
@@ -26,15 +27,15 @@ export default function CardCategoryOutput({
     };
 
     return (
-        <View style={{ paddingHorizontal: 10, paddingVertical: 5, borderRadius: 10, borderColor: Colors.tealKuvera, borderWidth: 1, }}>
+        <View style={{ paddingHorizontal: 10, paddingVertical: 5, borderRadius: 10, borderColor: Colors.tealKuvera, borderWidth: 2, }}>
             <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
                 <View style={{ backgroundColor: Colors.light.tint, width: 50, height: 50, justifyContent: "center", alignItems: "center", borderRadius: 10 }}>
                     <IconComponent />
                 </View>
                 <View>
-                    <Text style={{ fontWeight: "500", fontSize: 15 }}>{title}</Text>
-                    <Text style={{ fontSize: 13, color: Colors.grey[600] }}>{subTitle}</Text>
-                    <Text style={{ fontWeight: "600", fontSize: 15, color: Colors.tealKuvera }}>{money}</Text>
+                    <CustomText style={{ fontWeight: "500", fontSize: 15 }}>{title}</CustomText>
+                    <CustomText style={{ fontSize: 13, color: Colors.grey[600] }}>{subTitle}</CustomText>
+                    <CustomText style={{ fontWeight: "700", fontSize: 14, color: Colors.tealKuvera }}>{money}</CustomText>
                 </View>
             </View>
         </View>

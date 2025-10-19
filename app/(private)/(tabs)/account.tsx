@@ -1,5 +1,6 @@
+import CustomText from "@/components/custom-text";
 import { useAppSelector } from "@/states";
-import { StyleSheet, Text } from "react-native";
+import { StyleSheet } from "react-native";
 import { ScreenContentWrapper } from "react-native-screens";
 
 export default function AccountScreen() {
@@ -7,8 +8,8 @@ export default function AccountScreen() {
 
   return (
     <ScreenContentWrapper style={styles.container}>
-      <Text>Account Screen</Text>
-      <Text>Name: {authUser.name}</Text>
+      <CustomText>Account Screen</CustomText>
+      <CustomText>Name: {authUser.name}</CustomText>
     </ScreenContentWrapper>
   );
 }

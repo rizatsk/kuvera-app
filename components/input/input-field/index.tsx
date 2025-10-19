@@ -1,6 +1,8 @@
+import CustomText from '@/components/custom-text';
 import { Colors } from '@/constants/theme';
+import { formatRupiah } from '@/helper/format-rupiah';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { Animated, GestureResponderEvent, LayoutChangeEvent, Pressable, Text, View } from 'react-native';
+import { Animated, GestureResponderEvent, LayoutChangeEvent, Pressable, View } from 'react-native';
 import MaskInput, { MaskInputProps } from 'react-native-mask-input';
 import { ComputedStyleProps } from './style';
 
@@ -18,6 +20,7 @@ interface InputFieldProps extends MaskInputProps {
     handleOnTouchStart?: (e: GestureResponderEvent) => void
     handleOnchangeText?: (masked: string, unmasked: string, obfuscated: string) => void
     counter?: number
+    inputType?: 'text' | 'money'
 }
 
 export default function InputFieldKuvera({
@@ -34,6 +37,7 @@ export default function InputFieldKuvera({
     handleOnTouchStart,
     handleOnchangeText,
     counter = 0,
+    inputType = 'text',
     ...rest
 }: InputFieldProps) {
     const [labelWidth, setLabelWidth] = useState(0);
@@ -72,6 +76,8 @@ export default function InputFieldKuvera({
     };
 
     const computedValue = useMemo(() => {
+        if (inputType === 'money') return formatRupiah(value || '');
+
         return value;
     }, [value]);
     // End For Input Field
@@ -90,9 +96,9 @@ export default function InputFieldKuvera({
                         onLayout={getLabelWidth}
                         pointerEvents="none"
                     >
-                        <Text style={computedStyle.label}>
+                        <CustomText style={computedStyle.label}>
                             {label}
-                        </Text>
+                        </CustomText>
                     </Animated.View>
                 )}
                 {isInput ? (
@@ -111,21 +117,21 @@ export default function InputFieldKuvera({
                             {...rest}
                         />
                         {counter > 0 && (
-                            <Text style={computedStyle.counter}>
+                            <CustomText style={computedStyle.counter}>
                                 {`${computedValue?.length}/${counter}`}
-                            </Text>
+                            </CustomText>
                         )}
                     </View>
                 ) : (
                     <Pressable onPress={() => handleOnFocus()} style={computedStyle.inputWrapper} >
-                        <Text style={computedStyle.textField}>{computedValue}</Text>
+                        <CustomText style={computedStyle.textField}>{computedValue}</CustomText>
                     </Pressable>
                 )}
             </View>
             {errorMessage && (
-                <Text style={computedStyle.messageHelper}>
+                <CustomText style={computedStyle.messageHelper}>
                     {errorMessage}
-                </Text>
+                </CustomText>
             )}
             {children}
         </View>

@@ -1,7 +1,8 @@
+import CustomText from "@/components/custom-text";
 import { useAppSelector } from "@/states";
 import { router, Stack } from "expo-router";
 import { useEffect } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 
 export default function AuthLayout() {
     const isPreload = useAppSelector((states) => states.preload);
@@ -17,7 +18,7 @@ export default function AuthLayout() {
         <>
             {isPreload ? (
                 <View style={styles.container}>
-                    <Text>Loading</Text>
+                    <CustomText>Loading</CustomText>
                 </View>
             ) : (
                 <>

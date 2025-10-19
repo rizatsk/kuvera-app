@@ -1,10 +1,11 @@
+import CustomText from "@/components/custom-text";
 import { TextInput } from "@/components/input/text-input/text-input";
 import environment from "@/constants/environment";
 import { Colors } from "@/constants/theme";
 import { asyncSetAuthUser, asyncSignInWithGoogle } from "@/states/auth-user/action";
 import { Image } from "expo-image";
 import { Formik } from "formik";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { useDispatch } from "react-redux";
 import { LoginSchema, ValuesFormLoginType } from "../../../helper/validation/login-validation";
 
@@ -41,13 +42,13 @@ export default function LoginScreen() {
           contentFit="contain" />
       </View>
       <View>
-        <Text style={styles.title}>Kuvera</Text>
-        <Text style={{ color: Colors.grey[700], fontWeight: "500" }}>
+        <CustomText style={styles.title}>Kuvera</CustomText>
+        <CustomText style={{ color: Colors.grey[700], fontWeight: "500" }}>
           Manage Money, Control Life
-        </Text>
-        <Text style={{ color: Colors.grey[700], fontWeight: "500", marginBottom: 20 }}>
+        </CustomText>
+        <CustomText style={{ color: Colors.grey[700], fontWeight: "500", marginBottom: 20 }}>
           Sign in and achieve your financial goals.
-        </Text>
+        </CustomText>
       </View>
       <View style={styles.viewForm}>
         <Formik
@@ -87,12 +88,12 @@ export default function LoginScreen() {
 
               {/* Forgot password */}
               <TouchableOpacity activeOpacity={0.6} style={[styles.buttonForgotPassword, { paddingTop: 15 }]} onPress={() => handleForgotPassword()}>
-                <Text style={styles.buttonTextFogotPassword}>Forgot password ?</Text>
+                <CustomText style={styles.buttonTextFogotPassword}>Forgot password ?</CustomText>
               </TouchableOpacity>
 
               {/* Button */}
               <TouchableOpacity activeOpacity={0.6} style={styles.button} onPress={() => handleSubmit()}>
-                <Text style={styles.buttonText}>Login</Text>
+                <CustomText style={styles.buttonText}>Login</CustomText>
               </TouchableOpacity>
             </>
           )}
@@ -100,9 +101,9 @@ export default function LoginScreen() {
 
         {/* Button register */}
         <View style={{ flexDirection: "row", paddingTop: 20 }}>
-          <Text style={{ color: Colors.grey[500] }}>Not have a account ? </Text>
+          <CustomText style={{ color: Colors.grey[500] }}>Not have a account ? </CustomText>
           <TouchableOpacity activeOpacity={0.6} style={styles.buttonForgotPassword} onPress={() => handleButtonRegister()}>
-            <Text style={styles.buttonTextFogotPassword}>Register Now</Text>
+            <CustomText style={styles.buttonTextFogotPassword}>Register Now</CustomText>
           </TouchableOpacity>
         </View>
 
@@ -111,14 +112,14 @@ export default function LoginScreen() {
 
         {/* Sign in with google */}
         <View>
-          <Text style={{ color: Colors.grey[500], textAlign: "center" }}>Or continue with</Text>
+          <CustomText style={{ color: Colors.grey[500], textAlign: "center" }}>Or continue with</CustomText>
           <TouchableOpacity activeOpacity={0.6} style={styles.buttonSingInGoogle} onPress={() => handleSignInGoogle()}>
             <Image
               source={require('@/assets/images/google-icon.webp')}
               style={{ width: 30, height: 30 }}
               contentFit="contain"
             />
-            <Text style={{ fontWeight: "bold" }}>Sign in with Google</Text>
+            <CustomText style={{ fontWeight: "bold" }}>Sign in with Google</CustomText>
           </TouchableOpacity>
         </View>
       </View>

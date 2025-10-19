@@ -1,5 +1,6 @@
+import CustomText from '@/components/custom-text';
 import ModalKuvera from '@/components/modal-bottom';
-import { formatDateTime, formatDateTimeVerbose } from '@/helper/validation/formate-date-time';
+import { formatDateTime, formatDateTimeVerbose } from '@/helper/formate-date-time';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import React, { useEffect, useState } from 'react';
 import { Platform, Text, TouchableOpacity, View } from 'react-native';
@@ -143,7 +144,7 @@ const DateTimeInput: React.FunctionComponent<CalenderInputProps> = (props) => {
                 </View>
 
                 <TouchableOpacity activeOpacity={0.6} style={modalStyles.buttonSave} onPress={() => handleSubmit()}>
-                    <Text style={{ color: "white", fontSize: 15, fontWeight: '500' }}>Simpan</Text>
+                    <CustomText style={{ color: "white", fontSize: 15, fontWeight: '500' }}>Simpan</CustomText>
                 </TouchableOpacity>
             </ModalKuvera>
         </InputFieldKuvera>

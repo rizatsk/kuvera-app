@@ -1,6 +1,7 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
 import React, { useEffect, useRef } from 'react';
-import { Animated, Dimensions, Modal, Text, TouchableOpacity, View } from 'react-native';
+import { Animated, Dimensions, Modal, TouchableOpacity, View } from 'react-native';
+import CustomText from '../custom-text';
 import { modalStyles } from './style';
 
 // Animasi for Modal
@@ -71,7 +72,7 @@ export default function ModalKuvera({
                 >
                     {/* Header */}
                     <View style={modalStyles.header}>
-                        <Text style={modalStyles.title}>{title}</Text>
+                        <CustomText style={modalStyles.title}>{title}</CustomText>
                         <TouchableOpacity activeOpacity={0.6} onPress={onClose} style={modalStyles.closeButton}>
                             <Ionicons name="close" size={24} color="#333" />
                         </TouchableOpacity>

@@ -9,7 +9,7 @@ export interface InputProps extends MaskInputProps {
     errorMessage?: string;
     counter?: number;
     inputIcon?: ReactNode;
-    inputType?: 'text' | 'date';
+    inputType?: 'text' | 'money';
     selectOptions?: Array<string>,
     onSelect?: (value: string) => void,
     onSelectDate?: (value: string) => void,

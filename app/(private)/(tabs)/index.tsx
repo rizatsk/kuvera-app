@@ -1,10 +1,11 @@
+import CustomText from '@/components/custom-text';
 import CardCategoryOutput from '@/components/page/home/card/cardCategoryOutput';
 import CardRecent from '@/components/page/home/card/cardRecent';
 import HomeMenu from '@/components/page/home/menu';
 import { Colors } from '@/constants/theme';
 import { categoryOutput, recentPayment } from '@/helper/mock-data';
 import Entypo from '@expo/vector-icons/Entypo';
-import { ScrollView, Text, View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import HeaderHome from '../../../components/page/home/header';
 
 export default function HomeScreen() {
@@ -14,16 +15,16 @@ export default function HomeScreen() {
       <ScrollView style={{ paddingVertical: 30 }} showsVerticalScrollIndicator={false}>
         {/* Invest Account value */}
         <View style={{ alignItems: "center", flex: 1, flexDirection: "column", paddingHorizontal: 14, }}>
-          <Text style={{ fontWeight: "500" }}>Your invest account value is</Text>
+          <CustomText style={{ fontWeight: "500" }}>Your invest account value is</CustomText>
           <View style={{ marginVertical: 14, width: "80%", height: 0.8, backgroundColor: Colors.grey[400], }} />
-          <Text style={{ fontWeight: '600', fontSize: 25 }}>Rp. 1.500.532.000</Text>
+          <CustomText style={{ fontWeight: '600', fontSize: 25 }}>Rp. 1.500.532.000</CustomText>
         </View>
         {/* Home Menu */}
         <HomeMenu />
         {/* Category Output */}
         <View style={{ flex: 1, marginTop: 30, paddingHorizontal: 14, }}>
           <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: 15 }}>
-            <Text style={{ fontWeight: "500", fontSize: 16 }}>Category</Text>
+            <CustomText style={{ fontWeight: "500", fontSize: 16 }}>Category</CustomText>
             <Entypo name="chevron-right" size={24} color="black" />
           </View>
           {/* Component Card */}
@@ -48,7 +49,7 @@ export default function HomeScreen() {
         <View style={{ flex: 1, marginVertical: 30, backgroundColor: Colors.greyBackground, paddingVertical: 10 }}>
           <View style={{ paddingHorizontal: 14 }}>
             <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: 15 }}>
-              <Text style={{ fontWeight: "500", fontSize: 16 }}>Recent</Text>
+              <CustomText style={{ fontWeight: "500", fontSize: 16 }}>Recent</CustomText>
               <Entypo name="chevron-right" size={24} color="black" />
             </View>
             <View style={{ gap: 10 }}>

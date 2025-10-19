@@ -1,8 +1,9 @@
+import CustomText from '@/components/custom-text'
 import { Colors } from '@/constants/theme'
 import Ionicons from '@expo/vector-icons/Ionicons'
 import { Image } from 'expo-image'
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 
 export default function HeaderHome() {
   return (
@@ -16,13 +17,13 @@ export default function HeaderHome() {
               source={require("@/assets/images/icon/avatar-men.png")} />
           </View>
           <View style={{flex: 1}}>
-            <Text style={{ fontWeight: "400", fontSize: 13, color: "white" }}>Good morning</Text>
-            <Text
+            <CustomText style={{ fontWeight: "400", fontSize: 13, color: "white" }}>Good morning</CustomText>
+            <CustomText
               numberOfLines={1}
               ellipsizeMode='tail'
               style={{ fontWeight: "500", fontSize: 17, color: "white", flexShrink: 1 }}>
               Rizat Sakmir, S.Kom.
-            </Text>
+            </CustomText>
           </View>
         </View>
         <View style={{marginRight: 10}}>
