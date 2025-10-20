@@ -55,7 +55,7 @@ export default function FormAddSpending() {
                             errorMessage={FormikProps.errors.date && FormikProps.touched.date ? FormikProps.errors.date: ""}
                         />
                         <TextInput 
-                            label='Spend'
+                            label='Money spent'
                             value={FormikProps.values.spend}
                             accessible={true}
                             keyboardType='number-pad'

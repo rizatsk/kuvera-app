@@ -1,10 +1,10 @@
 export default {
     "expo": {
-        "name": "kuvera",
-        "slug": "kuvera",
+        "name": "Kuvera",
+        "slug": "Kuvera",
         "version": "1.0.0",
         "orientation": "portrait",
-        "icon": "./assets/images/icon.png",
+        "icon": "./assets/images/foreground-icon.png",
         "scheme": "kuveraapp",
         "userInterfaceStyle": "automatic",
         "newArchEnabled": true,
@@ -16,18 +16,12 @@ export default {
         "android": {
             "package": "com.rjshubkuvera",
             "adaptiveIcon": {
-                "backgroundColor": "#E6F4FE",
-                "foregroundImage": "./assets/images/android-icon-foreground.png",
-                "backgroundImage": "./assets/images/android-icon-background.png",
-                "monochromeImage": "./assets/images/android-icon-monochrome.png"
+                "backgroundColor": "#ffffff",
+                "foregroundImage": "./assets/images/foreground-icon.png",
             },
             "edgeToEdgeEnabled": true,
             "predictiveBackGestureEnabled": false,
             "googleServicesFile": "./google-services.json",
-        },
-        "web": {
-            "output": "static",
-            "favicon": "./assets/images/favicon.png"
         },
         "plugins": [
             "expo-router",
@@ -35,7 +29,7 @@ export default {
                 "expo-splash-screen",
                 {
                     "image": "./assets/images/icon.png",
-                    "imageWidth": 200,
+                    "imageWidth": 110,
                     "resizeMode": "contain",
                     "backgroundColor": "#ffffff",
                     "dark": {

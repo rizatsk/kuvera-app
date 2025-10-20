@@ -9,10 +9,10 @@ export type ValuesFormAddSpendingType = {
 
 export const AddSpendingSchema = Yup.object().shape({
   category: Yup.string()
-    .required("Category wajib diisi"),
+    .required("Select category"),
   date: Yup.string()
-    .required("Date spending wajib diisi"),
+    .required("Date cannot be empty"),
   spend: Yup.string()
-    .required("spend spending wajib diisi"),
+    .required("Spending cannot be empty"),
   notes: Yup.string(),
 });
