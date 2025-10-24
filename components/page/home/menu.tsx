@@ -59,7 +59,7 @@ const style = StyleSheet.create({
     },
     title: {
         fontWeight: '700', 
-        color: Colors.grey[500], 
+        color: Colors.grey[700], 
         fontSize: 12
     },
     squareIcon: {

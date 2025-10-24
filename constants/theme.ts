@@ -10,9 +10,9 @@ const tintColorDark = '#fff';
 const blueKuvera = "#1a1280ff";
 const tealKuvera = "#48B3AF";
 const greenKuvera = "#A7E399";
-const yellowKuvera = "#f8e004ff";
-const greyBackground = "#F7FBFC";
-const greyBackground2 = "#DEFCF9";
+const yellowKuvera = "#f8cb04ff";
+const greyBackground = "#efeff0ff";
+const greyBackground2 = "#c6eceaff";
 const tealKuvera2 = "#016B61";
 
 export const Colors = {

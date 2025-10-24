@@ -17,14 +17,14 @@ export default function TabLayout() {
           title: "Home",
         }} />
       <Tabs.Screen
-        name="account"
-        options={{
-          title: "Account",
-        }} />
-      <Tabs.Screen
         name="expo"
         options={{
           title: "Expo",
+        }} />
+      <Tabs.Screen
+        name="account"
+        options={{
+          title: "Account",
         }} />
     </Tabs>
   )

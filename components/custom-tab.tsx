@@ -3,12 +3,13 @@ import Feather from '@expo/vector-icons/Feather';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import Octicons from '@expo/vector-icons/Octicons';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
-import { Text } from '@react-navigation/elements';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { ScreenContentWrapper } from 'react-native-screens';
+import CustomText from './custom-text';
 
 export default function CutomTabs({ state, descriptors, navigation }: BottomTabBarProps) {
   return (
-    <View style={{ backgroundColor: "white", width: '100%', height: 80 }}>
+    <ScreenContentWrapper style={{ backgroundColor: "white", width: '100%', height: 80 }}>
       <View style={style.container}>
         {state.routes.map((route, index) => {
           const { options } = descriptors[route.key];
@@ -64,17 +65,17 @@ export default function CutomTabs({ state, descriptors, navigation }: BottomTabB
               style={{ gap: 1, alignItems: 'center' }}
             >
               <IconComponent />
-              <Text style={{ color: color, fontSize: 12, fontWeight: '700' }}>
+              <CustomText style={{ color: color, fontSize: 12, fontWeight: '500' }}>
                 {label as string}
-              </Text>
+              </CustomText>
               {isFocused && (
-                <View style={{backgroundColor: color, height: 3, width: "130%", borderRadius: 100}}></View>
+                <View style={{backgroundColor: color, height: 3, width: "100%", borderRadius: 100}}></View>
               )}
             </TouchableOpacity>
           );
         })}
       </View>
-    </View>
+    </ScreenContentWrapper>
   );
 }
 

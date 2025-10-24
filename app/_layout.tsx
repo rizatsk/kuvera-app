@@ -1,20 +1,26 @@
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { Stack } from 'expo-router';
+import { useFonts } from 'expo-font';
+import { SplashScreen, Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import 'react-native-reanimated';
 
 import { useColorScheme } from '@/hooks/use-color-scheme';
-import { useFonts } from 'expo-font';
-import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import ReduxProvider from './provider';
 
 export default function RootLayout() {
-  const [loaded, error] = useFonts({
-    'Roboto-Flex': require('../assets/fonts/RobotoFlex.ttf'),
-  });
   const colorScheme = useColorScheme();
-  
+  const [loaded, error] = useFonts({
+    'Nunito-ExtraLight': require('@/assets/fonts/nunito/Nunito-ExtraLight.ttf'),
+    'Nunito-Light': require('@/assets/fonts/nunito/Nunito-Light.ttf'),
+    'Nunito-Reguler': require('@/assets/fonts/nunito/Nunito-Regular.ttf'),
+    'Nunito-Medium': require('@/assets/fonts/nunito/Nunito-Medium.ttf'),
+    'Nunito-SemiBold': require('@/assets/fonts/nunito/Nunito-SemiBold.ttf'),
+    'Nunito-Bold': require('@/assets/fonts/nunito/Nunito-Bold.ttf'),
+    'Nunito-ExtraBold': require('@/assets/fonts/nunito/Nunito-ExtraBold.ttf'),
+    'Nunito-Black': require('@/assets/fonts/nunito/Nunito-Black.ttf'),
+  });
+
   useEffect(() => {
     if (loaded || error) {
       SplashScreen.hideAsync();

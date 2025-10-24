@@ -22,7 +22,5 @@ export default function CustomText({
 }
 
 const styles = StyleSheet.create({
-  base: {
-    fontFamily: 'Roboto-Flex',
-  },
+  base: {},
 });

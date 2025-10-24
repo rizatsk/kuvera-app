@@ -113,8 +113,7 @@ export const getStyle = (props: InputProps, isFocused: boolean): ComputedStylePr
     margin: 0,
     overflow: 'visible',
     fontSize: 14,
-    lineHeight: Platform.OS === 'ios' ? 0 : 21,
-    fontFamily: 'Montserrat-Regular',
+    lineHeight: Platform.OS === 'ios' ? 0 : 21
   };
 
   computedStyle.messageHelper = {

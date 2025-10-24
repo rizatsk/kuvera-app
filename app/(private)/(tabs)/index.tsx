@@ -6,11 +6,12 @@ import { Colors } from '@/constants/theme';
 import { categoryOutput, recentPayment } from '@/helper/mock-data';
 import Entypo from '@expo/vector-icons/Entypo';
 import { ScrollView, View } from 'react-native';
+import { ScreenContentWrapper } from 'react-native-screens';
 import HeaderHome from '../../../components/page/home/header';
 
 export default function HomeScreen() {
   return (
-    <View style={{ flex: 1, backgroundColor: "white" }}>
+    <ScreenContentWrapper style={{ flex: 1, backgroundColor: "white" }}>
       <HeaderHome />
       <ScrollView style={{ paddingVertical: 30 }} showsVerticalScrollIndicator={false}>
         {/* Invest Account value */}
@@ -46,7 +47,7 @@ export default function HomeScreen() {
           </ScrollView>
         </View>
         {/* Recent */}
-        <View style={{ flex: 1, marginVertical: 30, backgroundColor: Colors.greyBackground, paddingVertical: 10 }}>
+        <View style={{ flex: 1, marginVertical: 30, backgroundColor: "white", paddingVertical: 10 }}>
           <View style={{ paddingHorizontal: 14 }}>
             <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: 15 }}>
               <CustomText style={{ fontWeight: "500", fontSize: 16 }}>Recent</CustomText>
@@ -67,6 +68,6 @@ export default function HomeScreen() {
           </View>
         </View>
       </ScrollView>
-    </View>
+    </ScreenContentWrapper>
   );
 }
