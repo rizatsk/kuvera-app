@@ -1,4 +1,8 @@
 import CustomText from "@/components/custom-text";
+import AccountTabsCard from "@/components/page/account/account-tabs";
+import ButtonLogout from "@/components/page/account/button-logout";
+import OtherTabs from "@/components/page/account/other-tabs";
+import environment from "@/constants/environment";
 import { Colors } from "@/constants/theme";
 import { useAppSelector } from "@/states";
 import Feather from "@expo/vector-icons/Feather";
@@ -20,7 +24,7 @@ export default function AccountScreen() {
               contentFit='contain'
               source={require("@/assets/images/bg-batik.webp")} />
           </View>
-            </View>
+        </View>
         {/* Photo user */}
         <View style={{ alignItems: "center" }}>
           <View>
@@ -37,9 +41,10 @@ export default function AccountScreen() {
           <CustomText style={{ marginTop: -50, fontWeight: 600, fontSize: 18 }}>Rizat Sakmir</CustomText>
           <CustomText style={{ fontSize: 15 }}>rizatsakmir@gmail.com</CustomText>
         </View>
-        <View style={{marginHorizontal: 14, marginTop: 20}}>
-          <CustomText style={{ fontSize: 16, fontWeight: 600}}>Akun</CustomText>
-        </View>
+        <AccountTabsCard />
+        <OtherTabs />
+        <ButtonLogout />
+        <CustomText style={styles.versionApp}>{environment.VERSION_APP}</CustomText>
       </ScrollView>
     </ScreenContentWrapper >
   );
@@ -48,6 +53,7 @@ export default function AccountScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: 'white'
   },
   fullScreenBackground: {
     height: '100%',
@@ -61,7 +67,7 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 1000,
     borderBottomRightRadius: 1000,
     backgroundColor: Colors.greyBackground2,
-    transform: [{ scaleX: 1.9 }, { scaleY: 1}],
+    transform: [{ scaleX: 1.9 }, { scaleY: 1 }],
   },
   containerAvatar: {
     backgroundColor: Colors.greyBackground,
@@ -71,7 +77,7 @@ const styles = StyleSheet.create({
     borderRadius: 10000,
     borderColor: Colors.tealKuvera,
     borderWidth: 3,
-    transform: [{translateY: -65}]
+    transform: [{ translateY: -65 }]
   },
   containerEdit: {
     position: 'absolute',
@@ -85,5 +91,12 @@ const styles = StyleSheet.create({
     borderRadius: 10000,
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  versionApp: {
+    marginTop: 20,
+    textAlign: 'center',
+    fontWeight: 500,
+    fontSize: 16,
+    color: Colors.grey[500]
   }
 })

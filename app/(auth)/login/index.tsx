@@ -36,10 +36,10 @@ export default function LoginScreen() {
   
   return (
     <View style={styles.container}>
-      <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
+      <View style={styles.iconContainer}>
         <Image source={require('@/assets/images/icon.png')}
-          style={{ width: 100, height: 100 }}
-          contentFit="contain" />
+          style={{ width: 60, height: 60, position: "absolute" }}
+          contentFit="fill" />
       </View>
       <View>
         <CustomText style={styles.title}>Kuvera</CustomText>
@@ -130,8 +130,19 @@ export default function LoginScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1, justifyContent: "flex-start",
-    paddingHorizontal: 20, paddingTop: 40,
+    paddingHorizontal: 20,
     backgroundColor: "#fff"
+  },
+  iconContainer: { 
+    height: 180,
+    overflow: 'hidden',
+    borderBottomLeftRadius: 1000,
+    borderBottomRightRadius: 1000,
+    backgroundColor: Colors.greyBackground2,
+    transform: [{ scaleX: 2.3 }],
+    flexDirection: "row", 
+    alignItems: "center", 
+    justifyContent: "center" 
   },
   viewForm: {
     width: "100%",

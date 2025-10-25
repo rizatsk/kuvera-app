@@ -2,11 +2,13 @@ import { configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useSelector } from "react-redux";
 import authUserReducer from "./auth-user/reducer";
 import isPreloadReducer from "./preload/reducer";
+import isLoadingReducer from "./visible-loading/reducer";
 
 export const store = configureStore({
   reducer: {
     preload: isPreloadReducer,
     authUser: authUserReducer,
+    visibleLoading: isLoadingReducer,
   } as any
 });
 

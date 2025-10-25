@@ -4,6 +4,7 @@ import { SplashScreen, Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import 'react-native-reanimated';
 
+import FullScreenLoader from '@/components/fullscreen-loader';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { useEffect } from 'react';
 import ReduxProvider from './provider';
@@ -39,6 +40,7 @@ export default function RootLayout() {
           <Stack.Screen name="(private)" />
           <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
         </Stack>
+        <FullScreenLoader />
       </ReduxProvider>
       <StatusBar style="auto" />
     </ThemeProvider>

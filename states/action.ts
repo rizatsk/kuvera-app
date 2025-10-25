@@ -3,6 +3,8 @@ export const ActionReducer = {
 
     SET_AUTH: "SET_AUTH",
     UNSET_AUTH: "UNSET_AUTH",
+
+    SET_LOADING: "SET_LOADING",
 };
 
 export enum ActionReducerType  {
@@ -10,4 +12,6 @@ export enum ActionReducerType  {
 
     SET_AUTH = "SET_AUTH",
     UNSET_AUTH = "UNSET_AUTH",
+
+    SET_LOADING = "SET_LOADING",
 }

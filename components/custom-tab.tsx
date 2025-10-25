@@ -1,5 +1,6 @@
 import { Colors } from '@/constants/theme';
 import Feather from '@expo/vector-icons/Feather';
+import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import Octicons from '@expo/vector-icons/Octicons';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
@@ -41,13 +42,17 @@ export default function CutomTabs({ state, descriptors, navigation }: BottomTabB
             });
           };
 
-          const color = isFocused ? "white" : Colors.grey[200];
+          const color = isFocused ? Colors.tealKuvera : Colors.grey[600];
           const IconComponent = () => {
             switch (label) {
               case 'Home':
                 return <Octicons name="home" size={20} color={color} />;
-              case 'Account':
+              case 'Profile':
                 return <Feather name="user" size={20} color={color} />;
+              case 'Transaction':
+                return <MaterialCommunityIcons name="chart-timeline-variant" size={24} color={color} />;
+              case 'Saham IDX':
+                return <FontAwesome6 name="chart-pie" size={24} color={color} />;
               default:
                 return <MaterialCommunityIcons name="react" size={20} color={color} />;
             }
@@ -68,8 +73,10 @@ export default function CutomTabs({ state, descriptors, navigation }: BottomTabB
               <CustomText style={{ color: color, fontSize: 12, fontWeight: '500' }}>
                 {label as string}
               </CustomText>
-              {isFocused && (
+              {isFocused ? (
                 <View style={{backgroundColor: color, height: 3, width: "100%", borderRadius: 100}}></View>
+              ): (
+                <View style={{height: 3, width: "100%"}}></View>
               )}
             </TouchableOpacity>
           );
@@ -81,15 +88,12 @@ export default function CutomTabs({ state, descriptors, navigation }: BottomTabB
 
 const style = StyleSheet.create({
   container: {
-    paddingVertical: 8,
+    borderTopColor: Colors.grey[200],
+    borderTopWidth: 0.5,
+    paddingTop: 10,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginHorizontal: 10,
-    paddingHorizontal: 20,
-    borderRadius: 18,
-    backgroundColor: Colors.tealKuvera2,
-    borderColor: Colors.tealKuvera,
-    borderWidth: 2,
+    paddingHorizontal: 30,
   }
 })

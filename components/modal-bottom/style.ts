@@ -18,9 +18,10 @@ export const modalStyles = StyleSheet.create({
   },
   header: {
     flexDirection: 'row',
+    marginLeft: 24,
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingVertical: 15,
+    paddingVertical: 10,
     borderBottomWidth: 1,
     borderBottomColor: '#eee',
   },

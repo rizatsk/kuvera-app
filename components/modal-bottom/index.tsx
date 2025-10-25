@@ -15,12 +15,12 @@ type ModelKuveraProps = {
     title: string
     isModalVisible: boolean
     setIsModalVisible: (visible: boolean) => void
-    setFocused: (focused: boolean) => void,
+    setFocused?: (focused: boolean) => void,
     children: React.ReactNode;
 }
 
 export default function ModalKuvera({
-    title, isModalVisible, setIsModalVisible, setFocused, children
+    title, isModalVisible, setIsModalVisible, setFocused = () => {}, children
 }: ModelKuveraProps) {
     const slideAnim = useRef(new Animated.Value(START_POSITION));
 

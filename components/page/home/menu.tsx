@@ -1,6 +1,7 @@
 import CustomText from '@/components/custom-text'
 import { Colors } from '@/constants/theme'
 import AntDesign from '@expo/vector-icons/AntDesign'
+import Feather from '@expo/vector-icons/Feather'
 import FontAwesome from '@expo/vector-icons/FontAwesome'
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6'
 import { useRouter } from 'expo-router'
@@ -21,7 +22,7 @@ export default function HomeMenu() {
                     <View style={{ position: "absolute", top: 5, left: 10 }}>
                         <FontAwesome name="plus-circle" size={16} color={Colors.tealKuvera} />
                     </View>
-                    <FontAwesome6 name="shopify" size={24} color={Colors.tealKuvera} />
+                    <Feather name="shopping-bag" size={24} color={Colors.tealKuvera} />
                 </View>
                 <CustomText style={style.title}>Spending</CustomText>
             </TouchableOpacity>

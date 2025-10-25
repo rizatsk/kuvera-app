@@ -4,6 +4,7 @@ import {
     isSuccessResponse
 } from '@react-native-google-signin/google-signin';
 import { ActionReducer } from "../action";
+import { setLoading } from "../visible-loading/action";
 import { AsyncSetAuthType, AuthUserType, TypeAuth } from "./type";
 
 export function setAuthUserActionCreator(user: AuthUserType) {
@@ -29,6 +30,7 @@ export function asyncSetAuthUser({
 }: AsyncSetAuthType) {
     return async (dispatch: any) => {
         try {
+            dispatch(setLoading(true))
             const user = {
                 name: 'Rizat',
                 email: dataUser.name,
@@ -39,6 +41,8 @@ export function asyncSetAuthUser({
             dispatch(setAuthUserActionCreator(user));
         } catch (error) {
             console.log("Error set auth", error)
+        } finally {
+            dispatch(setLoading(false))
         }
     }
 }
@@ -46,12 +50,16 @@ export function asyncSetAuthUser({
 export function asyncUnsetAuth() {
     return async (dispatch: any) => {
         try {
+            dispatch(setLoading(true))
+
             await deleteItem("user-auth")
             GoogleSignin.configure();
             await GoogleSignin.signOut().catch((error) => console.log('Fail google signin to logout', error));
             dispatch(unsetAuthUserActionCreator())
         } catch (error) {
             console.log("Error unset auth", error)
+        } finally {
+            dispatch(setLoading(false))
         }
     }
 }
@@ -59,6 +67,8 @@ export function asyncUnsetAuth() {
 export function asyncSignInWithGoogle() {
     return async (dispatch: any) => {
         try {
+            dispatch(setLoading(true))
+
             GoogleSignin.configure();
             await GoogleSignin.hasPlayServices();
             const response = await GoogleSignin.signIn();
@@ -80,6 +90,8 @@ export function asyncSignInWithGoogle() {
             }
         } catch (error) {
             console.log("Error sign in with google", error)
+        } finally {
+            dispatch(setLoading(false))
         }
     }
 }
