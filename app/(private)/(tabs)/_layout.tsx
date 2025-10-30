@@ -22,12 +22,12 @@ export default function TabLayout() {
           title: "Transaction",
         }} />
       <Tabs.Screen
-        name="idx"
+        name="saham-idx"
         options={{
           title: "Saham IDX",
         }} />
       <Tabs.Screen
-        name="account"
+        name="profile"
         options={{
           title: "Profile",
         }} />

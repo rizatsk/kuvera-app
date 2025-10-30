@@ -1,5 +1,24 @@
 import React from 'react';
-import { StyleSheet, Text, TextProps, TextStyle } from 'react-native';
+import { Text, TextProps, TextStyle } from 'react-native';
+
+type NumericFontWeight = 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000;
+
+const FONT_MAPPING = {
+  100: 'Nunito-ExtraLight',
+  200: 'Nunito-Light',
+  300: 'Nunito-Reguler',
+  400: 'Nunito-Medium',
+  500: 'Nunito-SemiBold',
+  600: 'Nunito-Bold',
+  700: 'Nunito-ExtraBold',
+  800: 'Nunito-Black',
+  900: 'Nunito-Black',
+  1000: 'Nunito-Black',
+} as const;
+
+const getFontFamilyByWeight = (weight: NumericFontWeight): string => {
+  return FONT_MAPPING[weight] || 'Nunito-Reguler';
+};
 
 interface CustomTextProps extends TextProps {
   style?: TextStyle;
@@ -7,20 +26,22 @@ interface CustomTextProps extends TextProps {
 }
 
 export default function CustomText({
-    style,
-    children,
-    ...rest
+  style,
+  children,
+  ...rest
 }: CustomTextProps): React.JSX.Element {
-  return (
-    <Text 
-        style={[styles.base, style]} 
-        {...rest}
-    >
-        {children}
-    </Text>
-  )
-}
+  const fontFamilyName = getFontFamilyByWeight(style?.fontWeight as NumericFontWeight);
 
-const styles = StyleSheet.create({
-  base: {},
-});
+  return (
+    <Text
+      style={[
+        style,
+        {
+          fontFamily: fontFamilyName,
+        }
+      ]}
+    >
+      {children}
+    </Text>
+  );
+};

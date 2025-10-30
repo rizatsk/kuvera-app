@@ -1,28 +1,36 @@
 import CustomText from "@/components/custom-text";
-import AccountTabsCard from "@/components/page/account/account-tabs";
-import ButtonLogout from "@/components/page/account/button-logout";
-import OtherTabs from "@/components/page/account/other-tabs";
+import AccountTabsCard from "@/components/page/profile/account-tabs";
+import ButtonLogout from "@/components/page/profile/button-logout";
+import OtherTabs from "@/components/page/profile/other-tabs";
 import environment from "@/constants/environment";
 import { Colors } from "@/constants/theme";
 import { useAppSelector } from "@/states";
 import Feather from "@expo/vector-icons/Feather";
+import Ionicons from "@expo/vector-icons/Ionicons";
 import { Image } from "expo-image";
 import { ScrollView, StyleSheet, View } from "react-native";
 import { ScreenContentWrapper } from "react-native-screens";
 
-export default function AccountScreen() {
+export default function ProfileScreen() {
   const authUser = useAppSelector((states) => states.authUser);
 
   return (
     <ScreenContentWrapper style={styles.container}>
       <ScrollView>
         {/* Background atas */}
-        <View>
+        <View style={{flex: 1, marginBottom: 55}}>
           <View style={styles.arcStyle}>
             <Image
               style={styles.fullScreenBackground}
               contentFit='contain'
               source={require("@/assets/images/bg-batik.webp")} />
+          </View>
+          <View style={{marginTop: 30, marginHorizontal: 14}}>
+            <View style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
+            <View style={styles.iconNotif}>
+              <Ionicons name="notifications" size={22} color={Colors.tealKuvera} />
+            </View>     
+            </View>
           </View>
         </View>
         {/* Photo user */}
@@ -38,7 +46,7 @@ export default function AccountScreen() {
               </View>
             </View>
           </View>
-          <CustomText style={{ marginTop: -50, fontWeight: 600, fontSize: 18 }}>Rizat Sakmir</CustomText>
+          <CustomText style={{ marginTop: 20, fontWeight: 600, fontSize: 18 }}>Rizat Sakmir</CustomText>
           <CustomText style={{ fontSize: 15 }}>rizatsakmir@gmail.com</CustomText>
         </View>
         <AccountTabsCard />
@@ -61,6 +69,7 @@ const styles = StyleSheet.create({
     opacity: 0.3,
   },
   arcStyle: {
+    position: 'absolute',
     width: '100%',
     height: 180,
     overflow: 'hidden',
@@ -68,6 +77,15 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 1000,
     backgroundColor: Colors.greyBackground2,
     transform: [{ scaleX: 1.9 }, { scaleY: 1 }],
+  },
+  iconNotif: { 
+    backgroundColor: Colors.whiteTransaparent, 
+    borderRadius: 10, 
+    width: 32, height: 32, 
+    justifyContent: 'center', 
+    alignItems: 'center',
+    borderWidth: 2,
+    borderColor: Colors.tealKuvera
   },
   containerAvatar: {
     backgroundColor: Colors.greyBackground,
@@ -77,7 +95,6 @@ const styles = StyleSheet.create({
     borderRadius: 10000,
     borderColor: Colors.tealKuvera,
     borderWidth: 3,
-    transform: [{ translateY: -65 }]
   },
   containerEdit: {
     position: 'absolute',
@@ -95,7 +112,7 @@ const styles = StyleSheet.create({
   versionApp: {
     marginTop: 20,
     textAlign: 'center',
-    fontWeight: 500,
+    fontWeight: 600,
     fontSize: 16,
     color: Colors.grey[500]
   }

@@ -9,11 +9,13 @@ const tintColorLight = '#0a48a4';
 const tintColorDark = '#fff';
 const blueKuvera = "#1a1280ff";
 const tealKuvera = "#48B3AF";
+const tealDarkKuvera = "#4da3a0ff";
 const greenKuvera = "#A7E399";
 const yellowKuvera = "#f8cb04ff";
 const greyBackground = "#efeff0ff";
 const greyBackground2 = "#c6eceaff";
 const tealKuvera2 = "#016B61";
+const whiteTransaparent = "#ffffffa1"
 
 export const Colors = {
   blueKuvera,
@@ -23,6 +25,8 @@ export const Colors = {
   greyBackground,
   greyBackground2,
   tealKuvera2,
+  whiteTransaparent,
+  tealDarkKuvera,
   light: {
     text: '#11181C',
     background: '#fff',

@@ -52,7 +52,7 @@ export default function CutomTabs({ state, descriptors, navigation }: BottomTabB
               case 'Transaction':
                 return <MaterialCommunityIcons name="chart-timeline-variant" size={24} color={color} />;
               case 'Saham IDX':
-                return <FontAwesome6 name="chart-pie" size={24} color={color} />;
+                return <FontAwesome6 name="chart-pie" size={20} color={color} />;
               default:
                 return <MaterialCommunityIcons name="react" size={20} color={color} />;
             }
@@ -70,7 +70,7 @@ export default function CutomTabs({ state, descriptors, navigation }: BottomTabB
               style={{ gap: 1, alignItems: 'center' }}
             >
               <IconComponent />
-              <CustomText style={{ color: color, fontSize: 12, fontWeight: '500' }}>
+              <CustomText style={{ color: color, fontSize: 12, fontWeight: 700 }}>
                 {label as string}
               </CustomText>
               {isFocused ? (

@@ -30,7 +30,7 @@ export default function CardRecent({
                     <IconComponent />
                 </View>
                 <View>
-                    <CustomText style={{ fontWeight: "500", fontSize: 16 }}>{title}</CustomText>
+                    <CustomText style={{ fontWeight: 600, fontSize: 16 }}>{title}</CustomText>
                     <CustomText style={{ fontSize: 13, color: Colors.grey[600] }}>{date}</CustomText>
                 </View>
             </View>

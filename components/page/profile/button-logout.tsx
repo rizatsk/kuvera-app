@@ -17,7 +17,7 @@ export default function ButtonLogout() {
   return (
     <>
       <TouchableOpacity style={styles.buttonLogout} activeOpacity={0.6} onPress={() => setIsModalVisible(true)}>
-        <CustomText style={{ fontSize: 16, fontWeight: 500, color: Colors.tealKuvera }}>Log out</CustomText>
+        <CustomText style={{ fontSize: 16, fontWeight: 600, color: Colors.tealKuvera }}>Log out</CustomText>
       </TouchableOpacity>
       <ModalKuvera
         title="Log Out"
@@ -30,13 +30,13 @@ export default function ButtonLogout() {
             contentFit='fill'
             source={require("@/assets/images/icon/log out.webp")} />
         </View>
-        <CustomText style={{ textAlign: 'center', fontSize: 17, fontWeight: 500, marginTop: 20 }}>Are you sure want to log out ?</CustomText>
+        <CustomText style={{ textAlign: 'center', fontSize: 17, fontWeight: 600, marginTop: 20 }}>Are you sure want to log out ?</CustomText>
         <CustomText style={{ textAlign: 'center', fontSize: 16, marginTop: 10 }}>You'll need to log in again to track your spending, and you can access your account whenever you want.</CustomText>
         <TouchableOpacity style={styles.buttonBack} activeOpacity={0.6} onPress={() => setIsModalVisible(false)}>
-          <CustomText style={{ fontSize: 16, fontWeight: 500, color: Colors.tealKuvera }}>Close</CustomText>
+          <CustomText style={{ fontSize: 16, fontWeight: 600, color: Colors.tealKuvera }}>Close</CustomText>
         </TouchableOpacity>
         <TouchableOpacity style={styles.buttonStayLogOut} activeOpacity={0.6} onPress={handleLogout}>
-          <CustomText style={{ fontSize: 16, fontWeight: 500, color: "white" }}>Log Out of Kuvera</CustomText>
+          <CustomText style={{ fontSize: 16, fontWeight: 600, color: "white" }}>Log Out of Kuvera</CustomText>
         </TouchableOpacity>
       </ModalKuvera>
     </>

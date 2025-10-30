@@ -1,3 +1,4 @@
+
 import CustomText from "@/components/custom-text";
 import { TextInput } from "@/components/input/text-input/text-input";
 import environment from "@/constants/environment";
@@ -33,7 +34,7 @@ export default function LoginScreen() {
   const handleSignInGoogle = () => {
     dispatch(asyncSignInWithGoogle() as any)
   }
-  
+
   return (
     <View style={styles.container}>
       <View style={styles.iconContainer}>
@@ -43,10 +44,10 @@ export default function LoginScreen() {
       </View>
       <View>
         <CustomText style={styles.title}>Kuvera</CustomText>
-        <CustomText style={{ color: Colors.grey[700], fontWeight: "500" }}>
+        <CustomText style={{ color: Colors.grey[700], fontWeight: 600 }}>
           Manage Money, Control Life
         </CustomText>
-        <CustomText style={{ color: Colors.grey[700], fontWeight: "500", marginBottom: 20 }}>
+        <CustomText style={{ color: Colors.grey[700], fontWeight: 600, marginBottom: 20 }}>
           Sign in and achieve your financial goals.
         </CustomText>
       </View>
@@ -133,16 +134,16 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     backgroundColor: "#fff"
   },
-  iconContainer: { 
+  iconContainer: {
     height: 180,
     overflow: 'hidden',
     borderBottomLeftRadius: 1000,
     borderBottomRightRadius: 1000,
     backgroundColor: Colors.greyBackground2,
     transform: [{ scaleX: 2.3 }],
-    flexDirection: "row", 
-    alignItems: "center", 
-    justifyContent: "center" 
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center"
   },
   viewForm: {
     width: "100%",

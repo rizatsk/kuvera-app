@@ -1,29 +1,28 @@
 import CustomText from '@/components/custom-text'
 import { Colors } from '@/constants/theme'
+import FontAwesome from '@expo/vector-icons/FontAwesome'
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6'
-import MaterialIcons from '@expo/vector-icons/MaterialIcons'
-import Octicons from '@expo/vector-icons/Octicons'
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
 
-export default function OtherTabs() {
+export default function AccountTabsCard() {
     return (
         <View style={{ marginHorizontal: 18, marginTop: 25 }}>
-            <CustomText style={{ fontSize: 16, fontWeight: 500 }}>Other</CustomText>
+            <CustomText style={{ fontSize: 16, fontWeight: 600 }}>Account</CustomText>
             <View style={{ marginVertical: 5, marginHorizontal: 5 }}>
                 <View style={styles.cardContainer}>
                     <View style={styles.cardIcon}>
-                        <Octicons name="checklist" size={24} color="black" />
-                        <CustomText style={styles.title}>Terms of service</CustomText>
+                        <FontAwesome6 name="user" size={20} color="black" />
+                        <CustomText style={styles.title}>Edit Profile</CustomText>
                     </View>
-                    <FontAwesome6 name="angle-right" size={22} color="black" />
+                    <FontAwesome6 name="angle-right" size={20} color="black" />
                 </View>
                 <View style={styles.cardContainer}>
                     <View style={styles.cardIcon}>
-                        <MaterialIcons name="local-police" size={24} color="black" />
-                        <CustomText style={styles.title}>Privacy polic</CustomText>
+                        <FontAwesome name="language" size={20} color="black" />
+                        <CustomText style={styles.title}>Language</CustomText>
                     </View>
-                    <FontAwesome6 name="angle-right" size={22} color="black" />
+                    <FontAwesome6 name="angle-right" size={20} color="black" />
                 </View>
             </View>
         </View>

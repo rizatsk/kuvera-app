@@ -55,18 +55,17 @@ const style = StyleSheet.create({
         justifyContent: 'center', 
         marginTop: 20, 
         gap: 35, 
-        backgroundColor: Colors.greyBackground2, 
         paddingVertical: 10
     },
     title: {
-        fontWeight: '700', 
-        color: Colors.grey[700], 
+        fontWeight: 500, 
+        color: Colors.grey[50], 
         fontSize: 12
     },
     squareIcon: {
         width: 50, height: 50, 
         backgroundColor: "white",
-        borderColor: Colors.tealKuvera,
+        borderColor: "white",
         borderWidth: 2,
         borderRadius: 10, 
         justifyContent: 'center', 

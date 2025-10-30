@@ -13,7 +13,7 @@ import { ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native'
 export default function FormAddSpending() {
     const [valueFormik, setValueFormik] = useState({
         category: "",
-        date: `${formatDateTime(new Date())}`,
+        date: `${new Date()}`,
         spend: "",
         notes: ""
     });
@@ -22,7 +22,7 @@ export default function FormAddSpending() {
 
     return (
         <ScrollView style={{ paddingVertical: 5 }}>
-            <CustomText style={{fontWeight: "500", fontSize: 16, color: Colors.tealKuvera}}>
+            <CustomText style={{fontWeight: 600, fontSize: 16, color: Colors.tealKuvera}}>
                 Every rupiah is important.
             </CustomText>
             <CustomText>Log your expenses now, and see where your money truly goes. Detailed records prevent regret at the end of the month</CustomText>
@@ -32,6 +32,7 @@ export default function FormAddSpending() {
                 onSubmit={(values) => {
                     const cleanValue = {
                         ...values,
+                        date: formatDateTime(new Date(values.date)),
                         spend: cleanRupiahToNumber(values.spend)
                     }
                     console.log(cleanValue)
@@ -71,7 +72,7 @@ export default function FormAddSpending() {
                             errorMessage={FormikProps.errors.notes && FormikProps.touched.notes ? FormikProps.errors.notes: ""}
                         />
                         <TouchableOpacity activeOpacity={0.6} style={style.button_lanjut} onPress={() => FormikProps.handleSubmit()}>
-                            <CustomText style={{fontWeight: "500", color: "white", fontSize: 16}}>Save</CustomText>
+                            <CustomText style={{fontWeight: 600, color: "white", fontSize: 16}}>Save</CustomText>
                         </TouchableOpacity>
                     </View>
                 )}

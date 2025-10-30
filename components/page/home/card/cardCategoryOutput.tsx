@@ -33,7 +33,7 @@ export default function CardCategoryOutput({
                     <IconComponent />
                 </View>
                 <View>
-                    <CustomText style={{ fontWeight: "500", fontSize: 15 }}>{title}</CustomText>
+                    <CustomText style={{ fontWeight: 600, fontSize: 15 }}>{title}</CustomText>
                     <CustomText style={{ fontSize: 13, color: Colors.grey[600] }}>{subTitle}</CustomText>
                     <CustomText style={{ fontWeight: "700", fontSize: 14, color: Colors.tealKuvera }}>{money}</CustomText>
                 </View>
