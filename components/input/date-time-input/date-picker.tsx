@@ -1,9 +1,11 @@
 import CustomText from '@/components/custom-text';
 import ModalKuvera from '@/components/modal-bottom';
 import { formatDateVerbose } from '@/helper/formate-date-time';
+import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
+import Octicons from '@expo/vector-icons/Octicons';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import React, { useState } from 'react';
-import { Platform, StyleSheet, Text, TouchableOpacity, View, ViewStyle } from 'react-native';
+import { Platform, StyleSheet, TextStyle, TouchableOpacity, View, ViewStyle } from 'react-native';
 import { modalStyles } from './style';
 
 export interface DatePickerProps {
@@ -11,6 +13,7 @@ export interface DatePickerProps {
     style?: ViewStyle;
     label: string;
     value?: string;
+    titleStyle?: TextStyle;
 }
 
 const DatePicker: React.FunctionComponent<DatePickerProps> = (props) => {
@@ -19,6 +22,7 @@ const DatePicker: React.FunctionComponent<DatePickerProps> = (props) => {
         label,
         onSelectDate,
         style,
+        titleStyle,
     } = props;
 
     const initialDate = new Date();
@@ -30,11 +34,6 @@ const DatePicker: React.FunctionComponent<DatePickerProps> = (props) => {
     // For Modal
     const handleOnFocus = () => {
         setIsModalVisible(true);
-        if (Platform.OS === 'android') {
-            showAndroidPicker('date')
-        } else {
-            setMode('date')
-        }
     };
 
     const handleSubmit = (valueDate = date) => {
@@ -90,10 +89,12 @@ const DatePicker: React.FunctionComponent<DatePickerProps> = (props) => {
                 <TouchableOpacity
                     activeOpacity={0.6}
                     onPress={() => Platform.OS === 'android' ? showAndroidPicker('date') : setMode('date')}
-                    style={[modalStyles.tab, mode === 'date' && modalStyles.activeTab]}
+                    style={[styles.tab]}
                 >
+                    <CustomText style={{ fontSize: 15, fontWeight: 500}}>Select periode:</CustomText>
+                    <CustomText style={{ fontSize: 15, fontWeight: 500, flex: 1, textAlign: 'center' }}>{formattedDate}</CustomText>
+                    <FontAwesome6 name="angle-right" size={20} color="black" />
                 </TouchableOpacity>
-                    <Text style={mode === 'date' && modalStyles.activeText}>{formattedDate}</Text>
             </View>
 
             {renderPicker()}
@@ -103,10 +104,11 @@ const DatePicker: React.FunctionComponent<DatePickerProps> = (props) => {
 
     return (
         <View>
-            <TouchableOpacity activeOpacity={0.6} style={[style]} onPress={handleOnFocus}>
-                <CustomText>
+            <TouchableOpacity activeOpacity={0.6} style={[style, {flexDirection: 'row', gap: 2, alignItems: 'center' }]} onPress={handleOnFocus}>
+                <CustomText style={titleStyle}>
                     {value && formatDateVerbose(value)}
                 </CustomText>
+                <Octicons name="chevron-down" size={18} color="white" />
             </TouchableOpacity>
             <ModalKuvera
                 title={label}
@@ -119,7 +121,7 @@ const DatePicker: React.FunctionComponent<DatePickerProps> = (props) => {
                 </View>
 
                 <TouchableOpacity activeOpacity={0.6} style={modalStyles.buttonSave} onPress={() => handleSubmit()}>
-                    <CustomText style={{ color: "white", fontSize: 15, fontWeight: '500' }}>Simpan</CustomText>
+                    <CustomText style={{ color: "white", fontSize: 15, fontWeight: '500' }}>Search</CustomText>
                 </TouchableOpacity>
             </ModalKuvera>
         </View>
@@ -129,7 +131,13 @@ const DatePicker: React.FunctionComponent<DatePickerProps> = (props) => {
 export default DatePicker;
 
 const styles = StyleSheet.create({
-    tabContainer: {
-
-    }
+     tab: {
+        padding: 10,
+        flex: 1,
+        alignItems: 'center',
+        borderRadius: 8,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        gap: 8,
+      },
 })
