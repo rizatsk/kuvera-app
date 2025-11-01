@@ -5,7 +5,7 @@ import Entypo from "@expo/vector-icons/Entypo";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import Octicons from "@expo/vector-icons/Octicons";
 import moment from 'moment';
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   StyleSheet,
   TextStyle,
@@ -13,33 +13,33 @@ import {
   View,
   ViewStyle
 } from "react-native";
-import { CalendarList, DateData } from 'react-native-calendars';
-import { MarkedDates } from "react-native-calendars/src/types";
 import { modalStyles } from "../../input/date-time-input/style";
+import CalendarListScreen from "./calendar-list";
+import { DateTrx } from "./type";
 
 export interface DatePickerProps {
-  onSelectDate: (value: string) => void;
+  onSelectDate: (params: DateTrx) => void;
   style?: ViewStyle;
   label: string;
-  value: string;
+  value: DateTrx;
   titleStyle?: TextStyle;
 }
 
-interface RangeState {
-  start: string | null;
-  end: string | null;
-  marked: MarkedDates;
+type setRange = {
+  start: string | null
+  end: string | null
 }
 
-const DatePicker: React.FunctionComponent<DatePickerProps> = (props) => {
+const ModalDateTransactions: React.FunctionComponent<DatePickerProps> = (props) => {
+  const [range, setRange] = useState<setRange>({ start: null, end: null })
   const { value, label, onSelectDate, style, titleStyle } = props;
 
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [showPicker, setShowPicker] = useState(false);
-  const [textDate, setTextDate] = useState(value);
+  const [textDate, setTextDate] = useState(value.keyString);
 
   useEffect(() => {
-    switch (value) {
+    switch (value.keyString) {
       case "30lastday":
         setTextDate("30 Hari Terakhir");
         break;
@@ -50,7 +50,7 @@ const DatePicker: React.FunctionComponent<DatePickerProps> = (props) => {
         setTextDate("1 Tahun Terakhir");
         break;
       default:
-        setTextDate(value);
+        setTextDate(value.keyString);
         break;
     }
   }, [value]);
@@ -60,8 +60,8 @@ const DatePicker: React.FunctionComponent<DatePickerProps> = (props) => {
     setIsModalVisible(true);
   };
 
-  const handleSubmit = (valueDate: string) => {
-    onSelectDate(`${valueDate}`);
+  const handleSubmit = (valueDate: DateTrx) => {
+    onSelectDate(valueDate);
     onClose();
   };
 
@@ -75,98 +75,37 @@ const DatePicker: React.FunctionComponent<DatePickerProps> = (props) => {
     setShowPicker(true);
   };
 
-  // State untuk menyimpan tanggal Mulai dan Akhir
-  const initialRange = { start: null, end: null, marked: {} };
-  const [range, setRange] = useState<RangeState>(initialRange);
-
-  // Warna yang digunakan untuk range
-  const RANGE_COLOR = '#70d7c7';
-  const START_END_COLOR = '#50cebb';
-
-  // --- FUNGSI UTAMA ---
-  const handleDayPress = useCallback((day: DateData) => {
-    const dateString = day.dateString;
-    let newRange: RangeState = { start: range.start, end: range.end, marked: {} };
-
-    if (!range.start || (range.start && range.end)) {
-      // Kasus 1: Belum ada start atau sudah ada range penuh -> Mulai baru
-      newRange.start = dateString;
-      newRange.end = null;
-      newRange.marked = {
-        [dateString]: { startingDay: true, color: START_END_COLOR, textColor: 'white' },
-      };
+  const handleSubmitRangeCalender = () => {
+    if (range.start && range.end) {
+      handleSubmit({
+        start: range.start,
+        end: range.end,
+        keyString: `${moment(range.start).format('DD-MM-YYYY')} - ${moment(range.end).format('DD-MM-YYYY')}`
+      })
+    } else if (range.start) {
+      handleSubmit({
+        start: range.start,
+        end: null,
+        keyString: `${moment(range.start).format('DD-MM-YYYY')}`
+      })
     } else {
-      // Kasus 2: Sudah ada start -> Tetapkan end
-      const startMoment = moment(range.start);
-      const endMoment = moment(dateString);
-
-      if (endMoment.isBefore(startMoment)) {
-        // Jika End sebelum Start -> Ganti Start
-        newRange.start = dateString;
-        newRange.end = null;
-        newRange.marked = {
-          [dateString]: { startingDay: true, color: START_END_COLOR, textColor: 'white' },
-        };
-      } else {
-        // Pilihan End yang Valid
-        newRange.end = dateString;
-        let date = startMoment.clone();
-
-        // Loop untuk mengisi tanggal di antara start dan end
-        while (date.isSameOrBefore(endMoment)) {
-          const currentDay = date.format('YYYY-MM-DD');
-
-          if (currentDay === newRange.start) {
-            newRange.marked[currentDay] = { startingDay: true, color: START_END_COLOR, textColor: 'white' };
-          } else if (currentDay === newRange.end) {
-            newRange.marked[currentDay] = { endingDay: true, color: START_END_COLOR, textColor: 'white' };
-          } else {
-            newRange.marked[currentDay] = { color: RANGE_COLOR, textColor: 'white' };
-          }
-          date.add(1, 'days');
-        }
-      }
+      onClose();
     }
+  }
 
-    setRange(newRange);
-  }, [range.start, range.end]); // Dependencies untuk useCallback
-
-  const lastDayOfCurrentMonth = moment().format('YYYY-MM-DD');
   const renderPicker = () => {
     return (
       <>
         <View style={{ flexDirection: 'row' }}>
           <TouchableOpacity
             activeOpacity={0.6}
-            onPress={() => {
-              if (range.start && range.end) {
-                handleSubmit(`${moment(range.start).format('DD-MM-YYYY')} - ${moment(range.end).format('DD-MM-YYYY')}`)
-                setRange(initialRange)
-              } else {
-                onClose();
-              }
-            }}
+            onPress={handleSubmitRangeCalender}
             style={{ borderWidth: 1, borderColor: Colors.tealKuvera, borderRadius: 4, paddingVertical: 2, paddingHorizontal: 12 }}>
             <CustomText style={{ color: Colors.tealKuvera, fontWeight: 500 }}>Selesai</CustomText>
           </TouchableOpacity>
         </View>
         <View style={{ paddingHorizontal: 10, marginBottom: 80 }}>
-          <CalendarList
-            animateScroll={false}
-            calendarStyle={{ width: '100%', paddingTop: 0 }}
-            maxDate={lastDayOfCurrentMonth}
-            futureScrollRange={0}
-            markingType='period'
-            markedDates={range.marked}
-            onDayPress={handleDayPress}
-            theme={{
-              textDayFontSize: 14,
-              selectedDayBackgroundColor: Colors.tealKuvera,
-              selectedDayTextColor: 'white',
-              todayTextColor: Colors.tealKuvera,
-              arrowColor: Colors.tealKuvera,
-            }}
-          />
+          <CalendarListScreen setRangeDate={setRange} />
         </View>
       </>
     )
@@ -181,15 +120,18 @@ const DatePicker: React.FunctionComponent<DatePickerProps> = (props) => {
             <TouchableOpacity
               activeOpacity={0.6}
               onPress={() => {
-                handleSubmit('7lastday')
-              }
-              }
+                handleSubmit({
+                  start: moment().subtract(7, 'days').format('YYYY-MM-DD'),
+                  end: moment().format('YYYY-MM-DD'),
+                  keyString: '7lastday'
+                })
+              }}
               style={[styles.tab]}
             >
               <CustomText style={{ fontSize: 15, fontWeight: 500 }}>
                 7 Hari terakhir
               </CustomText>
-              {value === '7lastday' && (
+              {value.keyString === '7lastday' && (
                 <Octicons name="check" size={24} color={Colors.tealDarkKuvera} />
               )}
             </TouchableOpacity>
@@ -197,15 +139,18 @@ const DatePicker: React.FunctionComponent<DatePickerProps> = (props) => {
             <TouchableOpacity
               activeOpacity={0.6}
               onPress={() => {
-                handleSubmit('30lastday')
-              }
-              }
+                handleSubmit({
+                  start: moment().subtract(30, 'days').format('YYYY-MM-DD'),
+                  end: moment().format('YYYY-MM-DD'),
+                  keyString: '30lastday'
+                })
+              }}
               style={[styles.tab]}
             >
               <CustomText style={{ fontSize: 15, fontWeight: 500 }}>
                 30 Hari terakhir
               </CustomText>
-              {value === '30lastday' && (
+              {value.keyString === '30lastday' && (
                 <Octicons name="check" size={24} color={Colors.tealDarkKuvera} />
               )}
             </TouchableOpacity>
@@ -213,15 +158,18 @@ const DatePicker: React.FunctionComponent<DatePickerProps> = (props) => {
             <TouchableOpacity
               activeOpacity={0.6}
               onPress={() => {
-                handleSubmit('1lastyear')
-              }
-              }
+                handleSubmit({
+                  start: moment().subtract(1, 'years').format('YYYY-MM-DD'),
+                  end: moment().format('YYYY-MM-DD'),
+                  keyString: '1lastyear'
+                })
+              }}
               style={[styles.tab]}
             >
               <CustomText style={{ fontSize: 15, fontWeight: 500 }}>
                 1 Tahun terakhir
               </CustomText>
-              {value === '1lastyear' && (
+              {value.keyString === '1lastyear' && (
                 <Octicons name="check" size={24} color={Colors.tealDarkKuvera} />
               )}
             </TouchableOpacity>
@@ -270,7 +218,7 @@ const DatePicker: React.FunctionComponent<DatePickerProps> = (props) => {
   );
 };
 
-export default DatePicker;
+export default ModalDateTransactions;
 
 const styles = StyleSheet.create({
   tabContainer: {},

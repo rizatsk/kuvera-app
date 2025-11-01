@@ -1,5 +1,6 @@
 import CustomText from "@/components/custom-text";
-import DatePicker from "@/components/page/transaction/modal-date-transaction";
+import ModalDateTransactions from "@/components/page/transaction/modal-date-transaction";
+import { DateTrx } from "@/components/page/transaction/type";
 import { Colors } from "@/constants/theme";
 import Octicons from "@expo/vector-icons/Octicons";
 import { useState } from "react";
@@ -7,10 +8,10 @@ import { ScrollView, StyleSheet, View } from "react-native";
 import { ScreenContentWrapper } from "react-native-screens";
 
 export default function TransactionScreen() {
-  const [dateTransaction, setDateTransaction] = useState('30lastday');
-  const onSelectDate = (selectedDate: string) => {
-    console.log("Selected range transaction", selectedDate)
-    setDateTransaction(selectedDate);
+  const [dateTrx, setDateTrx] = useState<DateTrx>({start: null, end: null, keyString: '30lastday'})
+  const onSelectDate = (dataDateTrx: DateTrx) => {
+    console.log('Selected date transaction', dataDateTrx)
+    setDateTrx(dataDateTrx);
   };
 
   return (
@@ -31,10 +32,10 @@ export default function TransactionScreen() {
               gap: 8,
             }}
           >
-            <DatePicker
+            <ModalDateTransactions
               titleStyle={{ color: "blac", fontWeight: 400, fontSize: 14 }}
               label="Select Date"
-              value={dateTransaction}
+              value={dateTrx}
               onSelectDate={onSelectDate}
             />
           </View>
