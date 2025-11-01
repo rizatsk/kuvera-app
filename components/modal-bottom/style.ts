@@ -26,7 +26,7 @@ export const modalStyles = StyleSheet.create({
     borderBottomColor: '#eee',
   },
   title: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: 'bold',
     flex: 1,
     textAlign: "center",

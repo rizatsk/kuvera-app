@@ -12,10 +12,10 @@ export const modalStyles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 15,
     borderBottomWidth: 0.8,
-    borderBottomColor: Colors.grey[200]
+    borderBottomColor: Colors.grey[100]
   },
   optionLabel: {
-    fontSize: 15,
+    fontSize: 14,
   },
   buttonSave: {
     paddingVertical: 10, 

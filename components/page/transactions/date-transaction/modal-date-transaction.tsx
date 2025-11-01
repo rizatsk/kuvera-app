@@ -13,7 +13,7 @@ import {
   View,
   ViewStyle
 } from "react-native";
-import { modalStyles } from "../../input/date-time-input/style";
+import { modalStyles } from "../../../input/date-time-input/style";
 import CalendarListScreen from "./calendar-list";
 import { DateTrx } from "./type";
 
@@ -41,13 +41,13 @@ const ModalDateTransactions: React.FunctionComponent<DatePickerProps> = (props) 
   useEffect(() => {
     switch (value.keyString) {
       case "30lastday":
-        setTextDate("30 Hari Terakhir");
+        setTextDate("30 Days Ago");
         break;
       case "7lastday":
-        setTextDate("7 Hari Terakhir");
+        setTextDate("7 Days Ago");
         break;
       case "1lastyear":
-        setTextDate("1 Tahun Terakhir");
+        setTextDate("1 Year Ago");
         break;
       default:
         setTextDate(value.keyString);
@@ -129,7 +129,7 @@ const ModalDateTransactions: React.FunctionComponent<DatePickerProps> = (props) 
               style={[styles.tab]}
             >
               <CustomText style={{ fontSize: 15, fontWeight: 500 }}>
-                7 Hari terakhir
+                7 Days Ago
               </CustomText>
               {value.keyString === '7lastday' && (
                 <Octicons name="check" size={24} color={Colors.tealDarkKuvera} />
@@ -148,7 +148,7 @@ const ModalDateTransactions: React.FunctionComponent<DatePickerProps> = (props) 
               style={[styles.tab]}
             >
               <CustomText style={{ fontSize: 15, fontWeight: 500 }}>
-                30 Hari terakhir
+                30 Days Ago
               </CustomText>
               {value.keyString === '30lastday' && (
                 <Octicons name="check" size={24} color={Colors.tealDarkKuvera} />
@@ -167,7 +167,7 @@ const ModalDateTransactions: React.FunctionComponent<DatePickerProps> = (props) 
               style={[styles.tab]}
             >
               <CustomText style={{ fontSize: 15, fontWeight: 500 }}>
-                1 Tahun terakhir
+                1 Yaer Ago
               </CustomText>
               {value.keyString === '1lastyear' && (
                 <Octicons name="check" size={24} color={Colors.tealDarkKuvera} />

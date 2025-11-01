@@ -1,8 +1,8 @@
 import CustomText from "@/components/custom-text";
-import ModalDateTransactions from "@/components/page/transaction/modal-date-transaction";
-import { DateTrx } from "@/components/page/transaction/type";
+import ModalDateTransactions from "@/components/page/transactions/date-transaction/modal-date-transaction";
+import { DateTrx } from "@/components/page/transactions/date-transaction/type";
+import ModalTypeTransaction from "@/components/page/transactions/type-transaction/modal-type-transaction";
 import { Colors } from "@/constants/theme";
-import Octicons from "@expo/vector-icons/Octicons";
 import { useState } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
 import { ScreenContentWrapper } from "react-native-screens";
@@ -14,8 +14,15 @@ export default function TransactionScreen() {
     setDateTrx(dataDateTrx);
   };
 
+  const [typeTransaction, setTypeTransaction] = useState('All Transaction');
+  const selectOptionsTypeTransaction = ['All Transaction', 'Incoming Balance', 'Outgoing Balance'];
+  const onSelectTypeTransaction = (select: string) => {
+    setTypeTransaction(select)
+  }
+  
+
   return (
-    <ScreenContentWrapper style={{ paddingTop: 20 }}>
+    <ScreenContentWrapper style={{ paddingTop: 20, backgroundColor: 'white' }}>
       <View style={{ paddingHorizontal: 18, paddingVertical: 10 }}>
         <CustomText
           style={{ fontWeight: 600, fontSize: 18, textAlign: "center" }}
@@ -25,33 +32,19 @@ export default function TransactionScreen() {
       </View>
       <ScrollView>
         <View style={styles.datePickerContainer}>
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              gap: 8,
-            }}
-          >
             <ModalDateTransactions
               titleStyle={{ color: "blac", fontWeight: 400, fontSize: 14 }}
               label="Select Date"
               value={dateTrx}
               onSelectDate={onSelectDate}
             />
-          </View>
           <View style={{ width: 2, height: "100%", backgroundColor: Colors.grey[50], }} />
-          <View style={{ flexDirection: "row", alignItems: "center", gap: 4 }}>
-            <CustomText
-              style={{
-                fontWeight: 500,
-                fontSize: 14,
-                textAlign: "center",
-              }}
-            >
-              All Transactions
-            </CustomText>
-            <Octicons name="chevron-down" size={20} color="black" />
-          </View>
+          <ModalTypeTransaction
+            value={typeTransaction}
+            label="Type Transaction"
+            selectOptions={selectOptionsTypeTransaction}
+            onSelect={onSelectTypeTransaction}
+          />
         </View>
       </ScrollView>
     </ScreenContentWrapper>
@@ -66,8 +59,8 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "white",
     paddingVertical: 6,
-    marginHorizontal: 12,
-    paddingHorizontal: 8,
-    borderRadius: 8,
+    paddingHorizontal: 20,
+    borderWidth: 1,
+    borderColor: Colors.grey[50]
   },
 });
