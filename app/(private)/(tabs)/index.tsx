@@ -1,12 +1,12 @@
 import CustomText from '@/components/custom-text';
 import CardCategoryOutput from '@/components/page/home/card/cardCategoryOutput';
 import CardRecent from '@/components/page/home/card/cardRecent';
+import HeaderHome from '@/components/page/home/header';
 import InvestAccountValue from '@/components/page/home/invest-account-value';
 import { categoryOutput, recentPayment } from '@/helper/mock-data';
 import Entypo from '@expo/vector-icons/Entypo';
 import { ScrollView, View } from 'react-native';
 import { ScreenContentWrapper } from 'react-native-screens';
-import HeaderHome from '../../../components/page/home/header';
 
 export default function HomeScreen() {
   return (
