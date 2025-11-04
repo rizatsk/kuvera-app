@@ -7,8 +7,8 @@ import HomeMenu from './menu'
 
 export default function InvestAccountValue() {
     return (
-        <View style={{ alignItems: "center", flex: 1, flexDirection: "column", marginHorizontal: 10, paddingVertical: 10, backgroundColor: Colors.tealKuvera, borderRadius: 10, overflow: 'hidden' }}>
-            <View style={{ backgroundColor: Colors.tealDarkKuvera, width: 110, paddingLeft: 10, borderRadius: 10, position: 'absolute', top: 9, right: -10 }}>
+        <View style={{ alignItems: "center", flex: 1, flexDirection: "column", marginHorizontal: 10, paddingVertical: 10, backgroundColor: Colors.tealLightKuvera, borderRadius: 10, overflow: 'hidden' }}>
+            <View style={{ backgroundColor: Colors.tealKuvera, width: 110, paddingLeft: 10, borderRadius: 10, position: 'absolute', top: 9, right: -10 }}>
                 <CustomText style={{ color: 'white', fontWeight: 500, fontSize: 16 }}>September</CustomText>
             </View>
             <CustomText style={{ fontWeight: 600, color: 'white' }}>Your invest account value is</CustomText>

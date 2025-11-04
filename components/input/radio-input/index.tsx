@@ -76,7 +76,7 @@ const RadioInput: React.FunctionComponent<RadioInputProps> = (props) => {
                 </View>
 
                 <TouchableOpacity activeOpacity={0.6} style={modalStyles.buttonSave} onPress={() => handleSubmit()}>
-                    <CustomText style={{ color: "white", fontSize: 15, fontWeight: '500' }}>Simpan</CustomText>
+                    <CustomText style={{ color: "white", fontSize: 15, fontWeight: '500' }}>Select</CustomText>
                 </TouchableOpacity>
             </ModalKuvera>
         </InputFieldKuvera>

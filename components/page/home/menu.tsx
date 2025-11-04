@@ -1,9 +1,9 @@
 import CustomText from '@/components/custom-text'
 import { Colors } from '@/constants/theme'
-import AntDesign from '@expo/vector-icons/AntDesign'
 import Feather from '@expo/vector-icons/Feather'
 import FontAwesome from '@expo/vector-icons/FontAwesome'
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6'
+import Ionicons from '@expo/vector-icons/Ionicons'
 import { useRouter } from 'expo-router'
 import React from 'react'
 import { StyleSheet, TouchableOpacity, View } from 'react-native'
@@ -31,7 +31,7 @@ export default function HomeMenu() {
                     <View style={{ position: "absolute", top: 5, left: 4 }}>
                         <FontAwesome name="plus-circle" size={16} color={Colors.tealKuvera} />
                     </View>
-                    <AntDesign name="dollar" size={24} color={Colors.tealKuvera} />
+                    <Ionicons name="wallet-outline" size={28} color={Colors.tealKuvera} />
                 </View>
                 <CustomText style={style.title}>Income</CustomText>
             </TouchableOpacity>
@@ -58,9 +58,9 @@ const style = StyleSheet.create({
         paddingVertical: 10
     },
     title: {
-        fontWeight: 500, 
-        color: Colors.grey[50], 
-        fontSize: 12
+        fontWeight: 600, 
+        color: "white", 
+        fontSize: 13
     },
     squareIcon: {
         width: 50, height: 50, 

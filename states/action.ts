@@ -5,6 +5,8 @@ export const ActionReducer = {
     UNSET_AUTH: "UNSET_AUTH",
 
     SET_LOADING: "SET_LOADING",
+
+    GET_ANTAM_GOLD_PRICE: "GET_ANTAM_GOLD_PRICE"
 };
 
 export enum ActionReducerType  {
@@ -14,4 +16,6 @@ export enum ActionReducerType  {
     UNSET_AUTH = "UNSET_AUTH",
 
     SET_LOADING = "SET_LOADING",
+
+    GET_ANTAM_GOLD_PRICE = "GET_ANTAM_GOLD_PRICE"
 }

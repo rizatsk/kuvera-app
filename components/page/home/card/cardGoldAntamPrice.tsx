@@ -1,9 +1,11 @@
 import CustomText from '@/components/custom-text'
 import { Colors } from '@/constants/theme'
+import { AsyncGetAntamGoldPrice } from '@/states/gold-antam-price/action'
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons'
 import { Image } from 'expo-image'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { StyleSheet, View } from 'react-native'
+import { useDispatch } from 'react-redux'
 
 type CardRecentType = {
     icon: string
@@ -12,9 +14,31 @@ type CardRecentType = {
     amount: string
 }
 
-export default function CardRecent({
-    icon, title, date, amount
-}: CardRecentType) {
+export default function CardGoldAntamPrice() {
+    const dispatch = useDispatch();
+    const [listGoldAntam, setListGoldAntam] = useState<Array<any>>([]);
+
+    useEffect(() => {
+        dispatch(
+            AsyncGetAntamGoldPrice({
+                setListGoldAntam
+            }) as any
+        )
+    }, [])
+
+    return (
+        <View style={{ gap: 10 }}>
+           <ListCardGoldAntamPrice 
+                icon='jual'
+                title='10gr'
+                date='2025'
+                amount='Rp 15.0000'
+           />
+        </View>
+    )
+}
+
+const ListCardGoldAntamPrice = ({ icon, title, date, amount}: CardRecentType) => {
     const IconComponent = () => {
         switch (icon) {
             case 'shopping':
@@ -34,17 +58,18 @@ export default function CardRecent({
                 )
         }
     }
+
     return (
-        <View style={{ flexDirection: "row", justifyContent: "space-between", paddingVertical: 5, alignItems: 'center' }}>
-            <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
-                <IconComponent />
-                <View>
-                    <CustomText style={{ fontWeight: 500, fontSize: 15 }}>{title}</CustomText>
-                    <CustomText style={{ fontSize: 12 }}>{date}</CustomText>
+         <View style={{ flexDirection: "row", justifyContent: "space-between", paddingVertical: 5, alignItems: 'center' }}>
+                <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
+                    <IconComponent />
+                    <View>
+                        <CustomText style={{ fontWeight: 500, fontSize: 15 }}>{title}</CustomText>
+                        <CustomText style={{ fontSize: 12 }}>{date}</CustomText>
+                    </View>
                 </View>
+                <CustomText style={{ fontWeight: 500, paddingRight: 8 }}>{amount}</CustomText>
             </View>
-            <CustomText style={{ fontWeight: 500, paddingRight: 8 }}>{amount}</CustomText>
-        </View>
     )
 }
 

@@ -5,13 +5,16 @@
 
 import { Platform } from 'react-native';
 
-const tintColorLight = '#0a48a4';
+const tintColorLight = '#0b62e3ff';
 const tintColorDark = '#fff';
-const blueKuvera = "#1a1280ff";
+const blueKuvera = "#0088ffff";
 const tealKuvera = "#48B3AF";
+const tealLightKuvera = "#0dd4ceff";
 const tealDarkKuvera = "#4da3a0ff";
-const greenKuvera = "#A7E399";
+const greenKuvera = "#29d602ff";
+const moneyGreenKuvera = "#6ec20eff";
 const yellowKuvera = "#f8cb04ff";
+const orangeKuvera = "#f87e04ff";
 const greyBackground = "#efeff0ff";
 const greyBackground2 = "#c6eceaff";
 const tealKuvera2 = "#016B61";
@@ -27,6 +30,9 @@ export const Colors = {
   tealKuvera2,
   whiteTransaparent,
   tealDarkKuvera,
+  orangeKuvera,
+  moneyGreenKuvera,
+  tealLightKuvera,
   light: {
     text: '#11181C',
     background: '#fff',

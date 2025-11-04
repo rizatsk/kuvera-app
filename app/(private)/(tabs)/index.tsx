@@ -1,5 +1,6 @@
 import CustomText from '@/components/custom-text';
 import CardCategoryOutput from '@/components/page/home/card/cardCategoryOutput';
+import CardGoldAntamPrice from '@/components/page/home/card/cardGoldAntamPrice';
 import CardRecent from '@/components/page/home/card/cardRecent';
 import HeaderHome from '@/components/page/home/header';
 import InvestAccountValue from '@/components/page/home/invest-account-value';
@@ -16,7 +17,7 @@ export default function HomeScreen() {
         {/* Invest Account value */}
         <InvestAccountValue />
         {/* Category Output */}
-        <View style={{ flex: 1, marginTop: 10, marginHorizontal: 10, backgroundColor: "white", borderRadius: 10, paddingVertical: 10, paddingHorizontal: 10}}>
+        <View style={{ flex: 1, marginTop: 10, marginHorizontal: 10, backgroundColor: "white", borderRadius: 10, paddingVertical: 10, paddingHorizontal: 10 }}>
           <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: 15 }}>
             <CustomText style={{ fontWeight: 600, fontSize: 16 }}>Category</CustomText>
             <Entypo name="chevron-right" size={24} color="black" />
@@ -32,16 +33,24 @@ export default function HomeScreen() {
               <CardCategoryOutput
                 key={index}
                 title={category.title}
-                subTitle={category.subTitle}
                 money={category.money}
                 icon={category.icon}
               />
             ))}
           </ScrollView>
         </View>
-        {/* Recent */}
+        {/* Container */}
         <View style={{ flex: 1, marginTop: 10, backgroundColor: "white", borderRadius: 10, paddingVertical: 10, paddingHorizontal: 10 }}>
-          <View style={{ paddingHorizontal: 10}}>
+          {/* Price gold antam */}
+          <View style={{ paddingHorizontal: 10 }}>
+            <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: 15 }}>
+              <CustomText style={{ fontWeight: 600, fontSize: 16 }}>Gold Antam Price</CustomText>
+            </View>
+            <CardGoldAntamPrice />
+          </View>
+
+          {/* Recent */}
+          <View style={{ paddingHorizontal: 10, marginTop: 20 }}>
             <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: 15 }}>
               <CustomText style={{ fontWeight: 600, fontSize: 16 }}>Recent</CustomText>
               <Entypo name="chevron-right" size={24} color="black" />
