@@ -19,6 +19,7 @@ const greyBackground = "#efeff0ff";
 const greyBackground2 = "#c6eceaff";
 const tealKuvera2 = "#016B61";
 const whiteTransaparent = "#ffffffa1"
+const goldCOlor = "#ffbf00"
 
 export const Colors = {
   blueKuvera,
@@ -33,6 +34,7 @@ export const Colors = {
   orangeKuvera,
   moneyGreenKuvera,
   tealLightKuvera,
+  goldCOlor,
   light: {
     text: '#11181C',
     background: '#fff',

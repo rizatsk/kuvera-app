@@ -7,7 +7,7 @@ import { StyleSheet, View } from 'react-native'
 
 export default function AccountTabsCard() {
     return (
-        <View style={{ marginHorizontal: 18, marginTop: 25 }}>
+        <View style={{ marginHorizontal: 18, marginTop: 35 }}>
             <CustomText style={{ fontSize: 16, fontWeight: 600 }}>Account</CustomText>
             <View style={{ marginVertical: 5, marginHorizontal: 5 }}>
                 <View style={styles.cardContainer}>

@@ -1,13 +1,15 @@
+import { GoldAntam } from '@/components/page/home/card/price-antam/cardGoldAntamPrice';
+import environment from '@/constants/environment';
 import axios from 'axios';
 
-export async function ApiGoldAntamPrice() {
+export async function ApiGoldAntamPrice(): Promise<GoldAntam[]> {
     try {
         const {data: result} = await axios({
             method: 'GET',
-            url: "https://www.idx.co.id/primary/TradingSummary/GetStockSummary?length=9999&start=0"
+            url: environment.BASE_API_URL + '/service/price-gold-antam'
         });
 
-        return result;
+        return result.data;
     } catch(error: any) {
         throw {
             status: error.status,

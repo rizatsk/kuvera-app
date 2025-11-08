@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 14,
     marginTop: 40,
     borderRadius: 5,
-    paddingVertical: 10,
+    paddingVertical: 8,
   },
   buttonBack: {
     backgroundColor: 'white',

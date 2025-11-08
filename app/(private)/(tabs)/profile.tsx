@@ -18,41 +18,39 @@ export default function ProfileScreen() {
     <ScreenContentWrapper style={styles.container}>
       <ScrollView>
         {/* Background atas */}
-        <View style={{flex: 1, marginBottom: 55}}>
-          <View style={styles.arcStyle}>
-            <Image
-              style={styles.fullScreenBackground}
-              contentFit='contain'
-              source={require("@/assets/images/bg-batik.webp")} />
-          </View>
-          <View style={{marginTop: 30, marginHorizontal: 14}}>
-            <View style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
-            <View style={styles.iconNotif}>
-              <Ionicons name="notifications" size={22} color={Colors.tealKuvera} />
-            </View>     
+        <View style={{ flex: 1 }}>
+          <View style={styles.arcStyle} />
+          <View style={{ marginTop: 30, marginHorizontal: 14 }}>
+            <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
+              <View style={styles.iconNotif}>
+                <Ionicons name="notifications" size={22} color={Colors.tealKuvera} />
+              </View>
             </View>
           </View>
         </View>
         {/* Photo user */}
-        <View style={{ alignItems: "center" }}>
-          <View>
-            <View style={styles.containerAvatar} >
-              <Image
-                style={{ height: 110, width: 110 }}
-                contentFit='fill'
-                source={require("@/assets/images/icon/avatar-men.png")} />
-              <View style={styles.containerEdit}>
-                <Feather name="edit-3" size={20} color="grey" />
-              </View>
+        <View style={{ marginHorizontal: 18, marginTop: -25, flexDirection: 'row', gap: 15 }}>
+          <View style={styles.containerAvatar} >
+            <Image
+              style={{ height: 85, width: 85 }}
+              contentFit='fill'
+              source={require("@/assets/images/icon/avatar-men.png")} />
+            <View style={styles.containerEdit}>
+              <Feather name="edit-3" size={20} color="grey" />
             </View>
           </View>
-          <CustomText style={{ marginTop: 20, fontWeight: 600, fontSize: 18 }}>Rizat Sakmir</CustomText>
-          <CustomText style={{ fontSize: 15 }}>rizatsakmir@gmail.com</CustomText>
+          <View>
+            <CustomText style={{ marginTop: 20, fontWeight: 600, fontSize: 19 }}>Rizat Sakmir</CustomText>
+            <CustomText style={{ fontSize: 16, fontWeight: 500 }}>rizatsakmir@gmail.com</CustomText>
+          </View>
         </View>
         <AccountTabsCard />
         <OtherTabs />
         <ButtonLogout />
-        <CustomText style={styles.versionApp}>{environment.VERSION_APP}</CustomText>
+        <View style={{ marginHorizontal: 18 }}>
+          <CustomText style={{ marginVertical: 20, textAlign: 'center' }}>Kuvera an easy-to-use income and expense management application, equipped with real-time price information for Antam Gold and the IHSG stock index. All your financial data is safe and guaranteed.</CustomText>
+          <CustomText style={styles.versionApp}>Version {environment.VERSION_APP}</CustomText>
+        </View>
       </ScrollView>
     </ScreenContentWrapper >
   );
@@ -66,31 +64,29 @@ const styles = StyleSheet.create({
   fullScreenBackground: {
     height: '100%',
     width: '100%',
-    opacity: 0.3,
   },
   arcStyle: {
     position: 'absolute',
     width: '100%',
-    height: 180,
-    overflow: 'hidden',
-    borderBottomLeftRadius: 1000,
-    borderBottomRightRadius: 1000,
-    backgroundColor: Colors.greyBackground2,
-    transform: [{ scaleX: 1.9 }, { scaleY: 1 }],
+    height: 135,
+    borderBottomLeftRadius: 50,
+    borderBottomRightRadius: 0,
+    backgroundColor: Colors.tealLightKuvera,
+    // transform: [{ scaleX: 1.4 }, { scaleY: 1 }],
   },
-  iconNotif: { 
-    backgroundColor: Colors.whiteTransaparent, 
-    borderRadius: 10, 
-    width: 32, height: 32, 
-    justifyContent: 'center', 
+  iconNotif: {
+    backgroundColor: Colors.whiteTransaparent,
+    borderRadius: 10,
+    width: 32, height: 32,
+    justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 2,
     borderColor: Colors.tealKuvera
   },
   containerAvatar: {
-    backgroundColor: Colors.greyBackground,
-    height: 110,
-    width: 110,
+    backgroundColor: "white",
+    height: 85,
+    width: 85,
     alignItems: 'center',
     borderRadius: 10000,
     borderColor: Colors.tealKuvera,
@@ -100,8 +96,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 0,
     right: 0,
-    width: 35,
-    height: 35,
+    width: 30,
+    height: 30,
     borderWidth: 4,
     borderColor: Colors.greyBackground,
     backgroundColor: Colors.greyBackground2,
@@ -110,7 +106,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   versionApp: {
-    marginTop: 20,
+    marginTop: 10,
     textAlign: 'center',
     fontWeight: 600,
     fontSize: 16,

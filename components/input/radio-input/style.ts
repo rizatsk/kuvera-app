@@ -15,7 +15,7 @@ export const modalStyles = StyleSheet.create({
     borderBottomColor: Colors.grey[100]
   },
   optionLabel: {
-    fontSize: 14,
+    fontSize: 15,
   },
   buttonSave: {
     paddingVertical: 10, 

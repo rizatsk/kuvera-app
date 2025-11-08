@@ -21,7 +21,6 @@ export default function TransactionScreen() {
     setTypeTransaction(select)
   }
 
-
   return (
     <ScreenContentWrapper style={{ paddingTop: 20, backgroundColor: 'white' }}>
       <View style={{ paddingHorizontal: 18, paddingVertical: 10 }}>

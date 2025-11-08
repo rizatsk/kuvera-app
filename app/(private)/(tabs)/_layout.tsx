@@ -22,9 +22,9 @@ export default function TabLayout() {
           title: "Transaction",
         }} />
       <Tabs.Screen
-        name="saham-idx"
+        name="stock-idx"
         options={{
-          title: "Saham IDX",
+          title: "Stock IDX",
         }} />
       <Tabs.Screen
         name="profile"

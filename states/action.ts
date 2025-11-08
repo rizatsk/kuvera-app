@@ -6,7 +6,7 @@ export const ActionReducer = {
 
     SET_LOADING: "SET_LOADING",
 
-    GET_ANTAM_GOLD_PRICE: "GET_ANTAM_GOLD_PRICE"
+    SET_HOME_REFRESH: "SET_HOME_REFRESH",
 };
 
 export enum ActionReducerType  {
@@ -17,5 +17,5 @@ export enum ActionReducerType  {
 
     SET_LOADING = "SET_LOADING",
 
-    GET_ANTAM_GOLD_PRICE = "GET_ANTAM_GOLD_PRICE"
+    SET_HOME_REFRESH = "SET_HOME_REFRESH",
 }

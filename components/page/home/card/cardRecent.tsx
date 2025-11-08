@@ -50,8 +50,8 @@ export default function CardRecent({
 
 const styles = StyleSheet.create({
     containerIcon: {
-        width: 38,
-        height: 38,
+        width: 40,
+        height: 40,
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 10000,

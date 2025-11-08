@@ -1,7 +1,7 @@
 import { Colors } from '@/constants/theme';
 import Feather from '@expo/vector-icons/Feather';
-import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import Octicons from '@expo/vector-icons/Octicons';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
@@ -51,8 +51,8 @@ export default function CutomTabs({ state, descriptors, navigation }: BottomTabB
                 return <Feather name="user" size={20} color={color} />;
               case 'Transaction':
                 return <MaterialCommunityIcons name="chart-timeline-variant" size={24} color={color} />;
-              case 'Saham IDX':
-                return <FontAwesome6 name="chart-pie" size={20} color={color} />;
+              case 'Stock IDX':
+                return <MaterialIcons name="candlestick-chart" size={24} color={color} />
               default:
                 return <MaterialCommunityIcons name="react" size={20} color={color} />;
             }
