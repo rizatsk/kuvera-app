@@ -27,19 +27,21 @@ export default function CardGoldAntamPrice() {
     const [listGoldAntam, setListGoldAntam] = useState<GoldAntam[]>([]);
 
     useEffect(() => {
-        dispatch(
-            AsyncGetAntamGoldPrice({ setListGoldAntam, setSkeletonLoading }) as any
-        );
+        getAntamGoldPrice()
     }, [])
 
     useEffect(() => {
         // Jalankan saat homeRefresh true
         if (homeRefresh) {
-            dispatch(
-                AsyncGetAntamGoldPrice({ setListGoldAntam, setSkeletonLoading }) as any
-            );
+            getAntamGoldPrice()
         }
     }, [homeRefresh])
+
+    function getAntamGoldPrice() {
+        dispatch(
+            AsyncGetAntamGoldPrice({ setListGoldAntam, setSkeletonLoading }) as any
+        );
+    }
 
     return (
         <FlatList<GoldAntam | undefined>
@@ -60,6 +62,7 @@ export default function CardGoldAntamPrice() {
                         />
                     )
             }
+            ListEmptyComponent={<CustomText>Price gold Antam is not available</CustomText>}
         />
     )
 }

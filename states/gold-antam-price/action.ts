@@ -10,7 +10,7 @@ export function AsyncGetAntamGoldPrice({
             setSkeletonLoading(true);
             const result = await ApiGoldAntamPrice();
             setListGoldAntam(result.filter((gold) => Variable.LIST_GRAM_ANTAM.includes(gold.berat)))
-        } catch(error) {
+        } catch(error: any) {
             console.log("Error get ApiGoldAntamPrice", error)
         } finally {
             setSkeletonLoading(false);

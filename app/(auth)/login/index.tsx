@@ -1,5 +1,6 @@
 
 import CustomText from "@/components/custom-text";
+import environment from "@/constants/environment";
 import { Colors } from "@/constants/theme";
 import { asyncSignInWithGoogle } from "@/states/auth-user/action";
 import { Image } from "expo-image";
@@ -42,7 +43,7 @@ export default function LoginScreen() {
         </TouchableOpacity>
 
         <CustomText style={{marginVertical: 20, textAlign: 'center'}}>An easy-to-use income and expense management application, equipped with real-time price information for Antam Gold and the IHSG stock index. All your financial data is safe and guaranteed.</CustomText>
-        <CustomText style={{marginTop: 10}}>Version 1.0.0</CustomText>
+        <CustomText style={{marginTop: 10}}>Version {environment.VERSION_APP}</CustomText>
 
       </View>
     </View>

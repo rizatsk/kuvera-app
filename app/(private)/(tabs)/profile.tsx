@@ -20,7 +20,7 @@ export default function ProfileScreen() {
         {/* Background atas */}
         <View style={{ flex: 1 }}>
           <View style={styles.arcStyle} />
-          <View style={{ marginTop: 30, marginHorizontal: 14 }}>
+          <View style={{ marginTop: 50, marginHorizontal: 14 }}>
             <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
               <View style={styles.iconNotif}>
                 <Ionicons name="notifications" size={22} color={Colors.tealKuvera} />
@@ -29,10 +29,10 @@ export default function ProfileScreen() {
           </View>
         </View>
         {/* Photo user */}
-        <View style={{ marginHorizontal: 18, marginTop: -25, flexDirection: 'row', gap: 15 }}>
+        <View style={{ marginHorizontal: 18, marginTop: -25, flexDirection: 'row', gap: 15, alignItems: 'center'}}>
           <View style={styles.containerAvatar} >
             <Image
-              style={{ height: 85, width: 85 }}
+              style={{ height: 70, width: 70 }}
               contentFit='fill'
               source={require("@/assets/images/icon/avatar-men.png")} />
             <View style={styles.containerEdit}>
@@ -40,7 +40,7 @@ export default function ProfileScreen() {
             </View>
           </View>
           <View>
-            <CustomText style={{ marginTop: 20, fontWeight: 600, fontSize: 19 }}>Rizat Sakmir</CustomText>
+            <CustomText style={{ fontWeight: 600, fontSize: 19 }}>Rizat Sakmir</CustomText>
             <CustomText style={{ fontSize: 16, fontWeight: 500 }}>rizatsakmir@gmail.com</CustomText>
           </View>
         </View>
@@ -85,8 +85,8 @@ const styles = StyleSheet.create({
   },
   containerAvatar: {
     backgroundColor: "white",
-    height: 85,
-    width: 85,
+    height: 70,
+    width: 70,
     alignItems: 'center',
     borderRadius: 10000,
     borderColor: Colors.tealKuvera,
@@ -96,8 +96,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 0,
     right: 0,
-    width: 30,
-    height: 30,
+    width: 25,
+    height: 25,
     borderWidth: 4,
     borderColor: Colors.greyBackground,
     backgroundColor: Colors.greyBackground2,

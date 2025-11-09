@@ -22,7 +22,7 @@ export default function TransactionScreen() {
   }
 
   return (
-    <ScreenContentWrapper style={{ paddingTop: 20, backgroundColor: 'white' }}>
+    <ScreenContentWrapper style={{ paddingTop: 25, backgroundColor: 'white' }}>
       <View style={{ paddingHorizontal: 18, paddingVertical: 10 }}>
         <CustomText
           style={{ fontWeight: 600, fontSize: 18, textAlign: "center" }}

@@ -5,84 +5,95 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import Octicons from '@expo/vector-icons/Octicons';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ScreenContentWrapper } from 'react-native-screens';
 import CustomText from './custom-text';
 
 export default function CutomTabs({ state, descriptors, navigation }: BottomTabBarProps) {
+  const insets = useSafeAreaInsets();
+
   return (
-    <ScreenContentWrapper style={{ backgroundColor: "white", width: '100%', height: 80 }}>
-      <View style={style.container}>
-        {state.routes.map((route, index) => {
-          const { options } = descriptors[route.key];
-          const label =
-            options.tabBarLabel !== undefined
-              ? options.tabBarLabel
-              : options.title !== undefined
-                ? options.title
-                : route.name;
+    <SafeAreaView
+      edges={['bottom']} // hanya jaga area bawah
+      style={{
+        backgroundColor: 'white',
+        paddingBottom: insets.bottom, // biar gak ketimpa gesture bar Android
+      }}
+    >
+      <ScreenContentWrapper style={{ backgroundColor: "white", width: '100%'}}>
+        <View style={style.container}>
+          {state.routes.map((route, index) => {
+            const { options } = descriptors[route.key];
+            const label =
+              options.tabBarLabel !== undefined
+                ? options.tabBarLabel
+                : options.title !== undefined
+                  ? options.title
+                  : route.name;
 
-          const isFocused = state.index === index;
+            const isFocused = state.index === index;
 
-          const onPress = () => {
-            const event = navigation.emit({
-              type: 'tabPress',
-              target: route.key,
-              canPreventDefault: true,
-            });
+            const onPress = () => {
+              const event = navigation.emit({
+                type: 'tabPress',
+                target: route.key,
+                canPreventDefault: true,
+              });
 
-            if (!isFocused && !event.defaultPrevented) {
-              navigation.navigate(route.name, route.params);
+              if (!isFocused && !event.defaultPrevented) {
+                navigation.navigate(route.name, route.params);
+              }
+            };
+
+            const onLongPress = () => {
+              navigation.emit({
+                type: 'tabLongPress',
+                target: route.key,
+              });
+            };
+
+            const color = isFocused ? Colors.tealKuvera : Colors.grey[600];
+            const IconComponent = () => {
+              switch (label) {
+                case 'Home':
+                  return <Octicons name="home" size={20} color={color} />;
+                case 'Profile':
+                  return <Feather name="user" size={20} color={color} />;
+                case 'Transaction':
+                  return <MaterialCommunityIcons name="chart-timeline-variant" size={24} color={color} />;
+                case 'Stock IDX':
+                  return <MaterialIcons name="candlestick-chart" size={24} color={color} />
+                default:
+                  return <MaterialCommunityIcons name="react" size={20} color={color} />;
+              }
             }
-          };
 
-          const onLongPress = () => {
-            navigation.emit({
-              type: 'tabLongPress',
-              target: route.key,
-            });
-          };
-
-          const color = isFocused ? Colors.tealKuvera : Colors.grey[600];
-          const IconComponent = () => {
-            switch (label) {
-              case 'Home':
-                return <Octicons name="home" size={20} color={color} />;
-              case 'Profile':
-                return <Feather name="user" size={20} color={color} />;
-              case 'Transaction':
-                return <MaterialCommunityIcons name="chart-timeline-variant" size={24} color={color} />;
-              case 'Stock IDX':
-                return <MaterialIcons name="candlestick-chart" size={24} color={color} />
-              default:
-                return <MaterialCommunityIcons name="react" size={20} color={color} />;
-            }
-          }
-
-          return (
-            <TouchableOpacity
-              activeOpacity={0.6}
-              key={label as string}
-              accessibilityState={isFocused ? { selected: true } : {}}
-              accessibilityLabel={options.tabBarAccessibilityLabel}
-              testID={options.tabBarButtonTestID}
-              onPress={onPress}
-              onLongPress={onLongPress}
-              style={{ gap: 1, alignItems: 'center' }}
-            >
-              <IconComponent />
-              <CustomText style={{ color: color, fontSize: 12, fontWeight: 700 }}>
-                {label as string}
-              </CustomText>
-              {isFocused ? (
-                <View style={{backgroundColor: color, height: 3, width: "100%", borderRadius: 100}}></View>
-              ): (
-                <View style={{height: 3, width: "100%"}}></View>
-              )}
-            </TouchableOpacity>
-          );
-        })}
-      </View>
-    </ScreenContentWrapper>
+            return (
+              <TouchableOpacity
+                activeOpacity={0.6}
+                key={label as string}
+                accessibilityState={isFocused ? { selected: true } : {}}
+                accessibilityLabel={options.tabBarAccessibilityLabel}
+                testID={options.tabBarButtonTestID}
+                onPress={onPress}
+                onLongPress={onLongPress}
+                style={{ gap: 1, alignItems: 'center' }}
+              >
+                <IconComponent />
+                <CustomText style={{ color: color, fontSize: 12, fontWeight: 700 }}>
+                  {label as string}
+                </CustomText>
+                {isFocused ? (
+                  <View style={{ backgroundColor: color, height: 3, width: "100%", borderRadius: 100 }}></View>
+                ) : (
+                  <View style={{ height: 3, width: "100%" }}></View>
+                )}
+              </TouchableOpacity>
+            );
+          })}
+        </View>
+      </ScreenContentWrapper>
+    </SafeAreaView>
   );
 }
 

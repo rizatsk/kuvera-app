@@ -9,7 +9,7 @@ export default function ExpoScreen() {
   const [searchStock, setSearchStock] = useState("all");
 
   return (
-    <ScreenContentWrapper style={{ paddingTop: 20, backgroundColor: 'white', flex: 1 }}>
+    <ScreenContentWrapper style={{ paddingTop: 25, backgroundColor: 'white', flex: 1 }}>
       <View style={{ paddingHorizontal: 18, paddingVertical: 10 }}>
         <CustomText
           style={{ fontWeight: 600, fontSize: 18, textAlign: "center" }}

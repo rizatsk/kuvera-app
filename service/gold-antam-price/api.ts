@@ -11,9 +11,6 @@ export async function ApiGoldAntamPrice(): Promise<GoldAntam[]> {
 
         return result.data;
     } catch(error: any) {
-        throw {
-            status: error.status,
-            response: error.response
-        }
+        throw error;
     }
 }
