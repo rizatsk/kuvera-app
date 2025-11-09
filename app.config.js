@@ -9,11 +9,13 @@ export default {
         "userInterfaceStyle": "automatic",
         "newArchEnabled": true,
         "ios": {
+            "buildNumber": "1",
             "bundleIdentifier": "com.rjshubkuvera",
             "supportsTablet": true,
             "googleServicesFile": "./GoogleService-Info.plist",
         },
         "android": {
+            "versionCode": 1,
             "package": "com.rjshubkuvera",
             "adaptiveIcon": {
                 "backgroundColor": "#ffffff",
@@ -22,6 +24,7 @@ export default {
             "edgeToEdgeEnabled": true,
             "predictiveBackGestureEnabled": false,
             "googleServicesFile": "./google-services.json",
+            "buildType": "apk"
         },
         "plugins": [
             "expo-router",
@@ -49,6 +52,11 @@ export default {
         "experiments": {
             "typedRoutes": true,
             "reactCompiler": true
+        },
+        "extra": {
+            "eas": {
+                "projectId": "c8680eee-ff98-455b-b989-46b2cf9d6118"
+            }
         }
     }
 };
