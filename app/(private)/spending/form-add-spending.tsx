@@ -1,11 +1,14 @@
 import FormAddSpending from '@/components/page/spending/form-add-spending'
 import React from 'react'
-import { View } from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 export default function PageFormAddSpending() {
   return (
-    <View style={{flex: 1, backgroundColor: "white", paddingVertical: 18, paddingHorizontal: 20}}>
-        <FormAddSpending />
-    </View>
+    <SafeAreaView
+      edges={['top']}
+      style={{ flex: 1, backgroundColor: "white", paddingHorizontal: 20 }}
+    >
+      <FormAddSpending />
+    </SafeAreaView>
   )
 }

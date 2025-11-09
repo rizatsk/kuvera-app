@@ -6,7 +6,7 @@ import { Colors } from "@/constants/theme";
 import { Image } from "expo-image";
 import { useState } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
-import { ScreenContentWrapper } from "react-native-screens";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function TransactionScreen() {
   const [dateTrx, setDateTrx] = useState<DateTrx>({ start: null, end: null, keyString: '30lastday' })
@@ -22,7 +22,10 @@ export default function TransactionScreen() {
   }
 
   return (
-    <ScreenContentWrapper style={{ paddingTop: 25, backgroundColor: 'white' }}>
+    <SafeAreaView
+      edges={['top']}
+      style={{ backgroundColor: 'white' }}
+    >
       <View style={{ paddingHorizontal: 18, paddingVertical: 10 }}>
         <CustomText
           style={{ fontWeight: 600, fontSize: 18, textAlign: "center" }}
@@ -90,7 +93,7 @@ export default function TransactionScreen() {
           <CustomText style={{ fontWeight: 600 }}>-Rp 250.000</CustomText>
         </View>
       </ScrollView>
-    </ScreenContentWrapper>
+    </SafeAreaView>
   );
 }
 

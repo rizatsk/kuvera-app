@@ -21,7 +21,7 @@ export default function FormAddSpending() {
     const ListCategories = ["Shopping", "Kebutuhan", "Bengkel"];
 
     return (
-        <ScrollView style={{ paddingVertical: 5 }}>
+        <ScrollView>
             <CustomText style={{fontWeight: 600, fontSize: 16, color: Colors.tealKuvera}}>
                 Every rupiah is important.
             </CustomText>

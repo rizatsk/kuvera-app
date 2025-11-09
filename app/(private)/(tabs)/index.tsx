@@ -9,7 +9,7 @@ import { useAppSelector } from '@/states';
 import { actionHomeRefresh } from '@/states/home-refresh/action';
 import Entypo from '@expo/vector-icons/Entypo';
 import { RefreshControl, ScrollView, View } from 'react-native';
-import { ScreenContentWrapper } from 'react-native-screens';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDispatch } from 'react-redux';
 
 export default function HomeScreen() {
@@ -23,12 +23,17 @@ export default function HomeScreen() {
   }
 
   return (
-    <ScreenContentWrapper style={{ flex: 1 }}>
+    <SafeAreaView
+      edges={['top']}
+      style={{
+        flex: 1,
+      }}
+    >
       <HeaderHome />
-      <ScrollView 
-        style={{ paddingVertical: 10 }} 
-        showsVerticalScrollIndicator={false} 
-        refreshControl={ <RefreshControl refreshing={homeRefresh} onRefresh={fetchRefreshing} />}
+      <ScrollView
+        style={{ paddingVertical: 10 }}
+        showsVerticalScrollIndicator={false}
+        refreshControl={<RefreshControl refreshing={homeRefresh} onRefresh={fetchRefreshing} />}
       >
         {/* Invest Account value */}
         <InvestAccountValue />
@@ -88,6 +93,6 @@ export default function HomeScreen() {
           </View>
         </View>
       </ScrollView>
-    </ScreenContentWrapper>
+    </SafeAreaView>
   );
 }

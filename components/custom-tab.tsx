@@ -5,19 +5,16 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import Octicons from '@expo/vector-icons/Octicons';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
-import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { ScreenContentWrapper } from 'react-native-screens';
 import CustomText from './custom-text';
 
 export default function CutomTabs({ state, descriptors, navigation }: BottomTabBarProps) {
-  const insets = useSafeAreaInsets();
-
   return (
     <SafeAreaView
-      edges={['bottom']} // hanya jaga area bawah
+      edges={['bottom']}
       style={{
         backgroundColor: 'white',
-        paddingBottom: insets.bottom, // biar gak ketimpa gesture bar Android
       }}
     >
       <ScreenContentWrapper style={{ backgroundColor: "white", width: '100%'}}>
