@@ -29,7 +29,7 @@ export default function SearchStock({ onSearch, delay = 500 }: SearchBarProps) {
             <TextInput
                 value={query}
                 onChangeText={setQuery}
-                placeholder="Search stock by code..."
+                placeholder="Search stock..."
                 placeholderTextColor="#999"
                 style={styles.input}
             />

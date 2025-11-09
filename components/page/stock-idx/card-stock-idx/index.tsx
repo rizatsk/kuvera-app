@@ -78,7 +78,7 @@ export default function ListCardStockIdx({ keyword }: ListCardStockIdxProps) {
             keyExtractor={(item, index) =>
                 skeletonLoading ? index.toString() : item!.No.toString()
             }
-            contentContainerStyle={{ gap: 10, marginVertical: 10, marginHorizontal: 18 }}
+            contentContainerStyle={{ gap: 10, paddingVertical: 15, marginHorizontal: 18 }}
             ListEmptyComponent={<IsNotFoundStockIDX />}
             renderItem={({ item }) =>
                 skeletonLoading ?
