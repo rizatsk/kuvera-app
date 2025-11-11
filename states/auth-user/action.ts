@@ -1,4 +1,4 @@
-import { deleteItem, setItem } from "@/helper/secure-store";
+import { deleteItem, getItem, setItem } from "@/helper/secure-store";
 import {
     GoogleSignin,
     isSuccessResponse
@@ -51,10 +51,16 @@ export function asyncUnsetAuth() {
     return async (dispatch: any) => {
         try {
             dispatch(setLoading(true))
+            
+            const accessTokenGoogle = await getItem("token-google");
 
             await deleteItem("user-auth")
+            
             GoogleSignin.configure();
             await GoogleSignin.signOut().catch((error) => console.log('Fail google signin to logout', error));
+            await GoogleSignin.clearCachedAccessToken(accessTokenGoogle || '');
+            
+            await deleteItem("token-google")
             dispatch(unsetAuthUserActionCreator())
         } catch (error) {
             console.log("Error unset auth", error)
@@ -84,6 +90,7 @@ export function asyncSignInWithGoogle() {
                     type: 'Google' as TypeAuth
                 };
                 await setItem("user-auth", JSON.stringify(user))
+                await setItem("token-google", tokenGoogle.accessToken)
                 dispatch(setAuthUserActionCreator(user))
             } else {
                 console.log("Google sign in cancel by user")
