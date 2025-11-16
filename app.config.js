@@ -31,8 +31,8 @@ export default {
             [
                 "expo-splash-screen",
                 {
-                    "image": "./assets/images/icon.png",
-                    "imageWidth": 110,
+                    "image": "./assets/images/kuvera-vertical.png",
+                    "imageWidth": 160,
                     "resizeMode": "contain",
                     "backgroundColor": "#ffffff",
                     "dark": {

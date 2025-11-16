@@ -17,13 +17,12 @@ export default function LoginScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.iconContainer}>
-        <Image source={require('@/assets/images/icon.png')}
-          style={{ width: 60, height: 60, position: "absolute" }}
+        <Image source={require('@/assets/images/kuvera-vertical.png')}
+          style={{ width: 80, height: 80, position: "absolute" }}
           contentFit="fill" />
       </View>
       <View>
-        <CustomText style={styles.title}>Kuvera</CustomText>
-        <CustomText style={{ color: Colors.grey[700], fontWeight: 600 }}>
+        <CustomText style={{ color: Colors.grey[700], fontWeight: 600, marginTop: 25 }}>
           Manage Money, Control Life
         </CustomText>
         <CustomText style={{ color: Colors.grey[700], fontWeight: 600, marginBottom: 20 }}>
@@ -72,7 +71,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "column",
   },
-  title: { fontSize: 24, fontWeight: "bold" },
   line: {
     marginVertical: 25,
     width: "100%",
