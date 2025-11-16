@@ -5,6 +5,7 @@ import OtherTabs from "@/components/page/profile/other-tabs";
 import environment from "@/constants/environment";
 import { Colors } from "@/constants/theme";
 import { useAppSelector } from "@/states";
+import { AuthUserType } from "@/states/auth-user/type";
 import Feather from "@expo/vector-icons/Feather";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { Image } from "expo-image";
@@ -12,7 +13,7 @@ import { ScrollView, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function ProfileScreen() {
-  const authUser = useAppSelector((states) => states.authUser);
+  const authUser: AuthUserType = useAppSelector((states) => states.authUser);
 
   return (
     <SafeAreaView
@@ -25,16 +26,16 @@ export default function ProfileScreen() {
           <View style={{ flexDirection: 'row', gap: 15, alignItems: 'center' }}>
             <View style={styles.containerAvatar} >
               <Image
-                style={{ height: 70, width: 70 }}
-                contentFit='fill'
-                source={require("@/assets/images/icon/avatar-men.png")} />
+                style={{ height: 65, width: 65, borderRadius: 1000, overflow: 'hidden' }}
+                contentFit='contain'
+                source={authUser.photo_profile_url} />
               <View style={styles.containerEdit}>
                 <Feather name="edit-3" size={20} color="grey" />
               </View>
             </View>
             <View>
-              <CustomText style={{ fontWeight: 600, fontSize: 19 }}>Rizat Sakmir</CustomText>
-              <CustomText style={{ fontSize: 16, fontWeight: 500 }}>rizatsakmir@gmail.com</CustomText>
+              <CustomText style={{ fontWeight: 600, fontSize: 19, textTransform: 'capitalize' }}>{authUser.name}</CustomText>
+              <CustomText style={{ fontSize: 16, fontWeight: 500 }}>{authUser.email}</CustomText>
             </View>
           </View>
           <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>

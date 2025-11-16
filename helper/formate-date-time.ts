@@ -13,7 +13,7 @@ export function formatDateTime(dateObj: Date) {
     const minutes = pad(dateObj.getMinutes());
     const seconds = pad(dateObj.getSeconds());
 
-    return `${day}-${month}-${year} ${hours}:${minutes}:${seconds}`;
+    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 }
 
 export function formatDate(dateObj: Date) {

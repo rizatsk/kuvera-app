@@ -2,15 +2,12 @@ import environment from "@/constants/environment";
 import axios from "axios";
 import { getAccessToken } from "../auth/handle-token";
 
-type GetAccountGraphQlResponse = {
-    name: string,
-    email: string,
-    photo_profile_url: string,
-    created_dt: string,
-    updated_dt: string | null
-}
+export type CategorySpendType = {
+    id: string
+    name: string
+};
 
-export async function getAccountGraphQl(): Promise<GetAccountGraphQlResponse> {
+export async function getCategorySpend(): Promise<CategorySpendType[]> {
     const accessToken = await getAccessToken();
     try {
         const { data: result } = await axios({
@@ -21,12 +18,12 @@ export async function getAccountGraphQl(): Promise<GetAccountGraphQlResponse> {
                 Authorization: 'Bearer ' + accessToken
             },
             data: JSON.stringify({
-                query: `query { account { name email photo_profile_url created_dt updated_dt } }`,
+                query: `query { categories_spend(status: true) { id name } }`,
                 variables: {}
             })
         });
 
-        return result.data.account;
+        return result.data.categories_spend;
     } catch (error: any) {
         const response = error.response?.data;
 

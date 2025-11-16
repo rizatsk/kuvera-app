@@ -25,9 +25,12 @@ export async function ApiIHSGPrice(): Promise<DataStocksIDXType[]> {
         })
         return dataIhsg;
     } catch (error: any) {
+        const response = error.response?.data;
+
         throw {
-            status: error.status,
-            response: error.response
-        }
+            status: error.response?.status,
+            message: response?.error,
+            code: response?.code,
+        };
     }
 }

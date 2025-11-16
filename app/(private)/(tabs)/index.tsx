@@ -1,10 +1,10 @@
 import CustomText from '@/components/custom-text';
-import CardCategoryOutput from '@/components/page/home/card/cardCategoryOutput';
 import CardRecent from '@/components/page/home/card/cardRecent';
+import ListCategoriesSpend from '@/components/page/home/card/categories-spend/listCategoriesSpend';
 import CardGoldAntamPrice from '@/components/page/home/card/price-antam/cardGoldAntamPrice';
 import HeaderHome from '@/components/page/home/header';
 import InvestAccountValue from '@/components/page/home/invest-account-value';
-import { categoryOutput, recentPayment } from '@/helper/mock-data';
+import { recentPayment } from '@/helper/mock-data';
 import { useAppSelector } from '@/states';
 import { actionHomeRefresh } from '@/states/home-refresh/action';
 import Entypo from '@expo/vector-icons/Entypo';
@@ -43,22 +43,7 @@ export default function HomeScreen() {
             <CustomText style={{ fontWeight: 600, fontSize: 16 }}>Category</CustomText>
             <Entypo name="chevron-right" size={24} color="black" />
           </View>
-          {/* Component Card */}
-          <ScrollView
-            horizontal={true}
-            showsHorizontalScrollIndicator={false}
-            contentContainerStyle={{ gap: 10 }}
-          >
-            {/* Card */}
-            {categoryOutput.map((category, index) => (
-              <CardCategoryOutput
-                key={index}
-                title={category.title}
-                money={category.money}
-                icon={category.icon}
-              />
-            ))}
-          </ScrollView>
+          <ListCategoriesSpend />
         </View>
 
         {/* Price gold antam */}

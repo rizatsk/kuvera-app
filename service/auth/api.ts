@@ -22,8 +22,8 @@ export async function authAccountWithGoogle(accessToken: string): Promise<AuthAc
 
         throw {
             status: error.response?.status,
-            message: response?.message,
-            code: response?.error_code,
+            message: response?.error,
+            code: response?.code,
         };
     }
 };

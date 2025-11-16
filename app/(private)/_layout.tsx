@@ -10,7 +10,7 @@ export default function PrivateLayout() {
 
     useEffect(() => {
         if (!authUser && !isPreload) {
-            router.replace("/(auth)/login")
+            router.replace("/(non-private)/login")
         }
     }, [authUser, isPreload])
 

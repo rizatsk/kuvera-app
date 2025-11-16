@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useSelector } from "react-redux";
 import authUserReducer from "./auth-user/reducer";
+import categoriesSpendReducer from "./categories-spend/reducer";
 import homeRefreshReducer from "./home-refresh/reducer";
 import isPreloadReducer from "./preload/reducer";
 import isLoadingReducer from "./visible-loading/reducer";
@@ -11,6 +12,7 @@ export const store = configureStore({
     authUser: authUserReducer,
     visibleLoading: isLoadingReducer,
     homeRefresh: homeRefreshReducer,
+    categoriesSpend: categoriesSpendReducer,
   } as any
 });
 

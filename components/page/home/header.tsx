@@ -1,6 +1,7 @@
 
 import CustomText from '@/components/custom-text'
 import { Colors } from '@/constants/theme'
+import getGreeting from '@/helper/greeting'
 import { useAppSelector } from '@/states'
 import { AuthUserType } from '@/states/auth-user/type'
 import Ionicons from '@expo/vector-icons/Ionicons'
@@ -10,6 +11,7 @@ import { StyleSheet, View } from 'react-native'
 
 export default function HeaderHome() {
   const authUser: AuthUserType = useAppSelector((states) => states.authUser);
+  const greeting = getGreeting('en');
 
   return (
       <View style={styles.Header}>
@@ -22,7 +24,7 @@ export default function HeaderHome() {
               source={authUser.photo_profile_url} />
           </View>
           <View style={{flex: 1}}>
-            <CustomText style={{ fontWeight: 500, fontSize: 13, color: Colors.tealKuvera }}>Good morning</CustomText>
+            <CustomText style={{ fontWeight: 500, fontSize: 13, color: Colors.tealKuvera }}>{greeting}</CustomText>
             <CustomText
               numberOfLines={1}
               ellipsizeMode='tail'

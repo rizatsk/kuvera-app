@@ -17,25 +17,25 @@ export default function CardCategoryOutput({
 }: CardProps) {
     const IconComponent = () => {
         switch(icon) {
-            case 'cable-data':
+            case 'internet':
                 return <MaterialCommunityIcons name="cable-data" size={24} color="white" />
-            case 'tools':
-                return <FontAwesome5 name={icon} size={24} color="white" />
+            case 'garage':
+                return <FontAwesome5 name={'tools'} size={24} color="white" />
             case 'pocket':
                 return <Entypo name="wallet" size={24} color="white" />
             default:
-                return <FontAwesome6 name={icon} size={24} color="white" />
+                return <FontAwesome6 name={"credit-card"} size={24} color="white" />
         }
     };
 
     return (
-        <View style={{ paddingHorizontal: 5, paddingVertical: 4, borderRadius: 10, borderColor: Colors.tealLightKuvera, borderWidth: 2, }}>
+        <View style={{ paddingLeft: 5, paddingRight: 8, paddingVertical: 4, borderRadius: 10, borderColor: Colors.tealLightKuvera, borderWidth: 2 }}>
             <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
                 <View style={{ backgroundColor: Colors.tealLightKuvera, width: 50, height: 50, justifyContent: "center", alignItems: "center", borderRadius: 10 }}>
                     <IconComponent />
                 </View>
                 <View>
-                    <CustomText style={{ fontWeight: 600, fontSize: 14 }}>{title}</CustomText>
+                    <CustomText style={{ fontWeight: 600, fontSize: 14, textTransform: 'capitalize' }}>{title}</CustomText>
                     <CustomText style={{ fontWeight: "700", fontSize: 13, color: Colors.tealKuvera }}>{money}</CustomText>
                 </View>
             </View>

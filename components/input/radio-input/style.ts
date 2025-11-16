@@ -16,6 +16,7 @@ export const modalStyles = StyleSheet.create({
   },
   optionLabel: {
     fontSize: 15,
+    textTransform: 'capitalize',
   },
   buttonSave: {
     paddingVertical: 10, 

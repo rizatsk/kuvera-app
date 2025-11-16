@@ -7,6 +7,8 @@ export const ActionReducer = {
     SET_LOADING: "SET_LOADING",
 
     SET_HOME_REFRESH: "SET_HOME_REFRESH",
+
+    SET_CATEGORIES_SPEND: "SET_CATEGORIES_SPEND",
 };
 
 export enum ActionReducerType  {
@@ -18,4 +20,6 @@ export enum ActionReducerType  {
     SET_LOADING = "SET_LOADING",
 
     SET_HOME_REFRESH = "SET_HOME_REFRESH",
+
+    SET_CATEGORIES_SPEND = "SET_CATEGORIES_SPEND",
 }

@@ -23,7 +23,10 @@ const RadioInput: React.FunctionComponent<RadioInputProps> = (props) => {
 
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [focused, setFocused] = useState(false);
-    const [selectedValue, setSelectedValue] = useState("");
+    const [selectedValue, setSelectedValue] = useState({
+        id: "",
+        name: ""
+    });
 
     const computedStyle = getStyle(props, focused);
 
@@ -61,11 +64,11 @@ const RadioInput: React.FunctionComponent<RadioInputProps> = (props) => {
                     {selectOptions.map((option) => (
                         <TouchableOpacity
                             activeOpacity={0.6}
-                            key={option}
+                            key={option.id}
                             style={modalStyles.optionItem}
                             onPress={() => setSelectedValue(option)}
                         >
-                            <CustomText style={modalStyles.optionLabel}>{option}</CustomText>
+                            <CustomText style={modalStyles.optionLabel}>{option.name}</CustomText>
                             <Ionicons
                                 name={selectedValue === option ? "radio-button-on" : "radio-button-off"}
                                 size={22}

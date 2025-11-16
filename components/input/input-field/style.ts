@@ -1,6 +1,6 @@
 import { Colors } from "@/constants/theme";
 import { Platform, StyleSheet, TextStyle, ViewStyle } from "react-native";
-import { InputProps } from "./type";
+import { InputProps, RadioButtonProps } from "./type";
 
 export interface ComputedStyleProps {
   fieldWrapper?: ViewStyle;
@@ -57,7 +57,7 @@ export const modalStyles = StyleSheet.create({
   }
 });
 
-export const getStyle = (props: InputProps, isFocused: boolean): ComputedStyleProps => {
+export const getStyle = (props: InputProps | RadioButtonProps, isFocused: boolean): ComputedStyleProps => {
   const { editable = true, isError, errorMessage } = props;
 
   const stateColor =

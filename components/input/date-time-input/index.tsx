@@ -92,6 +92,7 @@ const DateTimeInput: React.FunctionComponent<CalenderInputProps> = (props) => {
                     value={date}
                     mode={mode}
                     display={Platform.OS === 'ios' ? 'spinner' : 'default'}
+                    maximumDate={new Date()}
                     onChange={onChange}
                     locale="id-ID"
                 />
