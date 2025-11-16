@@ -1,29 +1,33 @@
 
 import CustomText from '@/components/custom-text'
 import { Colors } from '@/constants/theme'
+import { useAppSelector } from '@/states'
+import { AuthUserType } from '@/states/auth-user/type'
 import Ionicons from '@expo/vector-icons/Ionicons'
 import { Image } from 'expo-image'
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
 
 export default function HeaderHome() {
+  const authUser: AuthUserType = useAppSelector((states) => states.authUser);
+
   return (
       <View style={styles.Header}>
         {/* User */}
         <View style={{ flexDirection: 'row', alignItems: 'center', gap: 14, width: "85%" }}>
           <View style={{ backgroundColor: Colors.tealKuvera, height: 55, width: 55, alignItems: 'center', borderRadius: 10000 }} >
             <Image
-              style={{ height: 60, width: 60 }}
+              style={{ height: 55, width: 55 }}
               contentFit='contain'
-              source={require("@/assets/images/icon/avatar-men.png")} />
+              source={authUser.photo_profile_url} />
           </View>
           <View style={{flex: 1}}>
             <CustomText style={{ fontWeight: 500, fontSize: 13, color: Colors.tealKuvera }}>Good morning</CustomText>
             <CustomText
               numberOfLines={1}
               ellipsizeMode='tail'
-              style={{ fontWeight: 600, fontSize: 17, color: Colors.tealKuvera, flexShrink: 1 }}>
-              Rizat Sakmir, S.Kom.
+              style={{ fontWeight: 600, fontSize: 17, color: Colors.tealKuvera, flexShrink: 1, textTransform: 'capitalize' }}>
+              {authUser.name}
             </CustomText>
           </View>
         </View>
@@ -44,5 +48,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     marginHorizontal: 12,
     borderRadius: 30,
+    overflow: 'hidden'
   }
 })

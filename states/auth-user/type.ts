@@ -4,7 +4,8 @@ export type AuthUserType = {
     name: string,
     email: string,
     photo_profile_url: string,
-    type: TypeAuth,
+    created_dt: string,
+    updated_dt: string | null,
 }
 
 export type AsyncSetAuthType = {

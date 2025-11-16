@@ -1,4 +1,4 @@
-import { getItem } from "@/helper/secure-store";
+import { getAccountGraphQl } from "@/service/account/graphQl";
 import { ActionReducer } from "../action";
 import { setAuthUserActionCreator } from "../auth-user/action";
 import { setLoading } from "../visible-loading/action";
@@ -9,16 +9,20 @@ export function setPreloadAction(preload: boolean) {
         payload: {
             preload
         }
-    } 
+    }
 }
 
 export function asyncPreloadProcess() {
-    return async(dispatch: any) => {
+    return async (dispatch: any) => {
         try {
             dispatch(setLoading(true))
             dispatch(setPreloadAction(true));
-            const result = await getItem("user-auth") as string;
-            dispatch(setAuthUserActionCreator(JSON.parse(result)));
+
+            // Get data account
+            const user = await getAccountGraphQl();
+            dispatch(setAuthUserActionCreator(user))
+        } catch (error) {
+            console.log("Error async preload process", error)
         } finally {
             dispatch(setPreloadAction(false))
             dispatch(setLoading(false))
