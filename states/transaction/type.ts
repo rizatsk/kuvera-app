@@ -1,3 +1,6 @@
+import { TransactionGroupByCategoryType } from "@/service/transaction/api";
+import { Dispatch, SetStateAction } from "react";
+
 export type AsyncAddTransactionParam = {
     param: AddTransactionParams
     successHandler: () => void,
@@ -24,4 +27,12 @@ export type ResultAddTransaction = {
     notes: string,
     type: TypeTransaction,
     source: string
+}
+
+export type AsyncGetTransactionByCategoryParam = {
+    start_date: Date,
+    end_date: Date,
+    type: TypeTransaction,
+    setIsLoading: Dispatch<SetStateAction<boolean>>,
+    successHandler: (param: TransactionGroupByCategoryType[]) => void
 }

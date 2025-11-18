@@ -19,6 +19,7 @@ export async function getAccessToken(): Promise<string> {
         };
     } else if (!accessToken || !expiredAccessToken) {
         // When is not authenticated
+        await putAccessRefreshToken('', '');
         throw {
             status: 401,
             message: 'Sesi Anda telah berakhir, silahkan masuk kembali'
@@ -38,6 +39,7 @@ export async function getRefreshToken(): Promise<string> {
         const timeExpired = new Date(expiredRefreshToken);
 
         if (timeNow >= timeExpired) {
+            await putAccessRefreshToken('', '');
             throw {
                 status: 401,
                 message: 'Sesi Anda telah berakhir, silahkan masuk kembali'

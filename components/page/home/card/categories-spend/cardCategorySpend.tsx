@@ -1,5 +1,6 @@
 import CustomText from '@/components/custom-text'
 import { Colors } from '@/constants/theme'
+import { formatRupiah } from '@/helper/format-rupiah'
 import Entypo from '@expo/vector-icons/Entypo'
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5'
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6'
@@ -36,7 +37,7 @@ export default function CardCategoryOutput({
                 </View>
                 <View>
                     <CustomText style={{ fontWeight: 600, fontSize: 14, textTransform: 'capitalize' }}>{title}</CustomText>
-                    <CustomText style={{ fontWeight: "700", fontSize: 13, color: Colors.tealKuvera }}>{money}</CustomText>
+                    <CustomText style={{ fontWeight: "700", fontSize: 13, color: Colors.tealKuvera }}>{formatRupiah(money)}</CustomText>
                 </View>
             </View>
         </View>

@@ -40,6 +40,10 @@ export function asyncSignInWithGoogle() {
 
                 // Login to service
                 const {accessToken, refreshToken} = await authAccountWithGoogle(tokenGoogle.accessToken);
+                console.log("Data accessToken and refreshToken", {
+                    accessToken,
+                    refreshToken
+                })
 
                 // Set to token in save local storage expo
                 await putAccessRefreshToken(accessToken, refreshToken);

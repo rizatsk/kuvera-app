@@ -82,7 +82,7 @@ export default function FormAddSpending() {
                         created_dt: formatDateTime(new Date(values.date)),
                         money_spent: cleanRupiahToNumber(values.spend),
                         notes: values.notes,
-                        type: 'incoming' as TypeTransaction
+                        type: 'outgoing' as TypeTransaction
                     }
                     handleSubmitForm(cleanValue, formikHelpers);
                 }}

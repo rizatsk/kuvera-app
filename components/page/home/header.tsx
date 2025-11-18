@@ -17,7 +17,7 @@ export default function HeaderHome() {
       <View style={styles.Header}>
         {/* User */}
         <View style={{ flexDirection: 'row', alignItems: 'center', gap: 14, width: "85%" }}>
-          <View style={{ backgroundColor: Colors.tealKuvera, height: 55, width: 55, alignItems: 'center', borderRadius: 10000 }} >
+          <View style={{ backgroundColor: Colors.tealKuvera, height: 55, width: 55, alignItems: 'center', borderRadius: 10000, overflow: 'hidden' }} >
             <Image
               style={{ height: 55, width: 55 }}
               contentFit='contain'
