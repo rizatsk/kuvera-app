@@ -56,10 +56,9 @@ export function formatDateTimeVerbose(dateString: string): string { // Ditambahk
     // --- Bagian Jam (HH:mm:ss) ---
     const hours: string = pad(dateObj.getHours());
     const minutes: string = pad(dateObj.getMinutes());
-    const seconds: string = pad(dateObj.getSeconds());
 
     // Menggabungkan semua bagian
-    return `${dayName}, ${date} ${monthName} ${year} ${hours}:${minutes}:${seconds}`;
+    return `${dayName}, ${date} ${monthName} ${year} ${hours}:${minutes}`;
 }
 
 export function formatDateVerbose(dateString: string): string { // Ditambahkan anotasi tipe kembali (: string)

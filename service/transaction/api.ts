@@ -1,9 +1,17 @@
 import environment from "@/constants/environment";
-import { AddTransactionParams } from "@/states/transaction/type";
+import { TypeTransaction } from "@/states/transaction/type";
 import axios from "axios";
 import { getAccessToken } from "../auth/handle-token";
 
-export async function addTransaction(param: AddTransactionParams) {
+export type ApiAddTransactionParam = {
+    category_id: string,
+    created_dt: string,
+    money_spent: number,
+    notes: string,
+    type: TypeTransaction,
+}
+
+export async function addTransaction(param: ApiAddTransactionParam) {
     const accessToken = await getAccessToken();
     try {
         const { data: result } = await axios({

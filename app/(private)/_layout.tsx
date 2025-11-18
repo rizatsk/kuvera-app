@@ -31,6 +31,13 @@ export default function PrivateLayout() {
                             ...OptionStackScreen,
                         }}
                     />
+                    <Stack.Screen
+                        name="success/index"
+                        options={{
+                            title: "Success",
+                            ...OptionStackScreen,
+                        }}
+                    />
                 </Stack>
             )}
         </>

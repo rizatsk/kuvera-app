@@ -12,9 +12,10 @@ import { asyncGetCategorySpend } from '@/states/categories-spend/action'
 import { asyncAddTransaction } from '@/states/transaction/action'
 import { AddTransactionParams, TypeTransaction } from '@/states/transaction/type'
 import { setLoading } from '@/states/visible-loading/action'
-import { Formik } from 'formik'
-import React, { useEffect, useState } from 'react'
-import { ScrollView, StyleSheet, ToastAndroid, TouchableOpacity, View } from 'react-native'
+import { router } from 'expo-router'
+import { Formik, FormikHelpers } from 'formik'
+import React, { useCallback, useEffect } from 'react'
+import { ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native'
 import { useDispatch } from 'react-redux'
 
 export default function FormAddSpending() {
@@ -37,20 +38,29 @@ export default function FormAddSpending() {
         spend: "",
         notes: ""
     };
-    const [valueFormik, setValueFormik] = useState(initialValuesForm);
 
-    const handleSubmitForm = (values: AddTransactionParams) => {
+    const goToPageSuccess = useCallback(
+        (values: AddTransactionParams) => {
+            router.push({
+                pathname: '/success',
+                params: {
+                    ...values,
+                    id: '019a8b91-c19f-7090-83d1-40a66653164c'
+                }
+            })
+        },
+        []
+    );
+
+    const handleSubmitForm = (values: AddTransactionParams, formikHelper: FormikHelpers<any>) => {
         dispatch(
             asyncAddTransaction({
                 param: values,
                 successHandler: () => {
-                    ToastAndroid.showWithGravity(
-                        "Success add spending",
-                        ToastAndroid.SHORT,
-                        ToastAndroid.CENTER,
-                    );
-                    setValueFormik(initialValuesForm);
-                }
+                    formikHelper.resetForm({ values: initialValuesForm });
+                    
+                },
+                goToPageSuccess,
             }) as any
         )
     }
@@ -62,18 +72,19 @@ export default function FormAddSpending() {
             </CustomText>
             <CustomText>Log your expenses now, and see where your money truly goes. Detailed records prevent regret at the end of the month</CustomText>
             <Formik
-                initialValues={valueFormik}
+                initialValues={initialValuesForm}
                 enableReinitialize={true}
                 validationSchema={AddSpendingSchema}
-                onSubmit={(values) => {
+                onSubmit={(values, formikHelpers) => {
                     const cleanValue = {
+                        category_name: values.category.name,
                         category_id: values.category.id,
                         created_dt: formatDateTime(new Date(values.date)),
                         money_spent: cleanRupiahToNumber(values.spend),
                         notes: values.notes,
                         type: 'incoming' as TypeTransaction
                     }
-                    handleSubmitForm(cleanValue);
+                    handleSubmitForm(cleanValue, formikHelpers);
                 }}
             >
                 {(FormikProps) => (
