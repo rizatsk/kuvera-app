@@ -8,12 +8,12 @@ interface Action {
   };
 }
 
-function isLoadingReducer(loading = false, action = {} as Action) {
+function isLoadingReducer(initial = false, action = {} as Action) {
   switch (action.type) {
     case ActionReducer.SET_LOADING:
       return action.payload.isLoading;
     default:
-      return loading;
+      return initial;
   }
 }
 

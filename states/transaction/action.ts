@@ -1,6 +1,17 @@
-import { addTransaction, getTransactionGroupByCategory } from "@/service/transaction/api";
+import { addTransaction, getTransactionGroupByCategory, TransactionGroupByCategoryType } from "@/service/transaction/api";
+import { ActionReducer } from "../action";
 import { setLoading } from "../visible-loading/action";
 import { AsyncAddTransactionParam, AsyncGetTransactionByCategoryParam } from "./type";
+
+function setSumerizeTransactionByCategory(isLoading: boolean, data: TransactionGroupByCategoryType[]) {
+    return {
+        type: ActionReducer.SET_SUM_TRANSACTION_BY_CATEGORY,
+        payload: {
+            isLoading: isLoading,
+            transactions: data
+        }
+    }
+}
 
 export function asyncAddTransaction({
     param, successHandler, goToPageSuccess,
@@ -35,22 +46,23 @@ export function asyncAddTransaction({
 }
 
 export function asyncGetTransactionByCategory({
-    start_date, end_date, type, setIsLoading, successHandler
+    start_date, end_date, type
 }: AsyncGetTransactionByCategoryParam) {
      return async (dispatch: any) => {
-        setIsLoading(true);
+         let result: TransactionGroupByCategoryType[] = [];
+        dispatch(setSumerizeTransactionByCategory(true, result))
         try {
-            const result = await getTransactionGroupByCategory({
+            const response = await getTransactionGroupByCategory({
                 start_date,
                 end_date,
                 type
             });
 
-            successHandler(result);
+            result = response;
         } catch(error) {
             console.log("Error asyncGetTransactionByCategory", error)
         } finally {
-            setIsLoading(false);
+            dispatch(setSumerizeTransactionByCategory(false, result))
         }
     }
 }

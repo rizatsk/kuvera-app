@@ -8,12 +8,12 @@ interface Action {
   };
 }
 
-function isPreloadReducer(preload = true, action = {} as Action) {
+function isPreloadReducer(initial = true, action = {} as Action) {
   switch (action.type) {
     case ActionReducer.SET_PRELOAD:
       return action.payload.preload;
     default:
-      return preload;
+      return initial;
   }
 }
 

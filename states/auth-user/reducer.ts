@@ -2,7 +2,7 @@ import { ActionReducer } from "../action";
 import { ActionAuthUserReducer, AuthUserType } from "./type";
 
 function authUserReducer(
-  authUser = null as AuthUserType | null,
+  initial = null as AuthUserType | null,
   action = {} as ActionAuthUserReducer,
 ) {
   switch (action.type) {
@@ -11,7 +11,7 @@ function authUserReducer(
     case ActionReducer.UNSET_AUTH:
       return null;
     default:
-      return authUser;
+      return initial;
   }
 }
 

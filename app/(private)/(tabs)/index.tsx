@@ -3,7 +3,7 @@ import CardRecent from '@/components/page/home/card/cardRecent';
 import ListCategoriesSpend from '@/components/page/home/card/categories-spend/listCategoriesSpend';
 import CardGoldAntamPrice from '@/components/page/home/card/price-antam/cardGoldAntamPrice';
 import HeaderHome from '@/components/page/home/header';
-import InvestAccountValue from '@/components/page/home/invest-account-value';
+import InvestAccountValue from '@/components/page/home/spent-account-value';
 import { recentPayment } from '@/helper/mock-data';
 import { useAppSelector } from '@/states';
 import { actionHomeRefresh } from '@/states/home-refresh/action';

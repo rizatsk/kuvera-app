@@ -4,6 +4,7 @@ import authUserReducer from "./auth-user/reducer";
 import categoriesSpendReducer from "./categories-spend/reducer";
 import homeRefreshReducer from "./home-refresh/reducer";
 import isPreloadReducer from "./preload/reducer";
+import { sumTransactionByCategory } from "./transaction/reducer";
 import isLoadingReducer from "./visible-loading/reducer";
 
 export const store = configureStore({
@@ -13,6 +14,7 @@ export const store = configureStore({
     visibleLoading: isLoadingReducer,
     homeRefresh: homeRefreshReducer,
     categoriesSpend: categoriesSpendReducer,
+    sumTransactionByCategory: sumTransactionByCategory,
   } as any
 });
 
