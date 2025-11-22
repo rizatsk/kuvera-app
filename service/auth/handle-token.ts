@@ -15,7 +15,8 @@ export async function getAccessToken(): Promise<string> {
             const refreshToken = await getRefreshToken()
             const newToken = await refreshTokenApi(refreshToken as string);
             await putAccessRefreshToken(newToken.accessToken, newToken.refreshToken)
-            return newToken.accessToken; 
+
+            return newToken.accessToken;
         };
     } else if (!accessToken || !expiredAccessToken) {
         // When is not authenticated

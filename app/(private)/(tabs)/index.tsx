@@ -1,10 +1,9 @@
 import CustomText from '@/components/custom-text';
-import CardRecent from '@/components/page/home/card/cardRecent';
-import ListCategoriesSpend from '@/components/page/home/card/categories-spend/listCategoriesSpend';
-import CardGoldAntamPrice from '@/components/page/home/card/price-antam/cardGoldAntamPrice';
+import ListCardRecent from '@/components/page/home/card-recent.tsx/listCardRecent';
+import ListCategoriesSpend from '@/components/page/home/categories-spend/listCategoriesSpend';
 import HeaderHome from '@/components/page/home/header';
+import CardGoldAntamPrice from '@/components/page/home/price-antam/cardGoldAntamPrice';
 import InvestAccountValue from '@/components/page/home/spent-account-value';
-import { recentPayment } from '@/helper/mock-data';
 import { useAppSelector } from '@/states';
 import { actionHomeRefresh } from '@/states/home-refresh/action';
 import Entypo from '@expo/vector-icons/Entypo';
@@ -58,24 +57,7 @@ export default function HomeScreen() {
 
         {/* Recent */}
         <View style={{ flex: 1, marginTop: 10, backgroundColor: "white", borderRadius: 10, paddingVertical: 10, paddingHorizontal: 10 }}>
-          <View style={{ paddingHorizontal: 10 }}>
-            <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: 15 }}>
-              <CustomText style={{ fontWeight: 600, fontSize: 16 }}>Recent</CustomText>
-              <Entypo name="chevron-right" size={24} color="black" />
-            </View>
-            <View style={{ gap: 10 }}>
-              {/* Card */}
-              {recentPayment.map((recent, index) => (
-                <CardRecent
-                  key={index}
-                  title={recent.title}
-                  date={recent.date}
-                  icon={recent.icon}
-                  amount={recent.amount}
-                />
-              ))}
-            </View>
-          </View>
+          <ListCardRecent />
         </View>
       </ScrollView>
     </SafeAreaView>

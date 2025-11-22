@@ -1,5 +1,7 @@
 import CustomText from '@/components/custom-text'
 import { Colors } from '@/constants/theme'
+import { formatRupiah } from '@/helper/format-rupiah'
+import { formatDateTimeVerbose } from '@/helper/formate-date-time'
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons'
 import { Image } from 'expo-image'
 import React from 'react'
@@ -9,7 +11,7 @@ type CardRecentType = {
     icon: string
     title: string
     date: string
-    amount: string
+    amount: number
 }
 
 export default function CardRecent({
@@ -17,13 +19,7 @@ export default function CardRecent({
 }: CardRecentType) {
     const IconComponent = () => {
         switch (icon) {
-            case 'shopping':
-                return (
-                    <View style={[styles.containerIcon, { backgroundColor: Colors.tealLightKuvera }]}>
-                        <MaterialCommunityIcons name="shopping" size={24} color="white" />
-                    </View>
-                )
-            default:
+            case 'pocket':
                 return (
                     <View style={styles.containerIcon}>
                         <Image
@@ -32,18 +28,24 @@ export default function CardRecent({
                             source={require("@/assets/images/icon/money-minus.png")} />
                     </View>
                 )
+            default:
+                return (
+                    <View style={[styles.containerIcon, { backgroundColor: Colors.tealLightKuvera }]}>
+                        <MaterialCommunityIcons name="shopping" size={24} color="white" />
+                    </View>
+                )
         }
     }
     return (
-        <View style={{ flexDirection: "row", justifyContent: "space-between", paddingVertical: 5, alignItems: 'center' }}>
+        <View style={{ flexDirection: "row", justifyContent: "space-between", marginVertical: 5, alignItems: 'center' }}>
             <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
                 <IconComponent />
                 <View>
-                    <CustomText style={{ fontWeight: 500, fontSize: 15 }}>{title}</CustomText>
-                    <CustomText style={{ fontSize: 12 }}>{date}</CustomText>
+                    <CustomText style={{ fontWeight: 500, fontSize: 15, textTransform: 'capitalize' }}>{title}</CustomText>
+                    <CustomText style={{ fontSize: 12 }}>{formatDateTimeVerbose(date)}</CustomText>
                 </View>
             </View>
-            <CustomText style={{ fontWeight: 500, paddingRight: 8 }}>{amount}</CustomText>
+            <CustomText style={{ fontWeight: 500, paddingRight: 8 }}>{formatRupiah(amount)}</CustomText>
         </View>
     )
 }

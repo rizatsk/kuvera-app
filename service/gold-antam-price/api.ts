@@ -1,4 +1,4 @@
-import { GoldAntam } from '@/components/page/home/card/price-antam/cardGoldAntamPrice';
+import { GoldAntam } from '@/components/page/home/price-antam/cardGoldAntamPrice';
 import environment from '@/constants/environment';
 import axios from 'axios';
 
