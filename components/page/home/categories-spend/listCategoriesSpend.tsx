@@ -10,7 +10,7 @@ import SkeletonCardCategoryOutput from './skeleton';
 
 export default function ListCategoriesSpend() {
     const homeRefresh = useAppSelector((states) => states.homeRefresh);
-    const {isLoading, transactions}: InitialSumTransactionByCategoryType = useAppSelector((states) => states.sumTransactionByCategory);
+    const { isLoading, transactions }: InitialSumTransactionByCategoryType = useAppSelector((states) => states.sumTransactionByCategory);
     const dispatch = useDispatch();
 
     useEffect(() => {
