@@ -22,7 +22,7 @@ export type TransactionGroupByCategoryType = {
 
 export type GetTransactionsParam = {
     type: TypeTransaction,
-    limit: number,
+    limit?: number,
     start_date?: Date
     end_date?: Date
 }

@@ -1,30 +1,39 @@
 import CustomText from "@/components/custom-text";
+import ListCardTransactions from "@/components/page/transactions/card-transaction/list-card-transaction";
 import ModalDateTransactions from "@/components/page/transactions/date-transaction/modal-date-transaction";
 import { DateTrx } from "@/components/page/transactions/date-transaction/type";
 import ModalTypeTransaction from "@/components/page/transactions/type-transaction/modal-type-transaction";
 import { Colors } from "@/constants/theme";
-import { Image } from "expo-image";
+import { TypeTransaction } from "@/states/transaction/type";
+import moment from "moment";
 import { useState } from "react";
-import { ScrollView, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function TransactionScreen() {
-  const [dateTrx, setDateTrx] = useState<DateTrx>({ start: null, end: null, keyString: '30lastday' })
+  const [dateTrx, setDateTrx] = useState<DateTrx>({ 
+    start: moment().subtract(30, 'days').format('YYYY-MM-DD') + ' 00:00:00', 
+    end: moment().format('YYYY-MM-DD') + ' 23:59:59', 
+    keyString: '30lastday' 
+  })
   const onSelectDate = (dataDateTrx: DateTrx) => {
-    console.log('Selected date transaction', dataDateTrx)
     setDateTrx(dataDateTrx);
   };
 
-  const [typeTransaction, setTypeTransaction] = useState('All Transaction');
-  const selectOptionsTypeTransaction = ['All Transaction', 'Incoming Balance', 'Outgoing Balance'];
-  const onSelectTypeTransaction = (select: string) => {
-    setTypeTransaction(select)
+  const [typeTransaction, setTypeTransaction] = useState({ key: 'all', value: 'All Transaction' });
+  const selectOptionsTypeTransaction = [
+    { key: 'all', value: 'All Transaction' },
+    { key: 'incoming', value: 'Incoming Balance' },
+    { key: 'outgoing', value: 'Outgoing Balance' }
+  ];
+  const onSelectTypeTransaction = ({ key, value }: { key: string, value: string }) => {
+    setTypeTransaction({ key, value })
   }
 
   return (
     <SafeAreaView
-      edges={['top']}
-      style={{ backgroundColor: 'white' }}
+      edges={['top', 'bottom']}
+      style={{ backgroundColor: 'white', flex: 1 }}
     >
       <View style={{ paddingHorizontal: 18, paddingVertical: 10 }}>
         <CustomText
@@ -48,51 +57,11 @@ export default function TransactionScreen() {
           onSelect={onSelectTypeTransaction}
         />
       </View>
-      <ScrollView>
-        <View style={styles.monthTrxContainer}>
-          <CustomText style={{ fontWeight: 500, fontSize: 15 }}>Nov 2025</CustomText>
-          <View>
-            <CustomText style={styles.textSaldo}>Saldo in: Rp 5.500.000</CustomText>
-            <CustomText style={styles.textSaldo}>Saldo out: Rp 50.000</CustomText>
-          </View>
-        </View>
-        <View style={styles.dataTransactionContainer}>
-          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 20 }}>
-            {/* Icon */}
-            <View style={{ backgroundColor: Colors.tealLightKuvera, borderRadius: 1000, width: 38, height: 38, justifyContent: 'center', alignItems: 'center' }}>
-              <Image
-                style={{ height: 24, width: 24 }}
-                contentFit='contain'
-                source={require("@/assets/images/icon/money-bag-plus.png")} />
-            </View>
-            {/* Title */}
-            <View>
-              <CustomText style={{ fontSize: 15, fontWeight: 500 }}>Gajian</CustomText>
-              <CustomText style={{ fontSize: 12 }}>Sen, 1 Nov 2025 13:45</CustomText>
-            </View>
-          </View>
-          {/* Money */}
-          <CustomText style={{ fontWeight: 600, color: Colors.greenKuvera }}>+Rp 5.400.000</CustomText>
-        </View>
-        <View style={styles.dataTransactionContainer}>
-          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 20 }}>
-            {/* Icon */}
-            <View style={{ backgroundColor: Colors.orangeKuvera, borderRadius: 1000, width: 38, height: 38, justifyContent: 'center', alignItems: 'center' }}>
-              <Image
-                style={{ height: 24, width: 24 }}
-                contentFit='contain'
-                source={require("@/assets/images/icon/card-minus.png")} />
-            </View>
-            {/* Title */}
-            <View>
-              <CustomText style={{ fontSize: 15, fontWeight: 500 }}>Pizza</CustomText>
-              <CustomText style={{ fontSize: 12 }}>Sen, 1 Nov 2025 19:45</CustomText>
-            </View>
-          </View>
-          {/* Money */}
-          <CustomText style={{ fontWeight: 600 }}>-Rp 250.000</CustomText>
-        </View>
-      </ScrollView>
+      <ListCardTransactions
+        type={typeTransaction.key as TypeTransaction}
+        start_date={new Date(dateTrx.start)}
+        end_date={new Date(dateTrx.end as string)}
+      />
     </SafeAreaView>
   );
 }

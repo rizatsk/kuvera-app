@@ -2,12 +2,12 @@ import CustomText from '@/components/custom-text'
 import { GetTransactionType } from '@/service/transaction/type'
 import { useAppSelector } from '@/states'
 import { asyncGetTransactions } from '@/states/transaction/action'
-import { Entypo } from '@expo/vector-icons'
 import React, { useEffect, useState } from 'react'
 import { FlatList, View } from 'react-native'
 import { useDispatch } from 'react-redux'
 import CardRecent from './cardRecent'
 import SkeletonCardRecent from './skeleton'
+
 
 export default function ListCardRecent() {
     const homeRefresh = useAppSelector((states) => states.homeRefresh);
@@ -32,7 +32,7 @@ export default function ListCardRecent() {
             asyncGetTransactions({
                 param: {
                     limit: 10,
-                    type: 'all',
+                    type: 'outgoing',
                 },
                 setIsLoading,
                 successHandler: (result) => {
@@ -46,7 +46,6 @@ export default function ListCardRecent() {
         <View style={{ paddingHorizontal: 10 }}>
             <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: 15 }}>
                 <CustomText style={{ fontWeight: 600, fontSize: 16 }}>Recent</CustomText>
-                <Entypo name="chevron-right" size={24} color="black" />
             </View>
             <FlatList<GetTransactionType | undefined>
                 scrollEnabled={false}
@@ -57,7 +56,7 @@ export default function ListCardRecent() {
                 contentContainerStyle={{ gap: 10 }}
                 renderItem={({ item }) =>
                     isLoading ?
-                        <SkeletonCardRecent />:
+                        <SkeletonCardRecent /> :
                         (
                             <CardRecent
                                 key={item!.id}
@@ -68,7 +67,7 @@ export default function ListCardRecent() {
                             />
                         )
                 }
-                ListEmptyComponent={<CustomText>You not have transaction recents</CustomText>}
+                ListEmptyComponent={<CustomText>You not have transactions</CustomText>}
             />
         </View>
     )

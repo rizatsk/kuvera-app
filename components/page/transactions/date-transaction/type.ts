@@ -1,5 +1,5 @@
 export type DateTrx = {
-  start: string | null,
+  start: string,
   end: string | null,
   keyString: string
 }

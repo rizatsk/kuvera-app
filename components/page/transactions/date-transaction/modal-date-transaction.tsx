@@ -79,7 +79,7 @@ const ModalDateTransactions: React.FunctionComponent<DatePickerProps> = (props) 
     if (range.start && range.end) {
       handleSubmit({
         start: range.start,
-        end: range.end,
+        end: range.end + " 23:59:59",
         keyString: `${moment(range.start).format('DD-MM-YYYY')} - ${moment(range.end).format('DD-MM-YYYY')}`
       })
     } else if (range.start) {
@@ -122,7 +122,7 @@ const ModalDateTransactions: React.FunctionComponent<DatePickerProps> = (props) 
               onPress={() => {
                 handleSubmit({
                   start: moment().subtract(7, 'days').format('YYYY-MM-DD'),
-                  end: moment().format('YYYY-MM-DD'),
+                  end: moment().format('YYYY-MM-DD') + " 23:59:59",
                   keyString: '7lastday'
                 })
               }}
@@ -141,7 +141,7 @@ const ModalDateTransactions: React.FunctionComponent<DatePickerProps> = (props) 
               onPress={() => {
                 handleSubmit({
                   start: moment().subtract(30, 'days').format('YYYY-MM-DD'),
-                  end: moment().format('YYYY-MM-DD'),
+                  end: moment().format('YYYY-MM-DD') + " 23:59:59",
                   keyString: '30lastday'
                 })
               }}
@@ -160,7 +160,7 @@ const ModalDateTransactions: React.FunctionComponent<DatePickerProps> = (props) 
               onPress={() => {
                 handleSubmit({
                   start: moment().subtract(1, 'years').format('YYYY-MM-DD'),
-                  end: moment().format('YYYY-MM-DD'),
+                  end: moment().format('YYYY-MM-DD') + " 23:59:59",
                   keyString: '1lastyear'
                 })
               }}

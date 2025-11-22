@@ -80,6 +80,11 @@ export function asyncGetTransactions({
                 start_date: param.start_date,
                 end_date: param.end_date
             });
+
+            console.log("Data async get transactions", {
+                param,
+                response
+            })
             successHandler(response);
         } catch(error) {
             console.log("Error asyncGetTransactions", error)

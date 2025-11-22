@@ -55,11 +55,9 @@ export async function getTransactionGroupByCategory(param: ApiGetTransactionGrou
 export async function getTransactions(param: GetTransactionsParam): Promise<GetTransactionType[]> {
     const accessToken = await getAccessToken();
     try {
-        let query = `(type: "${param.type}" limit: ${param.limit}`
-        if (param.start_date && param.end_date) {
-            query += ` start_date: "${param.start_date}" end_date: "${param.end_date}"`
-        }
-        
+        let query = `(type: "${param.type}"`
+        if (param.limit) query += `limit: ${param.limit}`
+        if (param.start_date && param.end_date) query += ` start_date: "${param.start_date}" end_date: "${param.end_date}"`
         query += `)`
 
         const { data: result } = await axios({

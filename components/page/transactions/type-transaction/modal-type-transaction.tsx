@@ -6,11 +6,14 @@ import Octicons from '@expo/vector-icons/Octicons';
 import React, { useState } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 
+type TypeValue = {
+        key: string, value: string
+    };
 interface ModalTypeTransactionProps {
     label: string,
-    value: string,
-    selectOptions: Array<string>,
-    onSelect: (value: string) => void
+    value: TypeValue
+    selectOptions: TypeValue[],
+    onSelect: (value: TypeValue) => void
 }
 
 const ModalTypeTransaction: React.FunctionComponent<ModalTypeTransactionProps> = (props) => {
@@ -29,7 +32,7 @@ const ModalTypeTransaction: React.FunctionComponent<ModalTypeTransactionProps> =
         setIsModalVisible(true);
     };
 
-    const handleSubmit = (value: string) => {
+    const handleSubmit = (value: TypeValue) => {
         setSelectedValue(value)
         onSelect(value);
         onClose();
@@ -50,7 +53,7 @@ const ModalTypeTransaction: React.FunctionComponent<ModalTypeTransactionProps> =
                             textAlign: "center",
                         }}
                     >
-                        {value}
+                        {value.value}
                     </CustomText>
                 </TouchableOpacity>
                 <Octicons name="chevron-down" size={20} color="black" />
@@ -66,11 +69,11 @@ const ModalTypeTransaction: React.FunctionComponent<ModalTypeTransactionProps> =
                     {selectOptions.map((option) => (
                         <TouchableOpacity
                             activeOpacity={0.6}
-                            key={option}
+                            key={option.key}
                             style={modalStyles.optionItem}
                             onPress={() => handleSubmit(option)}
                         >
-                            <CustomText style={modalStyles.optionLabel}>{option}</CustomText>
+                            <CustomText style={modalStyles.optionLabel}>{option.value}</CustomText>
                             {selectedValue === option && (
                                 <Octicons name="check" size={24} color={Colors.tealDarkKuvera} />
                             )}
