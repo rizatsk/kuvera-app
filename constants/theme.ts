@@ -7,16 +7,16 @@ import { Platform } from 'react-native';
 
 const tintColorLight = '#0b62e3ff';
 const tintColorDark = '#fff';
-const blueKuvera = "#0088ffff";
+const blueKuvera = "#0088ff";
 const tealKuvera = "#48B3AF";
-const tealLightKuvera = "#0dd4ceff";
-const tealDarkKuvera = "#4da3a0ff";
-const greenKuvera = "#29d602ff";
-const moneyGreenKuvera = "#6ec20eff";
-const yellowKuvera = "#f8cb04ff";
-const orangeKuvera = "#f87e04ff";
-const greyBackground = "#efeff0ff";
-const greyBackground2 = "#c6eceaff";
+const tealLightKuvera = "#0dd4ce";
+const tealDarkKuvera = "#4da3a0";
+const greenKuvera = "#29d602";
+const moneyGreenKuvera = "#6ec20e";
+const yellowKuvera = "#f8cb04";
+const orangeKuvera = "#f87e04";
+const greyBackground = "#efeff0";
+const greyBackground2 = "#c6ecea";
 const tealKuvera2 = "#016B61";
 const whiteTransaparent = "#ffffffa1"
 const goldCOlor = "#ffbf00"

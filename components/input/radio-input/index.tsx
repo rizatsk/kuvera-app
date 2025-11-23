@@ -1,6 +1,7 @@
 import CustomText from '@/components/custom-text';
 import ModalKuvera from '@/components/modal-bottom';
 import { Colors } from '@/constants/theme';
+import capitalize from '@/helper/capitalize';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import React, { useState } from 'react';
 import { TouchableOpacity, View } from 'react-native';
@@ -46,7 +47,7 @@ const RadioInput: React.FunctionComponent<RadioInputProps> = (props) => {
 
     return (
         <InputFieldKuvera
-            value={value}
+            value={capitalize(value || '')}
             label={label}
             computedStyle={computedStyle}
             errorMessage={errorMessage}

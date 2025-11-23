@@ -25,9 +25,16 @@ export default function PrivateLayout() {
                         }}
                     />
                     <Stack.Screen
-                        name="spending/form-add-spending"
+                        name="menu/form-add-spending"
                         options={{
                             title: "Add Spending",
+                            ...OptionStackScreen,
+                        }}
+                    />
+                    <Stack.Screen
+                        name="menu/form-add-income"
+                        options={{
+                            title: "Add Income",
                             ...OptionStackScreen,
                         }}
                     />

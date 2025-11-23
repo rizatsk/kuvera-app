@@ -1,4 +1,4 @@
-import FormAddSpending from '@/components/page/spending/form-add-spending'
+import FormAddSpending from '@/components/page/menu/form-add-spending'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 

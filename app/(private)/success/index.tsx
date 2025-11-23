@@ -10,16 +10,18 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 
 export default function SuccessScreen() {
     const params = useLocalSearchParams();
-    
+    const stringSuccess = params.type === 'incoming' ? 'Income' : 'Spent';
+
     const handleButtonBack = () => {
         router.back();
     }
 
     const handleButtonAllTransaction = () => {
-        router.push({
+        router.replace({
             pathname: '/(private)/(tabs)/transaction'
         })
     }
+
 
     return (
         <SafeAreaView
@@ -32,7 +34,7 @@ export default function SuccessScreen() {
                     <Image source={require('@/assets/images/spending.png')}
                         style={{ width: 70, height: 70 }}
                         contentFit="fill" />
-                    <CustomText style={{ fontWeight: 600, fontSize: 18, marginVertical: 10 }}>Save spent</CustomText>
+                    <CustomText style={{ fontWeight: 600, fontSize: 18, marginVertical: 10 }}>Save {stringSuccess}</CustomText>
                 </View>
                 {/* Detail */}
                 <View style={{ marginTop: 10 }}>
@@ -60,7 +62,7 @@ export default function SuccessScreen() {
 
                 {/* Button */}
                 <TouchableOpacity style={styles.buttonBack} activeOpacity={0.6} onPress={handleButtonBack}>
-                    <CustomText style={{ fontSize: 15, fontWeight: 600, color: Colors.tealKuvera }}>Back Add Spent</CustomText>
+                    <CustomText style={{ fontSize: 15, fontWeight: 600, color: Colors.tealKuvera }}>Back Add {stringSuccess}</CustomText>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.buttonStayLogOut} activeOpacity={0.6} onPress={handleButtonAllTransaction}>
                     <CustomText style={{ fontSize: 15, fontWeight: 600, color: "white" }}>All Transactions</CustomText>

@@ -14,11 +14,17 @@ import { AddTransactionParams, TypeTransaction } from '@/states/transaction/type
 import { setLoading } from '@/states/visible-loading/action'
 import { router } from 'expo-router'
 import { Formik, FormikHelpers } from 'formik'
-import React, { useCallback, useEffect } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native'
 import { useDispatch } from 'react-redux'
 
-export default function FormAddSpending() {
+export default function FormAddIncome() {
+     const [initialValuesForm, setInitalValuesForm] = useState({
+            category: { id: "", name: "" },
+            date: `${new Date()}`,
+            spend: "",
+            notes: ""
+        });
     const categories_spend: CategorySpendType[] = useAppSelector((states) => states.categoriesSpend);
     const dispatch = useDispatch();
 
@@ -32,21 +38,24 @@ export default function FormAddSpending() {
         }
     }, []);
 
-    const initialValuesForm = {
-        category: { id: "", name: "" },
-        date: `${new Date()}`,
-        spend: "",
-        notes: ""
-    };
+    useEffect(() => {
+            if (categories_spend.length > 0) {
+                const category_monthly = categories_spend.filter((category) => category.name === "monthly")
+                setInitalValuesForm((prev) => ({
+                    ...prev,
+                    category: {
+                        id: category_monthly[0].id,
+                        name: category_monthly[0].name
+                    }
+                }))
+            }
+        }, [categories_spend])
 
     const goToPageSuccess = useCallback(
         (values: AddTransactionParams) => {
             router.push({
                 pathname: '/success',
-                params: {
-                    ...values,
-                    id: '019a8b91-c19f-7090-83d1-40a66653164c'
-                }
+                params: values
             })
         },
         []
@@ -70,7 +79,7 @@ export default function FormAddSpending() {
             <CustomText style={{ fontWeight: 600, fontSize: 16, color: Colors.tealKuvera }}>
                 Every rupiah is important.
             </CustomText>
-            <CustomText>Log your expenses now, and see where your money truly goes. Detailed records prevent regret at the end of the month</CustomText>
+            <CustomText>Log your income now and understand exactly where your money comes from. Clear records help you plan better and grow your finances.</CustomText>
             <Formik
                 initialValues={initialValuesForm}
                 enableReinitialize={true}
@@ -82,7 +91,7 @@ export default function FormAddSpending() {
                         created_dt: formatDateTime(new Date(values.date)),
                         money_spent: cleanRupiahToNumber(values.spend),
                         notes: values.notes,
-                        type: 'outgoing' as TypeTransaction
+                        type: 'incoming' as TypeTransaction
                     }
                     handleSubmitForm(cleanValue, formikHelpers);
                 }}
@@ -105,7 +114,7 @@ export default function FormAddSpending() {
                             errorMessage={FormikProps.errors.date && FormikProps.touched.date ? FormikProps.errors.date : ""}
                         />
                         <TextInput
-                            label='Money spent'
+                            label='Money Income'
                             value={FormikProps.values.spend}
                             accessible={true}
                             keyboardType='number-pad'
@@ -114,14 +123,14 @@ export default function FormAddSpending() {
                             errorMessage={FormikProps.errors.spend && FormikProps.touched.spend ? FormikProps.errors.spend : ""}
                         />
                         <TextInput
-                            label='Notes (optional)'
+                            label='Notes'
                             value={FormikProps.values.notes}
                             accessible={true}
                             onChangeText={FormikProps.handleChange('notes')}
                             errorMessage={FormikProps.errors.notes && FormikProps.touched.notes ? FormikProps.errors.notes : ""}
                         />
                         <TouchableOpacity activeOpacity={0.6} style={style.button_lanjut} onPress={() => FormikProps.handleSubmit()}>
-                            <CustomText style={{ fontWeight: 600, color: "white", fontSize: 16 }}>Save</CustomText>
+                            <CustomText style={{ fontWeight: 600, color: "white", fontSize: 16 }}>Save Income</CustomText>
                         </TouchableOpacity>
                     </View>
                 )}

@@ -1,3 +1,4 @@
+import { Colors } from '@/constants/theme';
 import { useAppSelector } from '@/states';
 import { asyncGetTransactionByCategory } from '@/states/transaction/action';
 import { InitialSumTransactionByCategoryType } from '@/states/transaction/type';
@@ -35,7 +36,7 @@ export default function ListCategoriesSpend() {
                 type: 'outgoing',
             }) as any
         )
-    }
+    };
 
     return (
         <ScrollView
@@ -46,12 +47,13 @@ export default function ListCategoriesSpend() {
             {/* Card */}
             {isLoading ? (<SkeletonCardCategoryOutput />) : (
                 <>
-                    {transactions.map((category) => (
+                    {transactions.map((category, index) => (
                         <CardCategoryOutput
                             key={category.category_id}
                             title={category.name}
                             money={`${category.total_money_spent}`}
                             icon={category.name}
+                            color={Colors.tealLightKuvera}
                         />
                     ))}
                 </>

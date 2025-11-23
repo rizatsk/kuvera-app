@@ -5,12 +5,11 @@ import totalByType from '@/helper/totalByType';
 import { GetTransactionType } from '@/service/transaction/type';
 import { asyncGetTransactions } from '@/states/transaction/action';
 import { TypeTransaction } from '@/states/transaction/type';
-import { Image } from 'expo-image';
-import { router } from 'expo-router';
 import React, { useEffect, useState } from 'react';
-import { FlatList, RefreshControl, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { FlatList, RefreshControl, StyleSheet, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import CardTransaction from './card-transaction';
+import NoHaveTransaction from './no-have-transaction';
 import SkeletonCardTransaction from './skeleton';
 
 type ListCardTransactionsParam = {
@@ -64,27 +63,6 @@ export default function ListCardTransactions(param: ListCardTransactionsParam) {
     );
   };
 
-  function navigateFormAddSpending() {
-    router.navigate({ pathname: '/(private)/spending/form-add-spending' })
-  }
-
-  const NotHaveTransaction = () => {
-    return (
-      <View style={{ flex: 1, alignItems: 'center', marginHorizontal: 20 }}>
-        <Image source={require('@/assets/images/no-data.png')}
-          style={{ width: 170, height: 170 }}
-          contentFit="contain" />
-        <View>
-          <CustomText style={{ textAlign: 'center', fontWeight: 500, fontSize: 16 }}>No transactions recorded yet.</CustomText>
-          <CustomText style={{ textAlign: 'center' }}>Add an expense to start tracking your finances</CustomText>
-        </View>
-        <TouchableOpacity style={styles.buttonStayLogOut} activeOpacity={0.6} onPress={navigateFormAddSpending}>
-          <CustomText style={{ fontSize: 16, fontWeight: 600, color: "white" }}>+ Add Transaction</CustomText>
-        </TouchableOpacity>
-      </View>
-    )
-  }
-
   return (
     <>
       <View style={styles.monthTrxContainer}>
@@ -115,7 +93,7 @@ export default function ListCardTransactions(param: ListCardTransactionsParam) {
               />
             )
         }
-        ListEmptyComponent={<NotHaveTransaction />}
+        ListEmptyComponent={<NoHaveTransaction />}
       />
     </>
   )
@@ -132,15 +110,5 @@ const styles = StyleSheet.create({
   },
   textSaldo: {
     fontSize: 12,
-  },
-  buttonStayLogOut: {
-    width: '100%',
-    backgroundColor: Colors.tealKuvera,
-    borderColor: Colors.tealKuvera,
-    borderWidth: 2,
-    alignItems: 'center',
-    marginTop: 20,
-    borderRadius: 5,
-    paddingVertical: 7,
   },
 });

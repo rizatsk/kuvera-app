@@ -14,5 +14,5 @@ export const AddSpendingSchema = Yup.object().shape({
     .required("Date cannot be empty"),
   spend: Yup.string()
     .required("Spending cannot be empty"),
-  notes: Yup.string(),
+  notes: Yup.string().required("Notes cannot be empty"),
 });
