@@ -75,8 +75,8 @@ export default function ListCardTransactions(param: ListCardTransactionsParam) {
           style={{ width: 170, height: 170 }}
           contentFit="contain" />
         <View>
-          <CustomText style={{ textAlign: 'center', fontWeight: 500, fontSize: 16 }}>Belum ada transaksi tercatat.</CustomText>
-          <CustomText style={{ textAlign: 'center' }}>Tambahkan data pengeluaran untuk mulai memantau keuangan Anda</CustomText>
+          <CustomText style={{ textAlign: 'center', fontWeight: 500, fontSize: 16 }}>No transactions recorded yet.</CustomText>
+          <CustomText style={{ textAlign: 'center' }}>Add an expense to start tracking your finances</CustomText>
         </View>
         <TouchableOpacity style={styles.buttonStayLogOut} activeOpacity={0.6} onPress={navigateFormAddSpending}>
           <CustomText style={{ fontSize: 16, fontWeight: 600, color: "white" }}>+ Add Transaction</CustomText>
