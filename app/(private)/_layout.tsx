@@ -25,14 +25,14 @@ export default function PrivateLayout() {
                         }}
                     />
                     <Stack.Screen
-                        name="menu/form-add-spending"
+                        name="add-transaction/form-add-spending"
                         options={{
                             title: "Add Spending",
                             ...OptionStackScreen,
                         }}
                     />
                     <Stack.Screen
-                        name="menu/form-add-income"
+                        name="add-transaction/form-add-income"
                         options={{
                             title: "Add Income",
                             ...OptionStackScreen,
@@ -42,6 +42,20 @@ export default function PrivateLayout() {
                         name="success/index"
                         options={{
                             title: "Success",
+                            ...OptionStackScreen,
+                        }}
+                    />
+                    <Stack.Screen
+                        name="category/all-category"
+                        options={{
+                            title: "Expen Category",
+                            ...OptionStackScreen,
+                        }}
+                    />
+                    <Stack.Screen
+                        name="category/add-category"
+                        options={{
+                            title: "Add Category",
                             ...OptionStackScreen,
                         }}
                     />

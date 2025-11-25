@@ -18,6 +18,7 @@ export type TransactionGroupByCategoryType = {
     category_id: string,
     category_name: string,
     total_money_spent: number
+    category_status: boolean
 } 
 
 export type GetTransactionsParam = {

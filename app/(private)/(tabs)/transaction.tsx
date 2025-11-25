@@ -32,7 +32,7 @@ export default function TransactionScreen() {
 
   return (
     <SafeAreaView
-      edges={['top', 'bottom']}
+      edges={['top']}
       style={{ backgroundColor: 'white', flex: 1 }}
     >
       <View style={{ paddingHorizontal: 18, paddingVertical: 10 }}>

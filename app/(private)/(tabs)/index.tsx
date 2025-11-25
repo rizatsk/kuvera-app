@@ -7,6 +7,7 @@ import InvestAccountValue from '@/components/page/home/spent-account-value';
 import { useAppSelector } from '@/states';
 import { actionHomeRefresh } from '@/states/home-refresh/action';
 import Entypo from '@expo/vector-icons/Entypo';
+import { router } from 'expo-router';
 import { RefreshControl, ScrollView, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDispatch } from 'react-redux';
@@ -19,6 +20,12 @@ export default function HomeScreen() {
     dispatch(
       actionHomeRefresh() as any
     )
+  }
+
+  const handleAllCategory = () => {
+    router.navigate({
+      pathname: '/(private)/category/all-category'
+    })
   }
 
   return (
@@ -39,8 +46,8 @@ export default function HomeScreen() {
         {/* Category Output */}
         <View style={{ flex: 1, marginTop: 10, marginHorizontal: 10, backgroundColor: "white", borderRadius: 10, paddingVertical: 10, paddingHorizontal: 10 }}>
           <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: 15 }}>
-            <CustomText style={{ fontWeight: 600, fontSize: 16 }}>Category</CustomText>
-            <Entypo name="chevron-right" size={24} color="black" />
+            <CustomText style={{ fontWeight: 600, fontSize: 16 }}>Expen Category</CustomText>
+            <Entypo name="chevron-right" size={24} color="black" onPress={handleAllCategory}/>
           </View>
           <ListCategoriesSpend />
         </View>

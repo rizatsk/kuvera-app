@@ -12,12 +12,20 @@ export default function HomeMenu() {
     const router = useRouter();
 
     const AddSpendingHandling = () => {
-        router.navigate("/menu/form-add-spending")
+        router.navigate({
+            pathname: "/(private)/add-transaction/form-add-spending"
+        })
     }
     
     function AddIncomeHandling() {
         router.navigate({
-            pathname: '/(private)/menu/form-add-income'
+            pathname: '/(private)/add-transaction/form-add-income'
+        })
+    }
+
+    function AddCategoryHandling() {
+        router.navigate({
+            pathname: '/(private)/category/add-category'
         })
     }
 
@@ -41,7 +49,7 @@ export default function HomeMenu() {
                 </View>
                 <CustomText style={style.title}>Income</CustomText>
             </TouchableOpacity>
-            <TouchableOpacity activeOpacity={0.6} style={{ alignItems: 'center' }}>
+            <TouchableOpacity activeOpacity={0.6} style={{ alignItems: 'center' }} onPress={AddCategoryHandling}>
                 <View style={style.squareIcon}>
                     <View style={{ position: "absolute", top: 5, left: 5 }}>
                         <FontAwesome name="plus-circle" size={16} color={Colors.tealKuvera} />

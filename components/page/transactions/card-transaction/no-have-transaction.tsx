@@ -17,9 +17,9 @@ export default function NoHaveTransaction() {
 
     function handleSubmit(option: { key: string, value: string }) {
         if (option.value === 'incoming') {
-            router.navigate({ pathname: '/(private)/menu/form-add-income' })
+            router.navigate({ pathname: '/(private)/add-transaction/form-add-income' })
         } else {
-            router.navigate({ pathname: '/(private)/menu/form-add-spending' })
+            router.navigate({ pathname: '/(private)/add-transaction/form-add-spending' })
         }
         setIsModalVisible(false);
     }

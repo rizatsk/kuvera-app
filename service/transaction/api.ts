@@ -40,14 +40,15 @@ export async function getTransactionGroupByCategory(param: ApiGetTransactionGrou
             },
             data: JSON.stringify({
                 query: `query { sumerize_category_transactions(
-                    type: "outgoing" 
-                    start_date: "2025-11-01 00:00:00" 
-                    end_date: "2025-11-25 23:59:59"
-                ) { category_id category_name total_money_spent } }`,
+                    type: "${param.type}"
+                    start_date: "${param.start_date}"
+                    end_date: "${param.end_date}"
+                ) { category_id category_name total_money_spent category_status } }`,
                 variables: {}
             })
         });
-
+        
+        console.log("Data param getTransactionGroupByCategory", param);
         return result.data.sumerize_category_transactions;
     } catch (error: any) {
         const response = error.response?.data;

@@ -62,7 +62,7 @@ export default function CardGoldAntamPrice() {
                         />
                     )
             }
-            ListEmptyComponent={<CustomText>Price gold Antam is not available</CustomText>}
+            ListEmptyComponent={<CustomText style={{textAlign: 'center', marginVertical: 20}}>Price gold Antam is not available</CustomText>}
         />
     )
 }

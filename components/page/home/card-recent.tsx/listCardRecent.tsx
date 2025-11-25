@@ -60,7 +60,7 @@ export default function ListCardRecent() {
     return (
         <View style={{ paddingHorizontal: 10 }}>
             <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: 15 }}>
-                <CustomText style={{ fontWeight: 600, fontSize: 16 }}>Recent</CustomText>
+                <CustomText style={{ fontWeight: 600, fontSize: 16 }}>Expen Recent</CustomText>
             </View>
             <FlatList<GetTransactionType | undefined>
                 scrollEnabled={false}

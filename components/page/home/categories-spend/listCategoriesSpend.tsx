@@ -1,16 +1,18 @@
 import { Colors } from '@/constants/theme';
+import { TransactionGroupByCategoryType } from '@/service/transaction/type';
 import { useAppSelector } from '@/states';
 import { asyncGetTransactionByCategory } from '@/states/transaction/action';
 import { InitialSumTransactionByCategoryType } from '@/states/transaction/type';
 import moment from 'moment';
-import React, { useEffect } from 'react';
-import { ScrollView } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { FlatList } from 'react-native';
 import { useDispatch } from 'react-redux';
 import CardCategoryOutput from './cardCategorySpend';
 import SkeletonCardCategoryOutput from './skeleton';
 
 export default function ListCategoriesSpend() {
     const homeRefresh = useAppSelector((states) => states.homeRefresh);
+    const [categoriesTrx, setCategoriesTrx] = useState<TransactionGroupByCategoryType[]>([]);
     const { isLoading, transactions }: InitialSumTransactionByCategoryType = useAppSelector((states) => states.sumTransactionByCategory);
     const dispatch = useDispatch();
 
@@ -24,6 +26,14 @@ export default function ListCategoriesSpend() {
             getTransactionByCategory()
         }
     }, [homeRefresh])
+
+    useEffect(() => {
+        if (transactions.length > 0 && !isLoading) {
+            console.log("data categories transactions", transactions);
+            const trxActive = transactions.filter((trx) => trx.category_status === true)
+            setCategoriesTrx(trxActive)
+        }
+    }, [transactions])
 
     const getTransactionByCategory = () => {
         const start_date = moment().format('YYYY-MM') + '-01 00:00:00';
@@ -39,25 +49,30 @@ export default function ListCategoriesSpend() {
     };
 
     return (
-        <ScrollView
-            horizontal={true}
+        <FlatList<TransactionGroupByCategoryType | undefined>
+            scrollEnabled={true}
             showsHorizontalScrollIndicator={false}
+            horizontal={true}
+            data={isLoading ? Array.from({ length: 4 }) : categoriesTrx}
+            keyExtractor={(item, index) =>
+                isLoading ? index.toString() : item!.category_id
+            }
             contentContainerStyle={{ gap: 10 }}
-        >
-            {/* Card */}
-            {isLoading ? (<SkeletonCardCategoryOutput />) : (
-                <>
-                    {transactions.map((category, index) => (
+            renderItem={({ item }) =>
+                isLoading ? (
+                    <SkeletonCardCategoryOutput />
+                ) :
+                    (
                         <CardCategoryOutput
-                            key={category.category_id}
-                            title={category.category_name}
-                            money={`${category.total_money_spent}`}
-                            icon={category.category_name}
+                            key={item!.category_id}
+                            title={item!.category_name}
+                            money={`${item!.total_money_spent}`}
+                            icon={item!.category_name}
                             color={Colors.tealLightKuvera}
+                            status={item!.category_status}
                         />
-                    ))}
-                </>
-            )}
-        </ScrollView>
+                    )
+            }
+        />
     )
 }

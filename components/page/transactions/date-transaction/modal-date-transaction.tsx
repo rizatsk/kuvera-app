@@ -43,8 +43,8 @@ const ModalDateTransactions: React.FunctionComponent<DatePickerProps> = (props) 
       case "30lastday":
         setTextDate("30 Days Ago");
         break;
-      case "7lastday":
-        setTextDate("7 Days Ago");
+      case "ThisMonth":
+        setTextDate("This Month");
         break;
       case "1lastyear":
         setTextDate("1 Year Ago");
@@ -78,7 +78,7 @@ const ModalDateTransactions: React.FunctionComponent<DatePickerProps> = (props) 
   const handleSubmitRangeCalender = () => {
     if (range.start && range.end) {
       handleSubmit({
-        start: range.start,
+        start: range.start + " 00:00:00",
         end: range.end + " 23:59:59",
         keyString: `${moment(range.start).format('DD-MM-YYYY')} - ${moment(range.end).format('DD-MM-YYYY')}`
       })
@@ -121,17 +121,17 @@ const ModalDateTransactions: React.FunctionComponent<DatePickerProps> = (props) 
               activeOpacity={0.6}
               onPress={() => {
                 handleSubmit({
-                  start: moment().subtract(7, 'days').format('YYYY-MM-DD'),
-                  end: moment().format('YYYY-MM-DD') + " 23:59:59",
-                  keyString: '7lastday'
+                  start: moment().subtract(30, 'days').format('YYYY-MM-DD') + ' 00:00:00',
+                  end: moment().format('YYYY-MM-DD') + ' 23:59:59',
+                  keyString: 'ThisMonth'
                 })
               }}
               style={[styles.tab]}
             >
               <CustomText style={{ fontSize: 15, fontWeight: 500 }}>
-                7 Days Ago
+                This Month
               </CustomText>
-              {value.keyString === '7lastday' && (
+              {value.keyString === 'ThisMonth' && (
                 <Octicons name="check" size={24} color={Colors.tealDarkKuvera} />
               )}
             </TouchableOpacity>
@@ -140,7 +140,7 @@ const ModalDateTransactions: React.FunctionComponent<DatePickerProps> = (props) 
               activeOpacity={0.6}
               onPress={() => {
                 handleSubmit({
-                  start: moment().subtract(30, 'days').format('YYYY-MM-DD'),
+                  start: moment().subtract(30, 'days').format('YYYY-MM-DD') + " 00:00:00",
                   end: moment().format('YYYY-MM-DD') + " 23:59:59",
                   keyString: '30lastday'
                 })
@@ -159,7 +159,7 @@ const ModalDateTransactions: React.FunctionComponent<DatePickerProps> = (props) 
               activeOpacity={0.6}
               onPress={() => {
                 handleSubmit({
-                  start: moment().subtract(1, 'years').format('YYYY-MM-DD'),
+                  start: moment().subtract(1, 'years').format('YYYY-MM-DD') + " 00:00:00",
                   end: moment().format('YYYY-MM-DD') + " 23:59:59",
                   keyString: '1lastyear'
                 })
