@@ -62,8 +62,8 @@ export default function AllCategory() {
     };
 
     const handleAddCategory = () => {
-        router.navigate({
-            pathname: '/(private)/category/add-category'
+        router.push({
+            pathname: '/(private)/category/add-category',
         })
     }
 

@@ -14,7 +14,15 @@ export function sumTransactionByCategory(
         isLoading: action.payload.isLoading,
         transactions: action.payload.transactions,
       };
+    case ActionReducer.ADD_SUM_TRANSACTION_BY_CATEGORY:
+      return {
+        isLoading: false,
+        transactions: [...initial.transactions, action.payload.category],
+      };
     default:
-      return initial;
+      return {
+        isLoading: initial.isLoading,
+        transactions: initial.transactions,
+      };;
   }
 }

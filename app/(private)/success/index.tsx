@@ -17,6 +17,7 @@ export default function SuccessScreen() {
     }
 
     const handleButtonAllTransaction = () => {
+        router.dismissAll();
         router.replace({
             pathname: '/(private)/(tabs)/transaction'
         })

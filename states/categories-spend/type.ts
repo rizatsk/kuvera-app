@@ -1,4 +1,5 @@
-import { CategorySpendType } from "@/service/category-spend/graphQl";
+
+import { CategorySpendType } from "@/service/category-spend/type";
 import { Dispatch, SetStateAction } from "react";
 import { ActionReducerType } from "../action";
 
@@ -10,5 +11,11 @@ export type ActionCategoriesSpendReducer = {
   type: ActionReducerType;
   payload: {
     categories_spend: CategorySpendType[] | [];
+    category_spend: CategorySpendType
   };
+}
+
+export type AsyncAddCategorySpendParam = {
+  name_category: string
+  handleSuccess: () => void
 }

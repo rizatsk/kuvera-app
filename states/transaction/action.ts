@@ -14,6 +14,15 @@ function setSumerizeTransactionByCategory(isLoading: boolean, data: TransactionG
     }
 }
 
+export function addSumerizeTransactionByCategoryCreator(category: TransactionGroupByCategoryType) {
+    return {
+        type: ActionReducer.ADD_SUM_TRANSACTION_BY_CATEGORY,
+        payload: {
+            category: category
+        }
+    }
+}
+
 export function asyncAddTransaction({
     param, successHandler, goToPageSuccess,
 }: AsyncAddTransactionParam) {
@@ -38,7 +47,7 @@ export function asyncAddTransaction({
                 type: param.type,
                 source: 'add-spend'
             })
-        } catch(error) {
+        } catch (error) {
             console.log("Error asyncAddTransaction", error)
         } finally {
             dispatch(setLoading(false));
@@ -49,8 +58,8 @@ export function asyncAddTransaction({
 export function asyncGetTransactionByCategory({
     start_date, end_date, type
 }: AsyncGetTransactionByCategoryParam) {
-     return async (dispatch: any) => {
-         let result: TransactionGroupByCategoryType[] = [];
+    return async (dispatch: any) => {
+        let result: TransactionGroupByCategoryType[] = [];
         dispatch(setSumerizeTransactionByCategory(true, result))
         try {
             const response = await getTransactionGroupByCategory({
@@ -60,7 +69,7 @@ export function asyncGetTransactionByCategory({
             });
 
             result = response;
-        } catch(error) {
+        } catch (error) {
             console.log("Error asyncGetTransactionByCategory", error)
         } finally {
             dispatch(setSumerizeTransactionByCategory(false, result))
@@ -71,8 +80,8 @@ export function asyncGetTransactionByCategory({
 export function asyncGetTransactions({
     param, setIsLoading, successHandler
 }: AsyncGetTransactionsParam) {
-   return async (dispatch: any) => {
-       setIsLoading(true);
+    return async (dispatch: any) => {
+        setIsLoading(true);
         try {
             const response = await getTransactions({
                 type: param.type,
@@ -82,10 +91,10 @@ export function asyncGetTransactions({
             });
 
             successHandler(response);
-        } catch(error) {
+        } catch (error) {
             console.log("Error asyncGetTransactions", error)
         } finally {
             setIsLoading(false);
         }
-    }  
+    }
 }

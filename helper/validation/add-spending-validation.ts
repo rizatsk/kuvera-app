@@ -1,4 +1,4 @@
-import { CategorySpendType } from "@/service/category-spend/graphQl";
+import { CategorySpendType } from "@/service/category-spend/type";
 import * as Yup from "yup";
 
 export type ValuesFormAddSpendingType = {

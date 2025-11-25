@@ -8,13 +8,8 @@ export const TextInput: React.FunctionComponent<InputProps> = (props) => {
   const {
     value,
     label,
-    onBlur = () => null,
-    onFocus = () => null,
     errorMessage,
-    helperMessage,
-    isError,
     counter = 0,
-    inputIcon = null,
     onTouchStart,
     showSoftInputOnFocus = true,
     inputType = 'text',
@@ -24,8 +19,7 @@ export const TextInput: React.FunctionComponent<InputProps> = (props) => {
   const [focused, setFocused] = useState(false);
 
   const computedStyle = getStyle(props, focused);
-
-
+  
   const handleOnFocus = () => {
       setFocused(true);
   };
@@ -45,8 +39,6 @@ export const TextInput: React.FunctionComponent<InputProps> = (props) => {
     if (counter) {
       if (unmasked.length <= counter) {
         onChangeText?.(masked, unmasked, obfuscated);
-      } else {
-        console.log("Batas input maksimum terlampaui!");
       }
     } else {
       onChangeText?.(masked, unmasked, obfuscated);
@@ -55,6 +47,7 @@ export const TextInput: React.FunctionComponent<InputProps> = (props) => {
 
   return (
     <InputFieldKuvera 
+      counter={counter}
       value={value}
       label={label}
       errorMessage={errorMessage}

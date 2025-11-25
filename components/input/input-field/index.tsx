@@ -20,7 +20,7 @@ interface InputFieldProps extends MaskInputProps {
     handleOnTouchStart?: (e: GestureResponderEvent) => void
     handleOnchangeText?: (masked: string, unmasked: string, obfuscated: string) => void
     counter?: number
-    inputType?: 'text' | 'money'
+    inputType?: 'text' | 'money',
 }
 
 export default function InputFieldKuvera({

@@ -44,7 +44,8 @@ export type ActionSumTransactionByCategoryReducer = {
 
 export type InitialSumTransactionByCategoryType = {
   isLoading: boolean,
-  transactions: TransactionGroupByCategoryType[]
+  transactions: TransactionGroupByCategoryType[],
+  category?: TransactionGroupByCategoryType
 }
 
 export type AsyncGetTransactionsParam = {

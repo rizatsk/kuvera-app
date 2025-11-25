@@ -6,7 +6,7 @@ import { Colors } from '@/constants/theme'
 import { cleanRupiahToNumber } from '@/helper/format-rupiah'
 import { formatDateTime } from '@/helper/formate-date-time'
 import { AddSpendingSchema } from '@/helper/validation/add-spending-validation'
-import { CategorySpendType } from '@/service/category-spend/graphQl'
+import { CategorySpendType } from '@/service/category-spend/type'
 import { useAppSelector } from '@/states'
 import { asyncGetCategorySpend } from '@/states/categories-spend/action'
 import { asyncAddTransaction } from '@/states/transaction/action'
@@ -19,28 +19,27 @@ import { ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native'
 import { useDispatch } from 'react-redux'
 
 export default function FormAddIncome() {
-     const [initialValuesForm, setInitalValuesForm] = useState({
-            category: { id: "", name: "" },
-            date: `${new Date()}`,
-            spend: "",
-            notes: ""
-        });
+    const [initialValuesForm, setInitalValuesForm] = useState({
+        category: { id: "", name: "" },
+        date: `${new Date()}`,
+        spend: "",
+        notes: ""
+    });
     const categories_spend: CategorySpendType[] = useAppSelector((states) => states.categoriesSpend);
     const dispatch = useDispatch();
 
     useEffect(() => {
-        if (categories_spend.length < 1) {
-            dispatch(
-                asyncGetCategorySpend({
-                    setIsLoading: setLoading
-                }) as any
-            )
-        }
+        dispatch(
+            asyncGetCategorySpend({
+                setIsLoading: setLoading
+            }) as any
+        )
     }, []);
 
     useEffect(() => {
-            if (categories_spend.length > 0) {
-                const category_monthly = categories_spend.filter((category) => category.name === "monthly")
+        if (categories_spend.length > 0) {
+            const category_monthly = categories_spend.filter((category) => category.name === "monthly")
+            if (category_monthly.length > 0) {
                 setInitalValuesForm((prev) => ({
                     ...prev,
                     category: {
@@ -49,7 +48,8 @@ export default function FormAddIncome() {
                     }
                 }))
             }
-        }, [categories_spend])
+        }
+    }, [categories_spend])
 
     const goToPageSuccess = useCallback(
         (values: AddTransactionParams) => {
@@ -67,7 +67,7 @@ export default function FormAddIncome() {
                 param: values,
                 successHandler: () => {
                     formikHelper.resetForm({ values: initialValuesForm });
-                    
+
                 },
                 goToPageSuccess,
             }) as any

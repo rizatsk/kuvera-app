@@ -12,13 +12,13 @@ type OptionStackScreenType = {
     headerLeft: () => React.JSX.Element
 }
 
-function BackNavigation() {
+function BackNavigation({ backToHome = false }: { backToHome?: boolean }) {
     const navigation = useNavigation();
     return (
         <TouchableOpacity
             activeOpacity={0.6}
             onPress={() => navigation.goBack()}
-            style={{ paddingHorizontal: 5, paddingVertical: 5}}
+            style={{ paddingHorizontal: 5, paddingVertical: 5 }}
         >
             <FontAwesome5 name="chevron-left" size={22} color="black" />
         </TouchableOpacity>

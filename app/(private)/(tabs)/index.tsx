@@ -23,7 +23,7 @@ export default function HomeScreen() {
   }
 
   const handleAllCategory = () => {
-    router.navigate({
+    router.push({
       pathname: '/(private)/category/all-category'
     })
   }

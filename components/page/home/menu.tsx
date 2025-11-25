@@ -12,19 +12,19 @@ export default function HomeMenu() {
     const router = useRouter();
 
     const AddSpendingHandling = () => {
-        router.navigate({
+        router.push({
             pathname: "/(private)/add-transaction/form-add-spending"
         })
     }
     
     function AddIncomeHandling() {
-        router.navigate({
+        router.push({
             pathname: '/(private)/add-transaction/form-add-income'
         })
     }
 
     function AddCategoryHandling() {
-        router.navigate({
+        router.push({
             pathname: '/(private)/category/add-category'
         })
     }

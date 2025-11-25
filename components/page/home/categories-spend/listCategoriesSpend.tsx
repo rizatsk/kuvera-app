@@ -29,7 +29,6 @@ export default function ListCategoriesSpend() {
 
     useEffect(() => {
         if (transactions.length > 0 && !isLoading) {
-            console.log("data categories transactions", transactions);
             const trxActive = transactions.filter((trx) => trx.category_status === true)
             setCategoriesTrx(trxActive)
         }
