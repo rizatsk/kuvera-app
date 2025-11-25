@@ -32,15 +32,23 @@ export async function getTransactionGroupByCategory(param: ApiGetTransactionGrou
     const accessToken = await getAccessToken();
     try {
         const { data: result } = await axios({
-            method: 'GET',
-            url: environment.BASE_API_URL + `/transaction/group-by-category?start_date=${param.start_date}&end_date=${param.end_date}&type=${param.type}`,
+            method: 'POST',
+            url: environment.BASE_URL + '/graphql',
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: 'Bearer ' + accessToken
             },
+            data: JSON.stringify({
+                query: `query { sumerize_category_transactions(
+                    type: "outgoing" 
+                    start_date: "2025-11-01 00:00:00" 
+                    end_date: "2025-11-25 23:59:59"
+                ) { category_id category_name total_money_spent } }`,
+                variables: {}
+            })
         });
 
-        return result.data
+        return result.data.sumerize_category_transactions;
     } catch (error: any) {
         const response = error.response?.data;
 

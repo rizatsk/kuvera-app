@@ -50,9 +50,9 @@ export default function ListCategoriesSpend() {
                     {transactions.map((category, index) => (
                         <CardCategoryOutput
                             key={category.category_id}
-                            title={category.name}
+                            title={category.category_name}
                             money={`${category.total_money_spent}`}
-                            icon={category.name}
+                            icon={category.category_name}
                             color={Colors.tealLightKuvera}
                         />
                     ))}

@@ -16,7 +16,7 @@ export type ApiGetTransactionGroupByCategoryParam = {
 
 export type TransactionGroupByCategoryType = {
     category_id: string,
-    name: string,
+    category_name: string,
     total_money_spent: number
 } 
 
