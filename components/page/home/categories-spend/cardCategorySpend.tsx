@@ -5,10 +5,12 @@ import Entypo from '@expo/vector-icons/Entypo'
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5'
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6'
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons'
+import { router } from 'expo-router'
 import React from 'react'
-import { View } from 'react-native'
+import { TouchableOpacity, View } from 'react-native'
 
 type CardProps = {
+    id: string,
     title: string,
     money: string,
     icon?: string,
@@ -16,7 +18,7 @@ type CardProps = {
     status?: boolean,
 }
 export default function CardCategoryOutput({
-    title, money, icon, color, status = true
+    id, title, money, icon, color, status = true
 }: CardProps) {
     const colorCard = status ? color : Colors.grey[500];
     const colorFont = status ? "black" : Colors.grey[500];
@@ -33,9 +35,22 @@ export default function CardCategoryOutput({
         }
     };
 
+    function handleButton() {
+        router.push({
+            pathname: '/(private)/category/transaction-by-category',
+            params: {
+                id: id,
+                name: title
+            }
+        })
+    }
+
 
     return (
-        <View style={{ paddingLeft: 5, paddingRight: 8, paddingVertical: 4, borderRadius: 10, borderColor: colorCard + 70, borderWidth: 2 }}>
+        <TouchableOpacity 
+            activeOpacity={0.6} 
+            onPress={handleButton}
+            style={{ paddingLeft: 5, paddingRight: 8, paddingVertical: 4, borderRadius: 10, borderColor: colorCard + 70, borderWidth: 2 }}>
             <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
                 <View style={{ backgroundColor: colorCard + 30, width: 50, height: 50, justifyContent: "center", alignItems: "center", borderRadius: 10 }}>
                     <IconComponent />
@@ -45,6 +60,6 @@ export default function CardCategoryOutput({
                     <CustomText style={{ fontWeight: "700", fontSize: 13, color: colorCard }}>{formatRupiah(money)}</CustomText>
                 </View>
             </View>
-        </View>
+        </TouchableOpacity>
     )
 }
