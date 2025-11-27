@@ -81,7 +81,6 @@ const styles = StyleSheet.create({
     },
     dataTransactionContainer: {
         backgroundColor: "white",
-        marginHorizontal: 20,
         marginVertical: 8,
         flexDirection: 'row',
         justifyContent: 'space-between',

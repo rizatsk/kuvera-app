@@ -1,8 +1,8 @@
-import { addTransaction, getTransactionGroupByCategory, getTransactions } from "@/service/transaction/api";
+import { addTransaction, getTransactionGroupByCategory, getTransactions, getTransactionsByCategory } from "@/service/transaction/api";
 import { TransactionGroupByCategoryType } from "@/service/transaction/type";
 import { ActionReducer } from "../action";
 import { setLoading } from "../visible-loading/action";
-import { AsyncAddTransactionParam, AsyncGetTransactionByCategoryParam, AsyncGetTransactionsParam } from "./type";
+import { AsyncAddTransactionParam, AsyncGetTransactionByCategoryParam, AsyncGetTransactionsByCategoryParam, AsyncGetTransactionsParam } from "./type";
 
 function setSumerizeTransactionByCategory(isLoading: boolean, data: TransactionGroupByCategoryType[]) {
     return {
@@ -93,6 +93,23 @@ export function asyncGetTransactions({
             successHandler(response);
         } catch (error) {
             console.log("Error asyncGetTransactions", error)
+        } finally {
+            setIsLoading(false);
+        }
+    }
+}
+
+export function asyncGetTransactionsByCategory({
+    param, setIsLoading, successHandler
+}: AsyncGetTransactionsByCategoryParam) {
+    return async (dispatch: any) => {
+        setIsLoading(true);
+        try {
+            const response = await getTransactionsByCategory(param);
+
+            successHandler(response);
+        } catch (error) {
+            console.log("Error asyncGetTransactionsByCategory", error)
         } finally {
             setIsLoading(false);
         }

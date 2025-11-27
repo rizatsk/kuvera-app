@@ -1,5 +1,5 @@
 
-import { GetTransactionsParam, GetTransactionType, TransactionGroupByCategoryType } from "@/service/transaction/type";
+import { GetTransactionsParam, GetTransactionType, TransactionGroupByCategoryType, TransactionsByCategory } from "@/service/transaction/type";
 import { Dispatch, SetStateAction } from "react";
 import { ActionReducerType } from "../action";
 
@@ -52,4 +52,16 @@ export type AsyncGetTransactionsParam = {
   param: GetTransactionsParam,
   setIsLoading: Dispatch<SetStateAction<boolean>>
   successHandler: (result: GetTransactionType[]) => void,
+}
+
+type ParamGetTransactionsByCategory = {
+  category_id: string
+  start_date: Date,
+  end_date: Date
+}
+
+export type AsyncGetTransactionsByCategoryParam = {
+  param: ParamGetTransactionsByCategory,
+  setIsLoading: Dispatch<SetStateAction<boolean>>
+  successHandler: (result: TransactionsByCategory[]) => void,
 }

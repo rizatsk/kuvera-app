@@ -1,7 +1,7 @@
 import environment from "@/constants/environment";
 import axios from "axios";
 import { getAccessToken } from "../auth/handle-token";
-import { ApiAddTransactionParam, ApiGetTransactionGroupByCategoryParam, GetTransactionsParam, GetTransactionType, TransactionGroupByCategoryType } from "./type";
+import { ApiAddTransactionParam, ApiGetTransactionGroupByCategoryParam, GetTransactionsByCategoryParam, GetTransactionsParam, GetTransactionType, TransactionGroupByCategoryType, TransactionsByCategory } from "./type";
 
 export async function addTransaction(param: ApiAddTransactionParam) {
     const accessToken = await getAccessToken();
@@ -48,7 +48,6 @@ export async function getTransactionGroupByCategory(param: ApiGetTransactionGrou
             })
         });
         
-        console.log("Data param getTransactionGroupByCategory", param);
         return result.data.sumerize_category_transactions;
     } catch (error: any) {
         const response = error.response?.data;
@@ -84,6 +83,38 @@ export async function getTransactions(param: GetTransactionsParam): Promise<GetT
         });
 
         return result.data.transactions;
+    } catch (error: any) {
+        const response = error.response?.data;
+
+        throw {
+            status: error.response?.status,
+            message: response?.errors[0]?.message,
+            code: response?.errors[0]?.statusCode,
+        };
+    }
+}
+
+export async function getTransactionsByCategory(param: GetTransactionsByCategoryParam): Promise<TransactionsByCategory[]> {
+    const accessToken = await getAccessToken();
+    try {
+        const { data: result } = await axios({
+            method: 'POST',
+            url: environment.BASE_URL + '/graphql',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: 'Bearer ' + accessToken
+            },
+            data: JSON.stringify({
+                query: `query { transactions_by_category(
+                    category_id: "${param.category_id}"
+                    start_date: "${param.start_date}"
+                    end_date: "${param.end_date}"
+                ) { id money_spent notes type created_dt } }`,
+                variables: {}
+            })
+        });
+
+        return result.data.transactions_by_category;
     } catch (error: any) {
         const response = error.response?.data;
 

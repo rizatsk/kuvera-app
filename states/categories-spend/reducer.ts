@@ -10,7 +10,6 @@ function categoriesSpendReducer(
     case ActionReducer.SET_CATEGORIES_SPEND:
       return action.payload.categories_spend;
     case ActionReducer.ADD_CATEGORIES_SPEND:
-      console.log("data initial categories spend", initial)
       const newCategory = [...initial, action.payload.category_spend];
       return newCategory;
     default:

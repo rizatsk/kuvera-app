@@ -78,7 +78,7 @@ export default function ListCardTransactions(param: ListCardTransactionsParam) {
         keyExtractor={(item, index) =>
           isLoading ? index.toString() : item!.id
         }
-        contentContainerStyle={{ gap: 2 }}
+        contentContainerStyle={{ gap: 2, marginHorizontal: 18 }}
         renderItem={({ item }) =>
           isLoading ?
             <SkeletonCardTransaction /> :

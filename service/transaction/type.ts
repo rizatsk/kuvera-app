@@ -28,9 +28,23 @@ export type GetTransactionsParam = {
     end_date?: Date
 }
 
+export type GetTransactionsByCategoryParam = {
+    category_id: string,
+    start_date: Date
+    end_date: Date
+}
+
 export type GetTransactionType = {
     id: string,
     category_name: string,
+    money_spent: number,
+    notes: string,
+    type: TypeTransaction,
+    created_dt: string,
+}
+
+export type TransactionsByCategory = {
+    id: string,
     money_spent: number,
     notes: string,
     type: TypeTransaction,
