@@ -1,9 +1,9 @@
 import CustomText from '@/components/custom-text'
 import { Colors } from '@/constants/theme'
 import { formatRupiah } from '@/helper/format-rupiah'
+import { Fontisto, Ionicons } from '@expo/vector-icons'
 import Entypo from '@expo/vector-icons/Entypo'
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5'
-import FontAwesome6 from '@expo/vector-icons/FontAwesome6'
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons'
 import { router } from 'expo-router'
 import React from 'react'
@@ -26,12 +26,14 @@ export default function CardCategoryOutput({
         switch (icon) {
             case 'internet':
                 return <MaterialCommunityIcons name="cable-data" size={30} color={colorCard} />
-            case 'garage':
+            case 'service':
                 return <FontAwesome5 name={'tools'} size={24} color={colorCard} />
-            case 'pocket':
+            case 'monthly':
                 return <Entypo name="wallet" size={30} color={colorCard} />
+            case 'food and drink':
+                return <Ionicons name="fast-food-sharp" size={30} color={colorCard} />
             default:
-                return <FontAwesome6 name={"credit-card"} size={24} color={colorCard} />
+                return <Fontisto name="credit-card" size={24} color={colorCard} />
         }
     };
 
@@ -39,8 +41,8 @@ export default function CardCategoryOutput({
         router.push({
             pathname: '/(private)/category/transaction-by-category',
             params: {
-                id: id,
-                name: title
+                category_id: id,
+                category_name: title
             }
         })
     }

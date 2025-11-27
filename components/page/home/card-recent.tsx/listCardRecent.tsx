@@ -69,12 +69,16 @@ export default function ListCardRecent() {
                     isLoading ? index.toString() : item!.id
                 }
                 contentContainerStyle={{ gap: 10 }}
-                renderItem={({ item }) =>
+                renderItem={({ item, index }) =>
                     isLoading ?
                         <SkeletonCardRecent /> :
                         (
                             <CardRecent
                                 key={item!.id}
+                                index={index}
+                                id={item!.id}
+                                type={item!.type}
+                                category_name={item!.category_name}
                                 title={item!.notes}
                                 date={item!.created_dt}
                                 icon={item!.category_name}

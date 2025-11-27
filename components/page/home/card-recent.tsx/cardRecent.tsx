@@ -2,51 +2,74 @@ import CustomText from '@/components/custom-text'
 import { Colors } from '@/constants/theme'
 import { formatRupiah } from '@/helper/format-rupiah'
 import { formatDateTimeVerbose } from '@/helper/formate-date-time'
+import { Entypo, FontAwesome5, Fontisto, Ionicons } from '@expo/vector-icons'
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons'
-import { Image } from 'expo-image'
+import { router } from 'expo-router'
 import React from 'react'
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, TouchableOpacity, View } from 'react-native'
 
 type CardRecentType = {
+    index: number
     icon: string
+    id: string
+    category_name: string
     title: string
     date: string
     amount: number
+    type: string
 }
 
 export default function CardRecent({
-    icon, title, date, amount
+    index, id, title, date, amount, category_name, type
 }: CardRecentType) {
     const IconComponent = () => {
-        switch (icon) {
-            case 'pocket':
-                return (
-                    <View style={styles.containerIcon}>
-                        <Image
-                            style={{ height: 24, width: 24 }}
-                            contentFit='contain'
-                            source={require("@/assets/images/icon/money-minus.png")} />
-                    </View>
-                )
+        const colorCard = "white"
+        switch (category_name) {
+            case 'internet':
+                return <MaterialCommunityIcons name="cable-data" size={25} color={colorCard} />
+            case 'service':
+                return <FontAwesome5 name={'tools'} size={24} color={colorCard} />
+            case 'monthly':
+                return <Entypo name="wallet" size={24} color={colorCard} />
+            case 'food and drink':
+                return <Ionicons name="fast-food-sharp" size={24} color={colorCard} />
             default:
-                return (
-                    <View style={[styles.containerIcon, { backgroundColor: Colors.tealLightKuvera }]}>
-                        <MaterialCommunityIcons name="shopping" size={24} color="white" />
-                    </View>
-                )
+                return <Fontisto name="credit-card" size={16} color={colorCard} />
         }
+    };
+
+    const handleButton = () => {
+        router.push({
+            pathname: '/(private)/detail-transaction',
+            params: {
+                id: id,
+                category_name: category_name,
+                notes: title,
+                money_spent: amount,
+                created_dt: date,
+                type: type
+            }
+        })
     }
+
+    const bgColorIcon = index % 2 == 1 ? Colors.orangeKuvera : Colors.tealLightKuvera;
+
     return (
-        <View style={{ flexDirection: "row", justifyContent: "space-between", marginVertical: 5, alignItems: 'center' }}>
+        <TouchableOpacity
+            onPress={handleButton}
+            activeOpacity={0.6}
+            style={{ flexDirection: "row", justifyContent: "space-between", marginVertical: 5, alignItems: 'center' }}>
             <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
-                <IconComponent />
+                <View style={[styles.containerIcon, { backgroundColor: bgColorIcon }]}>
+                    <IconComponent />
+                </View>
                 <View>
-                    <CustomText style={{ fontWeight: 500, fontSize: 15, textTransform: 'capitalize' }}>{title}</CustomText>
+                    <CustomText style={{ fontWeight: 500, fontSize: 14, textTransform: 'capitalize' }}>{title}</CustomText>
                     <CustomText style={{ fontSize: 12 }}>{formatDateTimeVerbose(date)}</CustomText>
                 </View>
             </View>
             <CustomText style={{ fontWeight: 500, paddingRight: 8 }}>{formatRupiah(amount)}</CustomText>
-        </View>
+        </TouchableOpacity>
     )
 }
 

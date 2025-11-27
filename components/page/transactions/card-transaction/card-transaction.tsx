@@ -3,12 +3,15 @@ import { Colors } from '@/constants/theme';
 import { formatRupiah } from '@/helper/format-rupiah';
 import { formatDateTimeVerbose } from '@/helper/formate-date-time';
 import { TypeTransaction } from '@/states/transaction/type';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { Entypo, FontAwesome5, Fontisto, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { Image } from 'expo-image';
+import { router } from 'expo-router';
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 
 type CardTransactionParam = {
+    index: number
+    id: string
     amount: number
     notes: string
     type: TypeTransaction
@@ -18,45 +21,61 @@ type CardTransactionParam = {
 
 export default function CardTransaction(param: CardTransactionParam) {
     const IconComponent = () => {
-        switch (param.type) {
-            case 'incoming':
-                return (
-                    <View style={[styles.containerIcon, { backgroundColor: Colors.tealLightKuvera }]}>
-                        <Image
-                            style={{ height: 24, width: 24 }}
-                            contentFit='contain'
-                            source={require("@/assets/images/icon/money-bag-plus.png")} />
-                    </View>
-                )
-            default:
-                if (param.category_name === 'pocket') {
-                    return (
-                        <View style={[styles.containerIcon]}>
-                            <Image
-                                style={{ height: 24, width: 24 }}
-                                contentFit='contain'
-                                source={require("@/assets/images/icon/card-minus.png")} />
-                        </View>
-                    )
-                } else {
-                    return (
-                        <View style={[styles.containerIcon, { backgroundColor: Colors.tealLightKuvera }]}>
-                            <MaterialCommunityIcons name="shopping" size={24} color="white" />
-                        </View>
-                    )
-                }
+        if (param.type === 'incoming') {
+            return (
+                <View style={[styles.containerIcon, { backgroundColor: Colors.tealLightKuvera }]}>
+                    <Image
+                        style={{ height: 24, width: 24 }}
+                        contentFit='contain'
+                        source={require("@/assets/images/icon/money-bag-plus.png")} />
+                </View>
+            )
+        } else {
+            const colorCard = "white"
+            switch (param.category_name) {
+                case 'internet':
+                    return <MaterialCommunityIcons name="cable-data" size={25} color={colorCard} />
+                case 'service':
+                    return <FontAwesome5 name={'tools'} size={24} color={colorCard} />
+                case 'monthly':
+                    return <Entypo name="wallet" size={24} color={colorCard} />
+                case 'food and drink':
+                    return <Ionicons name="fast-food-sharp" size={24} color={colorCard} />
+                default:
+                    return <Fontisto name="credit-card" size={16} color={colorCard} />
+            }
         }
     }
 
+    const handleButton = () => {
+        router.push({
+            pathname: '/(private)/detail-transaction',
+            params: {
+                id: param.id,
+                category_name: param.category_name,
+                notes: param.notes,
+                money_spent: param.amount,
+                created_dt: param.created_dt,
+                type: param.type
+            }
+        })
+    }
+
+    const bgColorIcon = param.index % 2 == 1 ? Colors.orangeKuvera : Colors.tealLightKuvera;
 
     return (
-        <View style={styles.dataTransactionContainer}>
-            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 20 }}>
+        <TouchableOpacity
+            activeOpacity={0.6}
+            onPress={handleButton}
+            style={styles.dataTransactionContainer}>
+            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10 }}>
                 {/* Icon */}
-                <IconComponent />
+                <View style={[styles.containerIcon, { backgroundColor: bgColorIcon }]}>
+                    <IconComponent />
+                </View>
                 {/* Title */}
                 <View>
-                    <CustomText style={{ fontSize: 15, fontWeight: 500, textTransform: 'capitalize' }}>{param.notes}</CustomText>
+                    <CustomText style={{ fontSize: 14, fontWeight: 500, textTransform: 'capitalize' }}>{param.notes}</CustomText>
                     <CustomText style={{ fontSize: 12 }}>{formatDateTimeVerbose(param.created_dt)}</CustomText>
                 </View>
             </View>
@@ -66,13 +85,12 @@ export default function CardTransaction(param: CardTransactionParam) {
             ) : (
                 <CustomText style={{ fontWeight: 600 }}>-{formatRupiah(param.amount)}</CustomText>
             )}
-        </View>
+        </TouchableOpacity>
     )
 }
 
 const styles = StyleSheet.create({
     containerIcon: {
-        backgroundColor: Colors.orangeKuvera,
         borderRadius: 1000,
         width: 38,
         height: 38,

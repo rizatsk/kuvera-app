@@ -5,7 +5,7 @@ import { formatRupiah } from "@/helper/format-rupiah";
 import { useAppSelector } from "@/states";
 import { asyncAddCategorySpend } from "@/states/categories-spend/action";
 import { InitialSumTransactionByCategoryType } from "@/states/transaction/type";
-import { Ionicons } from "@expo/vector-icons";
+import { Fontisto } from "@expo/vector-icons";
 import { router } from "expo-router";
 import { useState } from "react";
 import { StyleSheet, ToastAndroid, TouchableOpacity, View } from "react-native";
@@ -21,6 +21,16 @@ export default function AddCategory() {
     const colorCard = Colors.tealDarkKuvera;
 
     function handleAddCategoryButton() {
+        if (title.length < 1) {
+            setError('Category is cannot empty');
+            return;
+        };
+
+        if (title.length < 5) {
+            setError('Category minimal 5 character');
+            return;
+        }
+
         const isSameCategory = transactions.filter((trx) => trx.category_name.toLowerCase() === title.toLowerCase());
         if (isSameCategory.length > 0) {
             setError('Category is already available');
@@ -42,8 +52,8 @@ export default function AddCategory() {
         <View style={{ flex: 1, backgroundColor: 'white' }}>
             <View style={{ paddingVertical: 30, flexDirection: 'row', justifyContent: 'center', backgroundColor: colorCard + 20 }}>
                 <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
-                    <View style={{ backgroundColor: colorCard + 30, width: 60, height: 60, justifyContent: "center", alignItems: "center", borderRadius: 10 }}>
-                        <Ionicons name="wallet" size={40} color={colorCard} />
+                    <View style={{ backgroundColor: colorCard + 30, width: 67, height: 55, justifyContent: "center", alignItems: "center", borderRadius: 10 }}>
+                        <Fontisto name="credit-card" size={30} color={colorCard} />
                     </View>
                     <View>
                         <CustomText style={{ fontWeight: 600, fontSize: 20, textTransform: 'capitalize', color: colorCard }}>{title}</CustomText>

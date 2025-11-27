@@ -79,12 +79,14 @@ export default function ListCardTransactions(param: ListCardTransactionsParam) {
           isLoading ? index.toString() : item!.id
         }
         contentContainerStyle={{ gap: 2, marginHorizontal: 18 }}
-        renderItem={({ item }) =>
+        renderItem={({ item, index }) =>
           isLoading ?
             <SkeletonCardTransaction /> :
             (
               <CardTransaction
                 key={item!.id}
+                index={index}
+                id={item!.id}
                 category_name={item!.category_name}
                 notes={item!.notes}
                 amount={item!.money_spent}

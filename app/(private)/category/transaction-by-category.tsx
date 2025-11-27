@@ -16,13 +16,13 @@ import { FlatList, RefreshControl, StyleSheet, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 
 export default function TransactionByCategory() {
-    const params = useLocalSearchParams();
+    const {category_id, category_name} = useLocalSearchParams();
     const navigation = useNavigation()
     useEffect(() => {
         navigation.setOptions({
-            title: `Category ${capitalize(params.name as string)}`,
+            title: `Category ${capitalize(category_name as string)}`,
         });
-    }, [params]);
+    }, [category_id]);
 
     const dispatch = useDispatch();
     const [isLoading, setIsLoading] = useState(true);
@@ -62,7 +62,7 @@ export default function TransactionByCategory() {
         dispatch(
             asyncGetTransactionsByCategory({
                 param: {
-                    category_id: params.id as  string,
+                    category_id: category_id as  string,
                     start_date: new Date(dateTrx.start),
                     end_date: new Date(dateTrx.end as string),
                 },
@@ -100,13 +100,15 @@ export default function TransactionByCategory() {
                           isLoading ? index.toString() : item!.id
                         }
                         contentContainerStyle={{ gap: 2 }}
-                        renderItem={({ item }) =>
+                        renderItem={({ item, index }) =>
                           isLoading ?
                             <SkeletonCardTransaction /> :
                             (
                               <CardTransaction
                                 key={item!.id}
-                                category_name={params.name as string}
+                                index={index}
+                                id={item!.id}
+                                category_name={category_name as string}
                                 notes={item!.notes}
                                 amount={item!.money_spent}
                                 created_dt={item!.created_dt}

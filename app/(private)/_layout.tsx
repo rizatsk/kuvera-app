@@ -66,6 +66,13 @@ export default function PrivateLayout() {
                             ...OptionStackScreen,
                         }}
                     />
+                    <Stack.Screen
+                        name="detail-transaction/index"
+                        options={{
+                            title: "Detail Transaction",
+                            ...OptionStackScreen,
+                        }}
+                    />
                 </Stack>
             )}
         </>
