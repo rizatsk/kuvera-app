@@ -2,7 +2,7 @@ import CustomText from '@/components/custom-text'
 import { Colors } from '@/constants/theme'
 import { useAppSelector } from '@/states'
 import { AsyncGetAntamGoldPrice } from '@/states/gold-antam-price/action'
-import { Image } from 'expo-image'
+import { AntDesign } from '@expo/vector-icons'
 import React, { useEffect, useState } from 'react'
 import { FlatList, StyleSheet, View } from 'react-native'
 import { useDispatch } from 'react-redux'
@@ -72,10 +72,7 @@ const ListCardGoldAntamPrice = ({ weight, price_buy, price_buyback }: ListCardGo
         <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: 'center' }}>
             <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
                 <View style={styles.containerIcon}>
-                    <Image
-                        style={{ height: 26, width: 26 }}
-                        contentFit='contain'
-                        source={require("@/assets/images/icon/gold.png")} />
+                    <AntDesign name="gold" size={26} color="white" />
                 </View>
                 <View>
                     <CustomText style={{ fontWeight: 500, fontSize: 15 }}>{weight} gram</CustomText>
