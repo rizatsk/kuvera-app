@@ -25,8 +25,7 @@ export default function SkeletonCardTransaction() {
 const styles = StyleSheet.create({
     dataTransactionContainer: {
         backgroundColor: "white",
-        marginHorizontal: 20,
-        marginVertical: 8,
+        paddingVertical: 10,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center'

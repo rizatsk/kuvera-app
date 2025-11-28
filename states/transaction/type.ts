@@ -65,3 +65,8 @@ export type AsyncGetTransactionsByCategoryParam = {
   setIsLoading: Dispatch<SetStateAction<boolean>>
   successHandler: (result: TransactionsByCategory[]) => void,
 }
+
+export type AsyncDeleteTransactionParam = {
+  idTransaction: string,
+  successHandler: () => void,
+}

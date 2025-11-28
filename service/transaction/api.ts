@@ -124,4 +124,28 @@ export async function getTransactionsByCategory(param: GetTransactionsByCategory
             code: response?.errors[0]?.statusCode,
         };
     }
+};
+
+export async function deleteTransaction(transaction_id: string) {
+    const accessToken = await getAccessToken();
+    try {
+        const { data: result } = await axios({
+            method: 'DELETE',
+            url: environment.BASE_API_URL + `/transaction/${transaction_id}`,
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: 'Bearer ' + accessToken
+            },
+        });
+
+        return result;
+    } catch (error: any) {
+        const response = error.response?.data;
+
+        throw {
+            status: error.response?.status,
+            message: response?.errors[0]?.message,
+            code: response?.errors[0]?.statusCode,
+        };
+    }
 }

@@ -1,8 +1,8 @@
-import { addTransaction, getTransactionGroupByCategory, getTransactions, getTransactionsByCategory } from "@/service/transaction/api";
+import { addTransaction, deleteTransaction, getTransactionGroupByCategory, getTransactions, getTransactionsByCategory } from "@/service/transaction/api";
 import { TransactionGroupByCategoryType } from "@/service/transaction/type";
 import { ActionReducer } from "../action";
 import { setLoading } from "../visible-loading/action";
-import { AsyncAddTransactionParam, AsyncGetTransactionByCategoryParam, AsyncGetTransactionsByCategoryParam, AsyncGetTransactionsParam } from "./type";
+import { AsyncAddTransactionParam, AsyncDeleteTransactionParam, AsyncGetTransactionByCategoryParam, AsyncGetTransactionsByCategoryParam, AsyncGetTransactionsParam } from "./type";
 
 function setSumerizeTransactionByCategory(isLoading: boolean, data: TransactionGroupByCategoryType[]) {
     return {
@@ -112,6 +112,23 @@ export function asyncGetTransactionsByCategory({
             console.log("Error asyncGetTransactionsByCategory", error)
         } finally {
             setIsLoading(false);
+        }
+    }
+}
+
+export function asyncDeleteTransaction({
+    idTransaction, successHandler
+}: AsyncDeleteTransactionParam) {
+     return async (dispatch: any) => {
+        dispatch(setLoading(true));
+        try {
+            await deleteTransaction(idTransaction);
+
+            successHandler();
+        } catch (error) {
+            console.log("Error asyncDeleteTransaction", error)
+        } finally {
+            dispatch(setLoading(false));
         }
     }
 }

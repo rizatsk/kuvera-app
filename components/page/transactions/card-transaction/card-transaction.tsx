@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
     },
     dataTransactionContainer: {
         backgroundColor: "white",
-        marginVertical: 8,
+        paddingVertical: 10,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center'

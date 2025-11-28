@@ -1,4 +1,5 @@
 import CustomText from '@/components/custom-text';
+import ButtonDeleteTransaction from '@/components/page/detail-transaction/button-delete';
 import { Colors } from '@/constants/theme';
 import { formatRupiah } from '@/helper/format-rupiah';
 import { formatDateTimeVerbose } from '@/helper/formate-date-time';
@@ -70,10 +71,7 @@ export default function DetailTransaction() {
                     <Feather name="edit" size={20} color="white" />
                     <CustomText style={{ fontSize: 15, fontWeight: 600, color: "white" }}>Edit Data</CustomText>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.buttonDelete} activeOpacity={0.6}>
-                    <Entypo name="trash" size={20} color={Colors.tealKuvera} />
-                    <CustomText style={{ fontSize: 15, fontWeight: 600, color: Colors.tealKuvera }}>Delete Data</CustomText>
-                </TouchableOpacity>
+                <ButtonDeleteTransaction id={id as string} />
             </View>
         </View>
     );
@@ -104,18 +102,6 @@ const styles = StyleSheet.create({
         paddingVertical: 8,
         flexDirection: 'row',
         gap: 10,
-        justifyContent: 'center'
-    },
-    buttonDelete: {
-        backgroundColor: 'white',
-        borderColor: Colors.tealKuvera,
-        borderWidth: 2,
-        alignItems: 'center',
-        marginTop: 15,
-        borderRadius: 5,
-        paddingVertical: 8,
-        flexDirection: 'row',
-        gap: 5,
         justifyContent: 'center'
     },
 })
