@@ -19,7 +19,7 @@ export type TransactionGroupByCategoryType = {
     category_name: string,
     total_money_spent: number
     category_status: boolean
-} 
+}
 
 export type GetTransactionsParam = {
     type: TypeTransaction,
@@ -36,6 +36,7 @@ export type GetTransactionsByCategoryParam = {
 
 export type GetTransactionType = {
     id: string,
+    category_id: string,
     category_name: string,
     money_spent: number,
     notes: string,
@@ -45,6 +46,17 @@ export type GetTransactionType = {
 
 export type TransactionsByCategory = {
     id: string,
+    category_id: string,
+    money_spent: number,
+    notes: string,
+    type: TypeTransaction,
+    created_dt: string,
+}
+
+export type UpdateTransactionByIdParam = {
+    id_transaction: string,
+    category_id: string,
+    category_name: string,
     money_spent: number,
     notes: string,
     type: TypeTransaction,

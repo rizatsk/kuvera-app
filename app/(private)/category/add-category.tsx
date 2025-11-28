@@ -43,7 +43,7 @@ export default function AddCategory() {
                 router.replace({
                     pathname: '/(private)/category/all-category'
                 });
-                ToastAndroid.show('Success add category', 50)
+                ToastAndroid.show('Success add category', 300)
             }
         }) as any)
     };

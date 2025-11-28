@@ -87,6 +87,7 @@ export default function ListCardTransactions(param: ListCardTransactionsParam) {
                 key={item!.id}
                 index={index}
                 id={item!.id}
+                category_id={item!.category_id}
                 category_name={item!.category_name}
                 notes={item!.notes}
                 amount={item!.money_spent}

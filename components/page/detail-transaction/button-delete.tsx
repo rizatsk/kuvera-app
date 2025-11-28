@@ -6,7 +6,7 @@ import { Entypo } from '@expo/vector-icons';
 import { Image } from 'expo-image';
 import { router } from 'expo-router';
 import React, { useState } from 'react';
-import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, ToastAndroid, TouchableOpacity, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 
 type ButtonDeleteTransactionProps = {
@@ -24,7 +24,8 @@ export default function ButtonDeleteTransaction({ id }: ButtonDeleteTransactionP
             successHandler: () => {
                 router.push({
                     pathname: '/(private)/(tabs)/transaction',
-                })
+                });
+                ToastAndroid.show('Success delete transaction', 300)
             }
         }) as any);
     };

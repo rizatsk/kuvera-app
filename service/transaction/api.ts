@@ -1,7 +1,7 @@
 import environment from "@/constants/environment";
 import axios from "axios";
 import { getAccessToken } from "../auth/handle-token";
-import { ApiAddTransactionParam, ApiGetTransactionGroupByCategoryParam, GetTransactionsByCategoryParam, GetTransactionsParam, GetTransactionType, TransactionGroupByCategoryType, TransactionsByCategory } from "./type";
+import { ApiAddTransactionParam, ApiGetTransactionGroupByCategoryParam, GetTransactionsByCategoryParam, GetTransactionsParam, GetTransactionType, TransactionGroupByCategoryType, TransactionsByCategory, UpdateTransactionByIdParam } from "./type";
 
 export async function addTransaction(param: ApiAddTransactionParam) {
     const accessToken = await getAccessToken();
@@ -47,7 +47,7 @@ export async function getTransactionGroupByCategory(param: ApiGetTransactionGrou
                 variables: {}
             })
         });
-        
+
         return result.data.sumerize_category_transactions;
     } catch (error: any) {
         const response = error.response?.data;
@@ -64,7 +64,7 @@ export async function getTransactions(param: GetTransactionsParam): Promise<GetT
     const accessToken = await getAccessToken();
     try {
         let query = `(type: "${param.type}"`
-        if (param.limit) query += `limit: ${param.limit}`
+        if (param.limit) query += ` limit: ${param.limit}`
         if (param.start_date && param.end_date) query += ` start_date: "${param.start_date}" end_date: "${param.end_date}"`
         query += `)`
 
@@ -77,11 +77,15 @@ export async function getTransactions(param: GetTransactionsParam): Promise<GetT
             },
             data: JSON.stringify({
                 query: `query { transactions${query} 
-                    { id category_name money_spent notes type created_dt } }`,
+                    { id category_id category_name money_spent notes type created_dt } }`,
                 variables: {}
             })
         });
 
+        console.log("Data get transactions", {
+            query,
+            result
+        });
         return result.data.transactions;
     } catch (error: any) {
         const response = error.response?.data;
@@ -109,7 +113,7 @@ export async function getTransactionsByCategory(param: GetTransactionsByCategory
                     category_id: "${param.category_id}"
                     start_date: "${param.start_date}"
                     end_date: "${param.end_date}"
-                ) { id money_spent notes type created_dt } }`,
+                ) { id category_id money_spent notes type created_dt } }`,
                 variables: {}
             })
         });
@@ -136,6 +140,45 @@ export async function deleteTransaction(transaction_id: string) {
                 'Content-Type': 'application/json',
                 Authorization: 'Bearer ' + accessToken
             },
+        });
+
+        return result;
+    } catch (error: any) {
+        const response = error.response?.data;
+
+        throw {
+            status: error.response?.status,
+            message: response?.errors[0]?.message,
+            code: response?.errors[0]?.statusCode,
+        };
+    }
+};
+
+export async function updateTransactionById({
+    id_transaction,
+    category_id,
+    money_spent,
+    notes,
+    type,
+    created_dt
+}: UpdateTransactionByIdParam) {
+    const accessToken = await getAccessToken();
+    try {
+        const { data: result } = await axios({
+            method: 'PATCH',
+            url: environment.BASE_API_URL + `/transaction`,
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: 'Bearer ' + accessToken
+            },
+            data: {
+                id_transaction,
+                category_id,
+                money_spent,
+                notes,
+                type,
+                created_dt: new Date(created_dt)
+            }
         });
 
         return result;

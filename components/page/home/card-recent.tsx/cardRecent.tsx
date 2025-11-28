@@ -12,6 +12,7 @@ type CardRecentType = {
     index: number
     icon: string
     id: string
+    category_id: string
     category_name: string
     title: string
     date: string
@@ -20,7 +21,7 @@ type CardRecentType = {
 }
 
 export default function CardRecent({
-    index, id, title, date, amount, category_name, type
+    index, id, category_id, title, date, amount, category_name, type
 }: CardRecentType) {
     const IconComponent = () => {
         const colorCard = "white"
@@ -43,6 +44,7 @@ export default function CardRecent({
             pathname: '/(private)/detail-transaction',
             params: {
                 id: id,
+                category_id: category_id,
                 category_name: category_name,
                 notes: title,
                 money_spent: amount,

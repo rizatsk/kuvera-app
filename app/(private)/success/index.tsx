@@ -13,7 +13,10 @@ export default function SuccessScreen() {
     const stringSuccess = params.type === 'incoming' ? 'Income' : 'Spent';
 
     const handleButtonBack = () => {
-        router.back();
+        const path = params.type === 'incoming' ? 'income' : 'spending';
+        router.replace({
+            pathname: `/(private)/add-transaction/form-add-${path}`
+        });
     }
 
     const handleButtonAllTransaction = () => {
@@ -33,7 +36,7 @@ export default function SuccessScreen() {
                 {/* Header */}
                 <View style={{ alignItems: 'center' }}>
                     <Image source={require('@/assets/images/spending.png')}
-                        style={{ width: 70, height: 70 }}
+                        style={{ width: 100, height: 100 }}
                         contentFit="fill" />
                     <CustomText style={{ fontWeight: 600, fontSize: 18, marginVertical: 10 }}>Save {stringSuccess}</CustomText>
                 </View>

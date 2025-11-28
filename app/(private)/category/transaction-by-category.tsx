@@ -108,6 +108,7 @@ export default function TransactionByCategory() {
                                 key={item!.id}
                                 index={index}
                                 id={item!.id}
+                                category_id={item!.category_id}
                                 category_name={category_name as string}
                                 notes={item!.notes}
                                 amount={item!.money_spent}

@@ -1,8 +1,8 @@
-import { addTransaction, deleteTransaction, getTransactionGroupByCategory, getTransactions, getTransactionsByCategory } from "@/service/transaction/api";
+import { addTransaction, deleteTransaction, getTransactionGroupByCategory, getTransactions, getTransactionsByCategory, updateTransactionById } from "@/service/transaction/api";
 import { TransactionGroupByCategoryType } from "@/service/transaction/type";
 import { ActionReducer } from "../action";
 import { setLoading } from "../visible-loading/action";
-import { AsyncAddTransactionParam, AsyncDeleteTransactionParam, AsyncGetTransactionByCategoryParam, AsyncGetTransactionsByCategoryParam, AsyncGetTransactionsParam } from "./type";
+import { AsyncAddTransactionParam, AsyncDeleteTransactionParam, AsyncGetTransactionByCategoryParam, AsyncGetTransactionsByCategoryParam, AsyncGetTransactionsParam, AsyncUpdateTransactionParam } from "./type";
 
 function setSumerizeTransactionByCategory(isLoading: boolean, data: TransactionGroupByCategoryType[]) {
     return {
@@ -45,7 +45,6 @@ export function asyncAddTransaction({
                 money_spent: param.money_spent,
                 notes: param.notes,
                 type: param.type,
-                source: 'add-spend'
             })
         } catch (error) {
             console.log("Error asyncAddTransaction", error)
@@ -127,6 +126,32 @@ export function asyncDeleteTransaction({
             successHandler();
         } catch (error) {
             console.log("Error asyncDeleteTransaction", error)
+        } finally {
+            dispatch(setLoading(false));
+        }
+    }
+}
+
+export function asyncUpdateTransaction({
+    param, successHandler, goToPageSuccess
+}: AsyncUpdateTransactionParam){
+     return async (dispatch: any) => {
+        dispatch(setLoading(true));
+        try {
+            const result = await updateTransactionById(param);
+
+            successHandler();
+            goToPageSuccess({
+                id: param.id_transaction,
+                category_id: param.category_id,
+                category_name: param.category_name,
+                created_dt: param.created_dt,
+                money_spent: param.money_spent,
+                notes: param.notes,
+                type: param.type,
+            });
+        } catch (error) {
+            console.log("Error asyncUpdateTransaction", error)
         } finally {
             dispatch(setLoading(false));
         }

@@ -78,6 +78,7 @@ export default function ListCardRecent() {
                                 index={index}
                                 id={item!.id}
                                 type={item!.type}
+                                category_id={item!.category_id}
                                 category_name={item!.category_name}
                                 title={item!.notes}
                                 date={item!.created_dt}

@@ -4,12 +4,12 @@ import { Colors } from '@/constants/theme';
 import { formatRupiah } from '@/helper/format-rupiah';
 import { formatDateTimeVerbose } from '@/helper/formate-date-time';
 import { Entypo, Feather, FontAwesome5, Fontisto, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
-import { useLocalSearchParams } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 import React from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 
 export default function DetailTransaction() {
-    const { id, category_name, notes, money_spent, created_dt, type } = useLocalSearchParams();
+    const { id, category_id, category_name, notes, money_spent, created_dt, type } = useLocalSearchParams();
 
     const colorCard = Colors.tealLightKuvera;
     const IconComponent = () => {
@@ -29,13 +29,22 @@ export default function DetailTransaction() {
 
     const strType = type === 'incoming' ? 'Incoming Balance' : 'Outgoing Balance';
 
+    const handleButtonDetail = () => {
+        router.push({
+            pathname: '/(private)/edit/edit-spending',
+            params: {
+                id, category_id, category_name, notes, money_spent, created_dt, type
+            }
+        })
+    }
+
     return (
         <View
             style={{ flex: 1, backgroundColor: "white", paddingVertical: 10 }}
         >
             <View style={{ marginHorizontal: 20, paddingHorizontal: 5 }}>
                 {/* Header */}
-                <View style={{ alignItems: 'center',marginTop: 10 }}>
+                <View style={{ alignItems: 'center', marginTop: 10 }}>
                     <IconComponent />
                 </View>
                 {/* Detail */}
@@ -67,7 +76,7 @@ export default function DetailTransaction() {
                 </View>
 
                 {/* Button */}
-                <TouchableOpacity style={styles.buttonEdit} activeOpacity={0.6} >
+                <TouchableOpacity style={styles.buttonEdit} activeOpacity={0.6} onPress={handleButtonDetail} >
                     <Feather name="edit" size={20} color="white" />
                     <CustomText style={{ fontSize: 15, fontWeight: 600, color: "white" }}>Edit Data</CustomText>
                 </TouchableOpacity>

@@ -16,6 +16,7 @@ type CardTransactionParam = {
     notes: string
     type: TypeTransaction
     created_dt: string
+    category_id: string
     category_name: string
 }
 
@@ -52,6 +53,7 @@ export default function CardTransaction(param: CardTransactionParam) {
             pathname: '/(private)/detail-transaction',
             params: {
                 id: param.id,
+                category_id: param.category_id,
                 category_name: param.category_name,
                 notes: param.notes,
                 money_spent: param.amount,
