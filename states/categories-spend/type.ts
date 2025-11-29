@@ -10,12 +10,22 @@ export type AsyncGetCategorySpendParams = {
 export type ActionCategoriesSpendReducer = {
   type: ActionReducerType;
   payload: {
-    categories_spend: CategorySpendType[] | [];
+    categories_spend: CategorySpendType[] | []
     category_spend: CategorySpendType
+    category_id: string
   };
 }
 
 export type AsyncAddCategorySpendParam = {
   name_category: string
+  handleSuccess: () => void
+}
+
+export type AsyncUpdateStatusCategorySpendParam = {
+  param: {
+    category_id: string
+    status: boolean
+    category_name: string
+  },
   handleSuccess: () => void
 }

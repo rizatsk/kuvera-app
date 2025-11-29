@@ -12,6 +12,9 @@ function categoriesSpendReducer(
     case ActionReducer.ADD_CATEGORIES_SPEND:
       const newCategory = [...initial, action.payload.category_spend];
       return newCategory;
+    case ActionReducer.DELETE_CATEGORY_SPEND:
+      const newCategoriesAfterDelete = initial.filter((category) => category.id !== action.payload.category_id);
+      return newCategoriesAfterDelete;
     default:
       return initial;
   }

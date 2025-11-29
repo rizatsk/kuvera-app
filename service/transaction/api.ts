@@ -43,7 +43,7 @@ export async function getTransactionGroupByCategory(param: ApiGetTransactionGrou
                     type: "${param.type}"
                     start_date: "${param.start_date}"
                     end_date: "${param.end_date}"
-                ) { category_id category_name total_money_spent category_status } }`,
+                ) { category_id category_name total_money_spent category_status account_id } }`,
                 variables: {}
             })
         });
@@ -54,8 +54,8 @@ export async function getTransactionGroupByCategory(param: ApiGetTransactionGrou
 
         throw {
             status: error.response?.status,
-            message: response?.error,
-            code: response?.code,
+            message: response?.errors[0]?.message,
+            code: response?.errors[0]?.statusCode,
         };
     }
 }
@@ -82,10 +82,6 @@ export async function getTransactions(param: GetTransactionsParam): Promise<GetT
             })
         });
 
-        console.log("Data get transactions", {
-            query,
-            result
-        });
         return result.data.transactions;
     } catch (error: any) {
         const response = error.response?.data;

@@ -64,6 +64,7 @@ export default function ListCategoriesSpend() {
                     (
                         <CardCategoryOutput
                             key={item!.category_id}
+                            account_id={item!.account_id}
                             id={item!.category_id}
                             title={item!.category_name}
                             money={`${item!.total_money_spent}`}

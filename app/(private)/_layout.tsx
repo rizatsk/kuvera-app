@@ -74,7 +74,7 @@ export default function PrivateLayout() {
                         }}
                     />
                     <Stack.Screen
-                        name="edit/edit-spending"
+                        name="edit/edit-data-transaction"
                         options={{
                             title: "Edit Spending",
                             ...OptionStackScreen,

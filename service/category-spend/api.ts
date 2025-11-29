@@ -57,3 +57,31 @@ export async function addCategorySpend(name_category: string): Promise<CategoryS
         };
     }
 }
+
+export async function updateStatusCategory(category_id: string, status: boolean) {
+    const accessToken = await getAccessToken();
+    try {
+        const { data: result } = await axios({
+            method: 'PATCH',
+            url: environment.BASE_API_URL + '/category-spend/status',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: 'Bearer ' + accessToken
+            },
+            data: {
+                category_id: category_id,
+                status: status,
+            }
+        });
+
+        return result.data;
+    } catch (error: any) {
+        const response = error.response?.data;
+
+        throw {
+            status: error.response?.status,
+            message: response?.errors[0]?.message,
+            code: response?.errors[0]?.statusCode,
+        };
+    }
+}

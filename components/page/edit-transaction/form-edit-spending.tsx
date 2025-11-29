@@ -18,7 +18,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 
-type FormEditSpendingProps = {
+type FormEditTransactionProps = {
     params: {
         id: string, 
         category_id: string,
@@ -30,7 +30,7 @@ type FormEditSpendingProps = {
     }
 }
 
-export default function FormEditSpending({params}: FormEditSpendingProps) {
+export default function FormEditTransaction({params}: FormEditTransactionProps) {
     const [initialValuesForm, setInitalValuesForm] = useState({
         category: { id: "", name: "" },
         date: `${new Date()}`,
@@ -80,7 +80,9 @@ export default function FormEditSpending({params}: FormEditSpendingProps) {
                 goToPageSuccess,
             }) as any
         )
-    }
+    };
+
+    const typeStr = params.type === 'incoming' ? 'Income' : 'Spent'
 
     return (
         <ScrollView>
@@ -139,7 +141,7 @@ export default function FormEditSpending({params}: FormEditSpendingProps) {
                             errorMessage={FormikProps.errors.notes && FormikProps.touched.notes ? FormikProps.errors.notes : ""}
                         />
                         <TouchableOpacity activeOpacity={0.6} style={style.button_lanjut} onPress={() => FormikProps.handleSubmit()}>
-                            <CustomText style={{ fontWeight: 600, color: "white", fontSize: 16 }}>Save Spend</CustomText>
+                            <CustomText style={{ fontWeight: 600, color: "white", fontSize: 16 }}>Save {typeStr}</CustomText>
                         </TouchableOpacity>
                     </View>
                 )}

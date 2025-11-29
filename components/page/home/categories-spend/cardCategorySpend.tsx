@@ -11,6 +11,7 @@ import { TouchableOpacity, View } from 'react-native'
 
 type CardProps = {
     id: string,
+    account_id: string,
     title: string,
     money: string,
     icon?: string,
@@ -18,7 +19,7 @@ type CardProps = {
     status?: boolean,
 }
 export default function CardCategoryOutput({
-    id, title, money, icon, color, status = true
+    id, account_id, title, money, icon, color, status = true
 }: CardProps) {
     const colorCard = status ? color : Colors.grey[500];
     const colorFont = status ? "black" : Colors.grey[500];
@@ -42,7 +43,9 @@ export default function CardCategoryOutput({
             pathname: '/(private)/category/transaction-by-category',
             params: {
                 category_id: id,
-                category_name: title
+                category_name: title,
+                account_id: account_id,
+                status: `${status}`
             }
         })
     }

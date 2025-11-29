@@ -106,6 +106,7 @@ export default function AllCategory() {
                                 <View style={{ width: '48%' }} key={item!.category_id}>
                                     <CardCategoryOutput
                                         id={item!.category_id}
+                                        account_id={item!.account_id}
                                         title={item!.category_name}
                                         money={`${item!.total_money_spent}`}
                                         icon={item!.category_name}

@@ -1,4 +1,5 @@
 import CustomText from '@/components/custom-text';
+import ButtonMore from '@/components/page/transaction-by-category/button-more';
 import CardTransaction from '@/components/page/transactions/card-transaction/card-transaction';
 import NoHaveTransaction from '@/components/page/transactions/card-transaction/no-have-transaction';
 import SkeletonCardTransaction from '@/components/page/transactions/card-transaction/skeleton';
@@ -16,7 +17,7 @@ import { FlatList, RefreshControl, StyleSheet, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 
 export default function TransactionByCategory() {
-    const {category_id, category_name} = useLocalSearchParams();
+    const { category_id, category_name, account_id, status } = useLocalSearchParams();
     const navigation = useNavigation()
     useEffect(() => {
         navigation.setOptions({
@@ -62,7 +63,7 @@ export default function TransactionByCategory() {
         dispatch(
             asyncGetTransactionsByCategory({
                 param: {
-                    category_id: category_id as  string,
+                    category_id: category_id as string,
                     start_date: new Date(dateTrx.start),
                     end_date: new Date(dateTrx.end as string),
                 },
@@ -79,13 +80,21 @@ export default function TransactionByCategory() {
             style={{ flex: 1, backgroundColor: "white", paddingVertical: 10 }}
         >
             <View style={{ marginHorizontal: 20 }}>
-                <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-                    <ModalDateTransactions
-                        titleStyle={{ fontWeight: 600, fontSize: 15 }}
-                        label="Select Date"
-                        value={dateTrx}
-                        onSelectDate={onSelectDate}
-                    />
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <View style={{ flex: 1, alignItems: 'center' }}>
+                        <ModalDateTransactions
+                            titleStyle={{ fontWeight: 600, fontSize: 15 }}
+                            label="Select Date"
+                            value={dateTrx}
+                            onSelectDate={onSelectDate}
+                        />
+                    </View>
+                    {account_id !== 'all' && (
+                        <ButtonMore 
+                            id_category={category_id as string} 
+                            category_name={category_name as string} 
+                            status={status as string}/>
+                    )}
                 </View>
                 <View style={styles.monthTrxContainer}>
                     <CustomText style={{ fontWeight: 500, fontSize: 15 }}>Total :</CustomText>
@@ -94,31 +103,31 @@ export default function TransactionByCategory() {
                     </View>
                 </View>
                 <FlatList<TransactionsByCategory | undefined>
-                        refreshControl={<RefreshControl refreshing={isLoading} onRefresh={getTransactionByCategory} />}
-                        data={isLoading ? Array.from({ length: 10 }) : transactions}
-                        keyExtractor={(item, index) =>
-                          isLoading ? index.toString() : item!.id
-                        }
-                        contentContainerStyle={{ gap: 2 }}
-                        renderItem={({ item, index }) =>
-                          isLoading ?
+                    refreshControl={<RefreshControl refreshing={isLoading} onRefresh={getTransactionByCategory} />}
+                    data={isLoading ? Array.from({ length: 10 }) : transactions}
+                    keyExtractor={(item, index) =>
+                        isLoading ? index.toString() : item!.id
+                    }
+                    contentContainerStyle={{ gap: 2 }}
+                    renderItem={({ item, index }) =>
+                        isLoading ?
                             <SkeletonCardTransaction /> :
                             (
-                              <CardTransaction
-                                key={item!.id}
-                                index={index}
-                                id={item!.id}
-                                category_id={item!.category_id}
-                                category_name={category_name as string}
-                                notes={item!.notes}
-                                amount={item!.money_spent}
-                                created_dt={item!.created_dt}
-                                type={item!.type}
-                              />
+                                <CardTransaction
+                                    key={item!.id}
+                                    index={index}
+                                    id={item!.id}
+                                    category_id={item!.category_id}
+                                    category_name={category_name as string}
+                                    notes={item!.notes}
+                                    amount={item!.money_spent}
+                                    created_dt={item!.created_dt}
+                                    type={item!.type}
+                                />
                             )
-                        }
-                        ListEmptyComponent={<NoHaveTransaction />}
-                      />
+                    }
+                    ListEmptyComponent={<NoHaveTransaction />}
+                />
             </View>
         </View>
     )
