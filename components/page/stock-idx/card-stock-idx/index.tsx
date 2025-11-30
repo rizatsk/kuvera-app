@@ -52,7 +52,7 @@ export default function ListCardStockIdx({ keyword }: ListCardStockIdxProps) {
 
             }
         }
-    }, [keyword])
+    }, [keyword, dataStockIDX])
 
     const fetchRefreshing = () => {
         setRefresh(true)
