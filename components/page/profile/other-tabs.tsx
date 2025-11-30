@@ -3,10 +3,17 @@ import { Colors } from '@/constants/theme'
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6'
 import MaterialIcons from '@expo/vector-icons/MaterialIcons'
 import Octicons from '@expo/vector-icons/Octicons'
+import { router } from 'expo-router'
 import React from 'react'
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, TouchableOpacity, View } from 'react-native'
 
 export default function OtherTabs() {
+    const handlePrivacyPolic = () => {
+        router.push({
+            pathname: '/(private)/privacy-polic'
+        })
+    }
+
     return (
         <View style={{ marginHorizontal: 18, marginTop: 25 }}>
             <CustomText style={{ fontSize: 16, fontWeight: 600 }}>Other</CustomText>
@@ -18,13 +25,16 @@ export default function OtherTabs() {
                     </View>
                     <FontAwesome6 name="angle-right" size={20} color="black" />
                 </View>
-                <View style={styles.cardContainer}>
+                <TouchableOpacity
+                    activeOpacity={0.6}
+                    onPress={handlePrivacyPolic}
+                    style={styles.cardContainer}>
                     <View style={styles.cardIcon}>
                         <MaterialIcons name="local-police" size={20} color="black" />
                         <CustomText style={styles.title}>Privacy polic</CustomText>
                     </View>
                     <FontAwesome6 name="angle-right" size={20} color="black" />
-                </View>
+                </TouchableOpacity>
             </View>
         </View>
     )

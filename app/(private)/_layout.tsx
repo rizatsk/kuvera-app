@@ -87,6 +87,13 @@ export default function PrivateLayout() {
                             ...OptionStackScreen,
                         }}
                     />
+                    <Stack.Screen
+                        name="privacy-polic/index"
+                        options={{
+                            title: "Privacy Polic",
+                            ...OptionStackScreen,
+                        }}
+                    />
                 </Stack>
             )}
         </>
