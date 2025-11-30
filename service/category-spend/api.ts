@@ -85,3 +85,31 @@ export async function updateStatusCategory(category_id: string, status: boolean)
         };
     }
 }
+
+export async function updateNameCategory(category_id: string, category_name: string) {
+    const accessToken = await getAccessToken();
+    try {
+        const { data: result } = await axios({
+            method: 'PATCH',
+            url: environment.BASE_API_URL + '/category-spend',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: 'Bearer ' + accessToken
+            },
+            data: {
+                category_id: category_id,
+                category_name: category_name
+            }
+        });
+
+        return result.data;
+    } catch (error: any) {
+        const response = error.response?.data;
+
+        throw {
+            status: error.response?.status,
+            message: response?.errors[0]?.message,
+            code: response?.errors[0]?.statusCode,
+        };
+    }
+}

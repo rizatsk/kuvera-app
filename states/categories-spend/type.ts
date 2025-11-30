@@ -13,6 +13,7 @@ export type ActionCategoriesSpendReducer = {
     categories_spend: CategorySpendType[] | []
     category_spend: CategorySpendType
     category_id: string
+    category_name: string
   };
 }
 
@@ -25,6 +26,14 @@ export type AsyncUpdateStatusCategorySpendParam = {
   param: {
     category_id: string
     status: boolean
+    category_name: string
+  },
+  handleSuccess: () => void
+}
+
+export type AsyncUpdateNameCategorySpendParam = {
+  param: {
+    category_id: string
     category_name: string
   },
   handleSuccess: () => void

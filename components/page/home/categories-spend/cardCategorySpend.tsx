@@ -45,11 +45,11 @@ export default function CardCategoryOutput({
                 category_id: id,
                 category_name: title,
                 account_id: account_id,
-                status: `${status}`
+                status: `${status}`,
+                total_spent: money
             }
         })
     }
-
 
     return (
         <TouchableOpacity 

@@ -17,7 +17,7 @@ import { FlatList, RefreshControl, StyleSheet, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 
 export default function TransactionByCategory() {
-    const { category_id, category_name, account_id, status } = useLocalSearchParams();
+    const { category_id, category_name, account_id, status, total_spent = 0 } = useLocalSearchParams();
     const navigation = useNavigation()
     useEffect(() => {
         navigation.setOptions({
@@ -93,7 +93,9 @@ export default function TransactionByCategory() {
                         <ButtonMore 
                             id_category={category_id as string} 
                             category_name={category_name as string} 
-                            status={status as string}/>
+                            status={status as string}
+                            total_spent={total_spent as number}
+                        />
                     )}
                 </View>
                 <View style={styles.monthTrxContainer}>

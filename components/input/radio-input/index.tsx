@@ -4,7 +4,7 @@ import { Colors } from '@/constants/theme';
 import capitalize from '@/helper/capitalize';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import React, { useState } from 'react';
-import { TouchableOpacity, View } from 'react-native';
+import { ScrollView, TouchableOpacity } from 'react-native';
 import InputFieldKuvera from '../input-field';
 import { getStyle } from '../input-field/style';
 import { modalStyles } from './style';
@@ -61,7 +61,9 @@ const RadioInput: React.FunctionComponent<RadioInputProps> = (props) => {
                 setIsModalVisible={setIsModalVisible}
             >
                 {/* Daftar Opsi Radio */}
-                <View style={modalStyles.optionsContainer}>
+                <ScrollView 
+                    showsVerticalScrollIndicator={false}  
+                    style={modalStyles.optionsContainer}>
                     {selectOptions.map((option) => (
                         <TouchableOpacity
                             activeOpacity={0.6}
@@ -77,7 +79,7 @@ const RadioInput: React.FunctionComponent<RadioInputProps> = (props) => {
                             />
                         </TouchableOpacity>
                     ))}
-                </View>
+                </ScrollView>
 
                 <TouchableOpacity activeOpacity={0.6} style={modalStyles.buttonSave} onPress={() => handleSubmit()}>
                     <CustomText style={{ color: "white", fontSize: 15, fontWeight: '500' }}>Select</CustomText>

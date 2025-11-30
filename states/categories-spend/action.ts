@@ -1,8 +1,8 @@
-import { addCategorySpend, getCategorySpend, updateStatusCategory } from "@/service/category-spend/api";
+import { addCategorySpend, getCategorySpend, updateNameCategory, updateStatusCategory } from "@/service/category-spend/api";
 import { CategorySpendType } from "@/service/category-spend/type";
 import { ActionReducer } from "../action";
 import { setLoading } from "../visible-loading/action";
-import { AsyncAddCategorySpendParam, AsyncGetCategorySpendParams, AsyncUpdateStatusCategorySpendParam } from "./type";
+import { AsyncAddCategorySpendParam, AsyncGetCategorySpendParams, AsyncUpdateNameCategorySpendParam, AsyncUpdateStatusCategorySpendParam } from "./type";
 
 function setCategorySpendCreator(categories_spend: CategorySpendType[]) {
     return {
@@ -27,6 +27,16 @@ function deleteCategorySpendCreator(category_id: string) {
         type: ActionReducer.DELETE_CATEGORY_SPEND,
         payload: {
             category_id: category_id,
+        }
+    }
+}
+
+function updateNameCategorySpendCreator(category_id: string, category_name: string) {
+     return {
+        type: ActionReducer.UPDATE_CATEGORY_SPEND,
+        payload: {
+            category_id: category_id,
+            category_name: category_name,
         }
     }
 }
@@ -82,6 +92,23 @@ export function asyncUpdateStatusCategorySpend({
             handleSuccess();
         } catch (error) {
             console.log('Error asyncUpdateStatusCategorySpend', error)
+        } finally {
+            dispatch(setLoading(false));
+        }
+    }
+}
+
+export function asyncUpdateNameCategorySpend({
+    param, handleSuccess
+}: AsyncUpdateNameCategorySpendParam) {
+    return async (dispatch: any) => {
+        dispatch(setLoading(true));
+        try {
+            await updateNameCategory(param.category_id, param.category_name);
+            dispatch(updateNameCategorySpendCreator(param.category_id, param.category_name))
+            handleSuccess();
+        } catch (error) {
+            console.log('Error asyncUpdateNameCategorySpend', error)
         } finally {
             dispatch(setLoading(false));
         }
