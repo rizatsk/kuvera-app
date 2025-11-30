@@ -4,7 +4,7 @@ import { ScrollView, StyleSheet, View } from 'react-native';
 
 export default function PrivacyPolicyPage() {
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView style={styles.container} >
       <View style={styles.section}>
         <CustomText style={styles.text}>
           Kuvera we values your privacy. This policy explains what information we
@@ -77,18 +77,20 @@ export default function PrivacyPolicyPage() {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 16,
-    backgroundColor: '#ffffff'
+   backgroundColor: 'white'
   },
   section: {
-    marginHorizontal: 10,
+     padding: 16,
+    paddingBottom: 30 
   },
   heading: {
-    fontSize: 14,
-    marginTop: 5,
+    fontSize: 15,
     fontWeight: '600',
+    marginTop: 10,
+    marginBottom: 2,
   },
   text: {
+    fontSize: 14,
     textAlign: 'justify',
     lineHeight: 22
   },
@@ -96,7 +98,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 12,
     color: '#6b7280',
-    marginTop: 32,
+    marginTop: 22,
     marginBottom: 24
   }
 });

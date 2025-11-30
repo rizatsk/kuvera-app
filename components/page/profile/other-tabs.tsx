@@ -12,19 +12,28 @@ export default function OtherTabs() {
         router.push({
             pathname: '/(private)/privacy-polic'
         })
+    };
+
+    const handleTermsOfService = () => {
+        router.push({
+            pathname: '/(private)/terms-of-service'
+        })
     }
 
     return (
         <View style={{ marginHorizontal: 18, marginTop: 25 }}>
             <CustomText style={{ fontSize: 16, fontWeight: 600 }}>Other</CustomText>
             <View style={{ marginVertical: 5, marginHorizontal: 5 }}>
-                <View style={styles.cardContainer}>
+                <TouchableOpacity
+                    activeOpacity={0.6}
+                    onPress={handleTermsOfService}
+                    style={styles.cardContainer}>
                     <View style={styles.cardIcon}>
                         <Octicons name="checklist" size={20} color="black" />
                         <CustomText style={styles.title}>Terms of service</CustomText>
                     </View>
                     <FontAwesome6 name="angle-right" size={20} color="black" />
-                </View>
+                </TouchableOpacity>
                 <TouchableOpacity
                     activeOpacity={0.6}
                     onPress={handlePrivacyPolic}

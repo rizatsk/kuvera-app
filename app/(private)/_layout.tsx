@@ -94,6 +94,13 @@ export default function PrivateLayout() {
                             ...OptionStackScreen,
                         }}
                     />
+                    <Stack.Screen
+                        name="terms-of-service/index"
+                        options={{
+                            title: "Terms of Service",
+                            ...OptionStackScreen,
+                        }}
+                    />
                 </Stack>
             )}
         </>
