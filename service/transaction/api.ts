@@ -13,7 +13,10 @@ export async function addTransaction(param: ApiAddTransactionParam) {
                 'Content-Type': 'application/json',
                 Authorization: 'Bearer ' + accessToken
             },
-            data: param
+            data: {
+                ...param,
+                created_dt: new Date(param.created_dt)
+            }
         });
 
         return result.data;
