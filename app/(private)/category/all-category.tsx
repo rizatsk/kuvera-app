@@ -14,7 +14,6 @@ import { router } from 'expo-router';
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import { FlatList, StyleSheet, TouchableOpacity, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDispatch } from 'react-redux';
 
 export default function AllCategory() {
@@ -68,12 +67,11 @@ export default function AllCategory() {
     }
 
     return (
-        <SafeAreaView
-            edges={['top']}
+        <View
             style={{ flex: 1, backgroundColor: "white" }}
         >
-            <View style={{ marginHorizontal: 20 }}>
-                <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+            <View style={{ marginHorizontal: 10 }}>
+                <View style={{ flexDirection: 'row', justifyContent: 'center', marginVertical: 15 }}>
                     <ModalDateTransactions
                         titleStyle={{ fontWeight: 600, fontSize: 15 }}
                         label="Select Date"
@@ -129,7 +127,7 @@ export default function AllCategory() {
                     )}
                 />
             </View>
-        </SafeAreaView>
+        </View>
     )
 }
 

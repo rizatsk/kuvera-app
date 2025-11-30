@@ -6,6 +6,7 @@
     "start": "expo start",
     "reset-project": "node ./scripts/reset-project.js",
     "android": "expo run:android",
+    "build:android:production": "cd android && set ENVFILE=.env.production && ./gradlew app:assembleRelease",
     "build:android:sit": "eas build --profile preview --platform android",
     "build:ios:dev": "eas build --profile development --platform ios",
     "prebuild:android": "expo prebuild --platform android",

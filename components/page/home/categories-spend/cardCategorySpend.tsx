@@ -55,13 +55,13 @@ export default function CardCategoryOutput({
         <TouchableOpacity 
             activeOpacity={0.6} 
             onPress={handleButton}
-            style={{ paddingLeft: 5, paddingRight: 8, paddingVertical: 4, borderRadius: 10, borderColor: colorCard + 70, borderWidth: 2 }}>
+            style={{ flex: 1, paddingLeft: 5, paddingRight: 8, paddingVertical: 4, borderRadius: 10, borderColor: colorCard + 70, borderWidth: 2 }}>
             <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
                 <View style={{ backgroundColor: colorCard + 30, width: 50, height: 50, justifyContent: "center", alignItems: "center", borderRadius: 10 }}>
                     <IconComponent />
                 </View>
-                <View>
-                    <CustomText style={{ fontWeight: 600, fontSize: 14, textTransform: 'capitalize', color: colorFont }}>{title}</CustomText>
+                <View style={{ flex: 1, flexShrink: 1 }}>
+                    <CustomText style={{ fontWeight: 600, fontSize: 14, textTransform: 'capitalize', color: colorFont, flexWrap: 'wrap' }}>{title}</CustomText>
                     <CustomText style={{ fontWeight: "700", fontSize: 13, color: colorCard }}>{formatRupiah(money)}</CustomText>
                 </View>
             </View>

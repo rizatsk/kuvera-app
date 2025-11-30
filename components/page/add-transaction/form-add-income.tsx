@@ -67,7 +67,6 @@ export default function FormAddIncome() {
                 param: values,
                 successHandler: () => {
                     formikHelper.resetForm({ values: initialValuesForm });
-
                 },
                 goToPageSuccess,
             }) as any
