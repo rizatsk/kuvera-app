@@ -9,7 +9,6 @@ export async function ApiIHSGPrice(): Promise<DataStocksIDXType[]> {
             url: environment.IHSG_API_URL
         });
 
-        console.log("Hit API :", environment.IHSG_API_URL)
         const dataIhsg: DataStocksIDXType[] = result.data.map((ihsg: any) => {
             const percentage = (ihsg.Change / ihsg.Previous) * 100;
             return {

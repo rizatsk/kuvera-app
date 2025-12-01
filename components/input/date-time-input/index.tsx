@@ -53,6 +53,10 @@ const DateTimeInput: React.FunctionComponent<CalenderInputProps> = (props) => {
         }
     }, []);
 
+    useEffect(() => {
+        if (value) setDate(new Date(value))
+    }, [value])
+
 
     const onChange = (event: any, selectedDate?: Date) => {
         if (Platform.OS === 'android' && event.type === 'dismissed') {
