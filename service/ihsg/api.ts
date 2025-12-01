@@ -6,9 +6,10 @@ export async function ApiIHSGPrice(): Promise<DataStocksIDXType[]> {
     try {
         const { data: result } = await axios({
             method: 'GET',
-            url: environment.BASE_API_URL + "/service/price-ihsg"
+            url: environment.IHSG_API_URL
         });
 
+        console.log("Hit API :", environment.IHSG_API_URL)
         const dataIhsg: DataStocksIDXType[] = result.data.map((ihsg: any) => {
             const percentage = (ihsg.Change / ihsg.Previous) * 100;
             return {
