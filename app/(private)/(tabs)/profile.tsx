@@ -2,19 +2,13 @@ import CustomText from "@/components/custom-text";
 import AccountTabsCard from "@/components/page/profile/account-tabs";
 import ButtonLogout from "@/components/page/profile/button-logout";
 import OtherTabs from "@/components/page/profile/other-tabs";
+import PhotoProfile from "@/components/page/profile/photo-profile";
 import environment from "@/constants/environment";
 import { Colors } from "@/constants/theme";
-import { useAppSelector } from "@/states";
-import { AuthUserType } from "@/states/auth-user/type";
-import Feather from "@expo/vector-icons/Feather";
-import Ionicons from "@expo/vector-icons/Ionicons";
-import { Image } from "expo-image";
 import { ScrollView, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function ProfileScreen() {
-  const authUser: AuthUserType = useAppSelector((states) => states.authUser);
-
   return (
     <SafeAreaView
       edges={['top']}
@@ -22,28 +16,7 @@ export default function ProfileScreen() {
     >
       <ScrollView>
         {/* Photo user */}
-        <View style={{ marginHorizontal: 18, marginTop: 25, flexDirection: 'row', justifyContent: 'space-between' }}>
-          <View style={{ flexDirection: 'row', gap: 15, alignItems: 'center' }}>
-            <View style={styles.containerAvatar} >
-              <Image
-                style={{ height: 65, width: 65, borderRadius: 1000, overflow: 'hidden' }}
-                contentFit='contain'
-                source={authUser.photo_profile_url} />
-              <View style={styles.containerEdit}>
-                <Feather name="edit-3" size={20} color="grey" />
-              </View>
-            </View>
-            <View>
-              <CustomText style={{ fontWeight: 600, fontSize: 19, textTransform: 'capitalize' }}>{authUser.name}</CustomText>
-              <CustomText style={{ fontSize: 16, fontWeight: 500 }}>{authUser.email}</CustomText>
-            </View>
-          </View>
-          <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
-            <View style={styles.iconNotif}>
-              <Ionicons name="notifications" size={22} color={Colors.tealKuvera} />
-            </View>
-          </View>
-        </View>
+        <PhotoProfile />
         <AccountTabsCard />
         <OtherTabs />
         <ButtonLogout />
