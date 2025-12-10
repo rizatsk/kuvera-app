@@ -42,7 +42,7 @@ export default function EditCategory() {
             router.replace({
                 pathname: '/(private)/category/all-category'
             });
-            ToastAndroid.show('Success update category', 300);
+            ToastAndroid.show('Success update category', 500);
             return;
         } else if (isSameCategory.length > 0) {
             setError('Category is already available');
@@ -60,7 +60,7 @@ export default function EditCategory() {
                 router.replace({
                     pathname: '/(private)/category/all-category'
                 });
-                ToastAndroid.show('Success update category', 300)
+                ToastAndroid.show('Success update category', 500)
             }
         }) as any)
     };

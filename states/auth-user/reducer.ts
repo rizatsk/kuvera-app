@@ -8,6 +8,11 @@ function authUserReducer(
   switch (action.type) {
     case ActionReducer.SET_AUTH:
       return action.payload.user;
+    case ActionReducer.UPDATE_PROFILE_USER:
+      let user_update_profile = { ...initial }
+      if (action.payload.user_update.name) user_update_profile.name = action.payload.user_update.name;
+      if (action.payload.user_update.photo_profile_url) user_update_profile.photo_profile_url = action.payload.user_update.photo_profile_url;
+      return user_update_profile;
     case ActionReducer.UNSET_AUTH:
       return null;
     default:

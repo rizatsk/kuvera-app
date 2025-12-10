@@ -3,6 +3,7 @@ export const ActionReducer = {
 
     SET_AUTH: "SET_AUTH",
     UNSET_AUTH: "UNSET_AUTH",
+    UPDATE_PROFILE_USER: "UPDATE_PROFILE_USER",
 
     SET_LOADING: "SET_LOADING",
 
@@ -22,6 +23,7 @@ export enum ActionReducerType  {
 
     SET_AUTH = "SET_AUTH",
     UNSET_AUTH = "UNSET_AUTH",
+    UPDATE_PROFILE_USER = "UPDATE_PROFILE_USER",
 
     SET_LOADING = "SET_LOADING",
 

@@ -1,4 +1,4 @@
-import { getAccountGraphQl } from "@/service/account/graphQl";
+import { getAccountGraphQl } from "@/service/account/api";
 import { ActionReducer } from "../action";
 import { setAuthUserActionCreator } from "../auth-user/action";
 import { setLoading } from "../visible-loading/action";

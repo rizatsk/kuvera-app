@@ -25,7 +25,7 @@ export default function ButtonDeleteTransaction({ id }: ButtonDeleteTransactionP
                 router.push({
                     pathname: '/(private)/(tabs)/transaction',
                 });
-                ToastAndroid.show('Success delete transaction', 300)
+                ToastAndroid.show('Success delete transaction', 500)
             }
         }) as any);
     };

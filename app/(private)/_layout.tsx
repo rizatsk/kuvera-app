@@ -101,6 +101,13 @@ export default function PrivateLayout() {
                             ...OptionStackScreen,
                         }}
                     />
+                    <Stack.Screen
+                        name="update-profile/index"
+                        options={{
+                            title: "Update Profile",
+                            ...OptionStackScreen,
+                        }}
+                    />
                 </Stack>
             )}
         </>
