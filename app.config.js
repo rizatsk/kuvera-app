@@ -44,10 +44,18 @@ export default {
                 "expo-secure-store",
                 {
                     "configureAndroidBackup": true,
-                    "faceIDPermission": "Allow $(PRODUCT_NAME) to access your Face ID biometric data."
+                    "faceIDPermission": "Allow Kuvera to access your Face ID biometric data."
                 }
             ],
             ["@react-native-google-signin/google-signin"],
+            [
+                "expo-image-picker",
+                {
+                    "cameraPermission": "Allow Kuvera to access your camera",
+                    "photosPermission": "Allow Kuvera to access your microphone",
+                    "microphonePermission": "Allow Kuvera to access your microphone",
+                }
+            ],
         ],
         "experiments": {
             "typedRoutes": true,

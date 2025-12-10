@@ -36,7 +36,11 @@ export async function updateProfileApi({ name, photo_profile }: UpdateProfileApi
     try {
         const formData = new FormData();
         if (name) formData.append("name", name as string)
-        if (photo_profile) formData.append("photo_profile", photo_profile as File)
+        if (photo_profile) formData.append("photo_profile", {
+            uri: photo_profile.uri,
+            name: photo_profile.name,
+            type: photo_profile.type,
+        } as unknown as Blob);
 
         const { data: result } = await axios({
             method: 'PATCH',
@@ -47,7 +51,7 @@ export async function updateProfileApi({ name, photo_profile }: UpdateProfileApi
             },
             data: formData
         });
-        
+
         return result.data;
     } catch (error: any) {
         const response = error.response?.data;

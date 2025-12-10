@@ -8,7 +8,7 @@ export type GetAccountGraphQlResponse = {
 
 export type UpdateProfileApiParam = {
     name?: string | null, 
-    photo_profile?: File | null
+    photo_profile?: {uri: string, name: string, type: string} | null
 }
 
 export type UpdateProfileApiResponse = {

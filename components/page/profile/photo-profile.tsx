@@ -3,14 +3,18 @@ import { modalStyles } from '@/components/input/radio-input/style'
 import ModalKuvera from '@/components/modal-bottom'
 import { Colors } from '@/constants/theme'
 import { useAppSelector } from '@/states'
+import { asyncUpdateProfileUser } from '@/states/auth-user/action'
 import { AuthUserType } from '@/states/auth-user/type'
 import { Feather, Ionicons } from '@expo/vector-icons'
 import { Image } from 'expo-image'
-import React, { useState } from 'react'
-import { StyleSheet, TouchableOpacity, View } from 'react-native'
+import * as ImagePicker from 'expo-image-picker'
+import React, { useEffect, useState } from 'react'
+import { Alert, StyleSheet, ToastAndroid, TouchableOpacity, View } from 'react-native'
+import { useDispatch } from 'react-redux'
 
 export default function PhotoProfile() {
     const authUser: AuthUserType = useAppSelector((states) => states.authUser);
+    const dispatch = useDispatch();
     const [isModalVisible, setIsModalVisible] = useState(false);
 
     const selectOptions = [
@@ -18,15 +22,98 @@ export default function PhotoProfile() {
         { key: 'open-galery', value: 'Open Galery' },
     ];
 
-    const handleSubmit = (option: { key: string, value: string }) => {
-        console.log('Button submit', option);
+    useEffect(() => {
+        const retrivePending = async () => {
+            await ImagePicker.getPendingResultAsync();
+        };
+
+        retrivePending();
+    }, [])
+
+    const handleSubmit = async (option: { key: string, value: string }) => {
+        if (option.key === 'open-galery') {
+            await pickImage();
+        } else {
+            await pickCameraImage();
+        }
+
+        setIsModalVisible(false);
+    }
+
+    const pickImage = async () => {
+        const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+
+        if (!permissionResult.granted) {
+            Alert.alert('Permission required', 'Permission to access the media library is required.');
+            return;
+        }
+
+        const result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ['images'],
+            allowsEditing: true,
+            aspect: [1, 1],
+            quality: 1,
+            base64: false,
+        });
+
+        if (!result.canceled) {
+            const asset = result.assets[0];
+            dispatch(
+                asyncUpdateProfileUser({
+                    param: {
+                        photo_profile: {
+                            name: asset.fileName as string,
+                            uri: asset.uri,
+                            type: asset.mimeType as string
+                        },
+                    },
+                    successHandler: () => {
+                        ToastAndroid.show('Success update photo profile', 500)
+                    }
+                }) as any
+            )
+        }
+    }
+
+    const pickCameraImage = async () => {
+        const permissionResult = await ImagePicker.requestCameraPermissionsAsync();
+
+        if (!permissionResult.granted) {
+            Alert.alert('Permission required', 'Izin untuk **mengakses kamera** diperlukan untuk mengambil foto.');
+            return;
+        }
+
+        const result = await ImagePicker.launchCameraAsync({
+            mediaTypes: ['images'],
+            allowsEditing: true,
+            aspect: [1, 1],
+            quality: 1,
+        });
+
+        if (!result.canceled) {
+            const asset = result.assets[0];
+            dispatch(
+                asyncUpdateProfileUser({
+                    param: {
+                        photo_profile: {
+                            name: asset.fileName as string,
+                            uri: asset.uri,
+                            type: asset.mimeType as string
+                        },
+                    },
+                    successHandler: () => {
+                        ToastAndroid.show('Success update photo profile', 500)
+                    }
+                }) as any
+            )
+        }
     }
 
     return (
         <>
             <View style={{ marginHorizontal: 18, marginTop: 25, flexDirection: 'row', justifyContent: 'space-between' }}>
                 <View style={{ flexDirection: 'row', gap: 15, alignItems: 'center' }}>
-                    <TouchableOpacity 
+                    <TouchableOpacity
                         onPress={() => setIsModalVisible(true)}
                         activeOpacity={0.6}
                         style={styles.containerAvatar} >
@@ -63,7 +150,6 @@ export default function PhotoProfile() {
                             onPress={() => handleSubmit(option)}
                         >
                             <CustomText style={modalStyles.optionLabel}>{option.value}</CustomText>
-                            <Feather name="chevron-right" size={24} color="black" />
                         </TouchableOpacity>
                     ))}
                 </View>
