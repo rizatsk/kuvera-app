@@ -6,23 +6,33 @@ import { useAppSelector } from '@/states'
 import { AuthUserType } from '@/states/auth-user/type'
 import Ionicons from '@expo/vector-icons/Ionicons'
 import { Image } from 'expo-image'
+import { router } from 'expo-router'
 import React from 'react'
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, TouchableOpacity, View } from 'react-native'
 
 export default function HeaderHome() {
   const authUser: AuthUserType = useAppSelector((states) => states.authUser);
   const greeting = getGreeting('en');
 
+  const handlePhotoProfile = () => {
+    router.push({
+      pathname: '/(private)/(tabs)/profile'
+    })
+  };
+
   return (
       <View style={styles.Header}>
         {/* User */}
         <View style={{ flexDirection: 'row', alignItems: 'center', gap: 14, width: "85%" }}>
-          <View style={{ backgroundColor: Colors.tealKuvera, height: 55, width: 55, alignItems: 'center', borderRadius: 10000, overflow: 'hidden' }} >
+          <TouchableOpacity 
+            onPress={handlePhotoProfile}
+            activeOpacity={0.6}
+            style={{ backgroundColor: Colors.tealKuvera, height: 55, width: 55, alignItems: 'center', borderRadius: 10000, overflow: 'hidden' }} >
             <Image
               style={{ height: 55, width: 55 }}
               contentFit='contain'
               source={authUser.photo_profile_url} />
-          </View>
+          </TouchableOpacity>
           <View style={{flex: 1}}>
             <CustomText style={{ fontWeight: 500, fontSize: 13, color: Colors.tealKuvera }}>{greeting}</CustomText>
             <CustomText

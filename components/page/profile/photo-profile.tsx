@@ -76,10 +76,11 @@ export default function PhotoProfile() {
     }
 
     const pickCameraImage = async () => {
-        const permissionResult = await ImagePicker.requestCameraPermissionsAsync();
+        const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+        const permissionCameraResult = await ImagePicker.requestCameraPermissionsAsync();
 
-        if (!permissionResult.granted) {
-            Alert.alert('Permission required', 'Izin untuk **mengakses kamera** diperlukan untuk mengambil foto.');
+        if (!permissionResult.granted || !permissionCameraResult.granted) {
+            Alert.alert('Permission required', 'Permission to access the media library and camera is required.');
             return;
         }
 
