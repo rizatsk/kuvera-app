@@ -2,6 +2,7 @@ import CustomText from '@/components/custom-text'
 import { modalStyles } from '@/components/input/radio-input/style'
 import ModalKuvera from '@/components/modal-bottom'
 import { Colors } from '@/constants/theme'
+import manipulateImageToWebP from '@/helper/manipulateImage'
 import { useAppSelector } from '@/states'
 import { asyncUpdateProfileUser } from '@/states/auth-user/action'
 import { AuthUserType } from '@/states/auth-user/type'
@@ -58,12 +59,14 @@ export default function PhotoProfile() {
 
         if (!result.canceled) {
             const asset = result.assets[0];
+            const manipulatedImage = await manipulateImageToWebP(asset.uri);
+
             dispatch(
                 asyncUpdateProfileUser({
                     param: {
                         photo_profile: {
                             name: asset.fileName as string,
-                            uri: asset.uri,
+                            uri: manipulatedImage.uri,
                             type: asset.mimeType as string
                         },
                     },
@@ -93,12 +96,14 @@ export default function PhotoProfile() {
 
         if (!result.canceled) {
             const asset = result.assets[0];
+            const manipulatedImage = await manipulateImageToWebP(asset.uri);
+
             dispatch(
                 asyncUpdateProfileUser({
                     param: {
                         photo_profile: {
                             name: asset.fileName as string,
-                            uri: asset.uri,
+                            uri: manipulatedImage.uri,
                             type: asset.mimeType as string
                         },
                     },
