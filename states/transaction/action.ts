@@ -104,6 +104,7 @@ export function asyncGetTransactionsByCategory({
     return async (dispatch: any) => {
         setIsLoading(true);
         try {
+            console.log("Data param send transaction by category", param)
             const response = await getTransactionsByCategory(param);
 
             successHandler(response);

@@ -8,18 +8,20 @@ import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons'
 import { router } from 'expo-router'
 import React from 'react'
 import { TouchableOpacity, View } from 'react-native'
+import { DateTrx } from '../../transactions/date-transaction/type'
 
 type CardProps = {
     id: string,
     account_id: string,
     title: string,
     money: string,
-    icon?: string,
     color: string,
+    dateTrx: DateTrx,
+    icon?: string,
     status?: boolean,
 }
 export default function CardCategoryOutput({
-    id, account_id, title, money, icon, color, status = true
+    id, account_id, title, money, color, dateTrx, icon, status = true
 }: CardProps) {
     const colorCard = status ? color : Colors.grey[500];
     const colorFont = status ? "black" : Colors.grey[500];
@@ -42,6 +44,7 @@ export default function CardCategoryOutput({
         router.push({
             pathname: '/(private)/category/transaction-by-category',
             params: {
+                dateTrx: JSON.stringify(dateTrx),
                 category_id: id,
                 category_name: title,
                 account_id: account_id,

@@ -1,5 +1,4 @@
 import CustomText from '@/components/custom-text';
-import ButtonMore from '@/components/page/transaction-by-category/button-more';
 import CardTransaction from '@/components/page/transactions/card-transaction/card-transaction';
 import NoHaveTransaction from '@/components/page/transactions/card-transaction/no-have-transaction';
 import SkeletonCardTransaction from '@/components/page/transactions/card-transaction/skeleton';
@@ -11,19 +10,13 @@ import { formatRupiah } from '@/helper/format-rupiah';
 import { TransactionsByCategory } from '@/service/transaction/type';
 import { asyncGetTransactionsByCategory } from '@/states/transaction/action';
 import { useLocalSearchParams, useNavigation } from 'expo-router';
-import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import { FlatList, RefreshControl, StyleSheet, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 
 export default function TransactionByCategory() {
-    const { category_id, category_name, account_id, status, total_spent = 0 } = useLocalSearchParams();
+    const { dateTrx: dateTrxParam, category_id, category_name, account_id, status, total_spent = 0 } = useLocalSearchParams();
     const navigation = useNavigation()
-    useEffect(() => {
-        navigation.setOptions({
-            title: `Category ${capitalize(category_name as string)}`,
-        });
-    }, [category_id]);
 
     const dispatch = useDispatch();
     const [isLoading, setIsLoading] = useState(true);
@@ -31,15 +24,18 @@ export default function TransactionByCategory() {
     const [totalSaldo, setTotalSaldo] = useState(0);
 
     // Select Date
-    const [dateTrx, setDateTrx] = useState<DateTrx>({
-        start: moment().format('YYYY-MM') + '-01 00:00:00',
-        end: moment().format('YYYY-MM-DD') + ' 23:59:59',
-        keyString: 'ThisMonth'
-    })
+    const dateTrxParent = JSON.parse(dateTrxParam as any) as DateTrx;
+    const [dateTrx, setDateTrx] = useState<DateTrx>(dateTrxParent);
+
+    useEffect(() => {
+        navigation.setOptions({
+            title: `Category ${capitalize(category_name as string)}`,
+        });
+    }, [category_id, dateTrxParam]);
+
     const onSelectDate = (dataDateTrx: DateTrx) => {
         setDateTrx(dataDateTrx);
     };
-
 
     useEffect(() => {
         getTransactionByCategory();
@@ -77,26 +73,16 @@ export default function TransactionByCategory() {
 
     return (
         <View
-            style={{ flex: 1, backgroundColor: "white", paddingVertical: 10 }}
+            style={{ flex: 1, backgroundColor: "white" }}
         >
-            <View style={{ marginHorizontal: 20 }}>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <View style={{ flex: 1, alignItems: 'center' }}>
-                        <ModalDateTransactions
-                            titleStyle={{ fontWeight: 600, fontSize: 15 }}
-                            label="Select Date"
-                            value={dateTrx}
-                            onSelectDate={onSelectDate}
-                        />
-                    </View>
-                    {account_id !== 'all' && (
-                        <ButtonMore 
-                            id_category={category_id as string} 
-                            category_name={category_name as string} 
-                            status={status as string}
-                            total_spent={total_spent as number}
-                        />
-                    )}
+            <View style={{ marginHorizontal: 10 }}>
+                <View style={{ flexDirection: 'row', justifyContent: 'center', marginVertical: 15 }}>
+                    <ModalDateTransactions
+                        titleStyle={{ fontWeight: 600, fontSize: 15 }}
+                        label="Select Date"
+                        value={dateTrx}
+                        onSelectDate={onSelectDate}
+                    />
                 </View>
                 <View style={styles.monthTrxContainer}>
                     <CustomText style={{ fontWeight: 500, fontSize: 15 }}>Total :</CustomText>
@@ -110,7 +96,7 @@ export default function TransactionByCategory() {
                     keyExtractor={(item, index) =>
                         isLoading ? index.toString() : item!.id
                     }
-                    contentContainerStyle={{ gap: 2 }}
+                    contentContainerStyle={{ gap: 2, marginTop: 20 }}
                     renderItem={({ item, index }) =>
                         isLoading ?
                             <SkeletonCardTransaction /> :
@@ -149,7 +135,6 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.tealKuvera + 30
     },
     monthTrxContainer: {
-        marginVertical: 10,
         backgroundColor: Colors.white[200],
         paddingHorizontal: 20,
         paddingVertical: 8,
