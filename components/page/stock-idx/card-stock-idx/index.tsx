@@ -3,7 +3,8 @@ import { Colors } from '@/constants/theme';
 import { asyncGetStockIDXPrice } from '@/states/stock-idx/action';
 import { DataStocksIDXType } from '@/states/stock-idx/type';
 import Entypo from '@expo/vector-icons/Entypo';
-import React, { useEffect, useState } from 'react';
+import { useFocusEffect } from 'expo-router';
+import React, { useCallback, useEffect, useState } from 'react';
 import { FlatList, RefreshControl, StyleSheet, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import IsNotFoundStockIDX from './is-not-found';
@@ -29,10 +30,25 @@ export default function ListCardStockIdx({ keyword }: ListCardStockIdxProps) {
     const [dataStockIDXSearch, setDataStockIDXSearch] = useState<DataStocksIDXType[]>([]);
     const [skeletonLoading, setSkeletonLoading] = useState(true)
     const [refresh, setRefresh] = useState(false);
+    const API_FETCH_INTERVAL = 3000;
 
-    useEffect(() => {
-        getDataStockIDX()
-    }, [])
+    useFocusEffect(
+        useCallback(() => {
+            // 1. Panggil data segera saat layar fokus
+            getDataStockIDX();
+
+            // 2. Set up interval untuk periodic hit API
+            const intervalId = setInterval(() => {
+                getDataStockIDXPeriod();
+            }, API_FETCH_INTERVAL);
+
+            // 3. Cleanup function: bersihkan interval saat layar BLUR (tidak fokus)
+            return () => {
+                console.log('Interval dibersihkan. Layar tidak fokus.');
+                clearInterval(intervalId);
+            };
+        }, [])
+    )
 
     useEffect(() => {
         if (dataStockIDX.length > 0) {
@@ -66,6 +82,16 @@ export default function ListCardStockIdx({ keyword }: ListCardStockIdxProps) {
                 setDataStockIDX,
                 setDataStockIDXSearch,
                 setSkeletonLoading
+            }) as any
+        )
+    }
+
+    function getDataStockIDXPeriod() {
+        dispatch(
+            asyncGetStockIDXPrice({
+                setDataStockIDX,
+                setDataStockIDXSearch,
+                setSkeletonLoading: () => {}
             }) as any
         )
     }
