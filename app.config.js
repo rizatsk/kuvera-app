@@ -2,7 +2,7 @@ export default {
     "expo": {
         "name": "Kuvera",
         "slug": "Kuvera",
-        "version": "1.1.0",
+        "version": "1.2.1",
         "orientation": "portrait",
         "icon": "./assets/images/foreground-icon.png",
         "scheme": "kuveraapp",
