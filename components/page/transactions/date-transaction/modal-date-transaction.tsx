@@ -84,8 +84,8 @@ const ModalDateTransactions: React.FunctionComponent<DatePickerProps> = (props) 
       })
     } else if (range.start) {
       handleSubmit({
-        start: range.start,
-        end: null,
+        start: range.start + " 00:00:00",
+        end: range.start + " 23:59:59",
         keyString: `${moment(range.start).format('DD-MM-YYYY')}`
       })
     } else {
