@@ -40,6 +40,6 @@ app-example
 
 # generated native folders
 .env*.local
-.env*
+.env.development
 android
 ios

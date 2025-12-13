@@ -13,6 +13,12 @@ export default {
             "bundleIdentifier": "com.rjshubkuvera",
             "supportsTablet": true,
             "googleServicesFile": "./GoogleService-Info.plist",
+            "infoPlist": {
+                "ITSAppUsesNonExemptEncryption": false,
+                "NSPhotoLibraryUsageDescription": "Kuvera needs access to your photos to upload receipt images and manage your expense records.",
+                "NSCameraUsageDescription": "Kuvera needs access to your camera to capture receipt photos for expense tracking.",
+                "NSMicrophoneUsageDescription": "Kuvera uses the microphone only when recording audio is required."
+            }
         },
         "android": {
             "versionCode": 1,
