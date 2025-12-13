@@ -48,6 +48,7 @@ export type GetTransactionType = {
 export type TransactionsByCategory = {
     id: string,
     category_id: string,
+    category_name: string,
     money_spent: number,
     notes: string,
     type: TypeTransaction,

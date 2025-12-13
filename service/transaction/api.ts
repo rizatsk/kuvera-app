@@ -112,7 +112,7 @@ export async function getTransactionsByCategory(param: GetTransactionsByCategory
                     category_id: "${param.category_id}"
                     start_date: "${param.start_date}"
                     end_date: "${param.end_date}"
-                ) { id category_id money_spent notes type created_dt } }`,
+                ) { id category_id category_name money_spent notes type created_dt } }`,
                 variables: {}
             })
         });

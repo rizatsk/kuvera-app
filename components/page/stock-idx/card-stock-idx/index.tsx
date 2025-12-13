@@ -1,5 +1,6 @@
 import CustomText from '@/components/custom-text';
 import { Colors } from '@/constants/theme';
+import closeOrBidIHSG from '@/helper/closeOrBidIHSG';
 import { asyncGetStockIDXPrice } from '@/states/stock-idx/action';
 import { DataStocksIDXType } from '@/states/stock-idx/type';
 import Entypo from '@expo/vector-icons/Entypo';
@@ -39,7 +40,8 @@ export default function ListCardStockIdx({ keyword }: ListCardStockIdxProps) {
 
             // 2. Set up interval untuk periodic hit API
             const intervalId = setInterval(() => {
-                getDataStockIDXPeriod();
+                const bidOrClose = closeOrBidIHSG();
+                if (bidOrClose === 'Bid') getDataStockIDXPeriod();
             }, API_FETCH_INTERVAL);
 
             // 3. Cleanup function: bersihkan interval saat layar BLUR (tidak fokus)

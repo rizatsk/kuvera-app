@@ -7,6 +7,7 @@ import { DateTrx } from '@/components/page/transactions/date-transaction/type';
 import { Colors } from '@/constants/theme';
 import capitalize from '@/helper/capitalize';
 import { formatRupiah } from '@/helper/format-rupiah';
+import totalByType from '@/helper/totalByType';
 import { TransactionsByCategory } from '@/service/transaction/type';
 import { asyncGetTransactionsByCategory } from '@/states/transaction/action';
 import { useLocalSearchParams, useNavigation } from 'expo-router';
@@ -15,13 +16,16 @@ import { FlatList, RefreshControl, StyleSheet, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 
 export default function TransactionByCategory() {
-    const { dateTrx: dateTrxParam, category_id, category_name, account_id, status, total_spent = 0 } = useLocalSearchParams();
+    const { dateTrx: dateTrxParam, category_id, category_name } = useLocalSearchParams();
     const navigation = useNavigation()
 
     const dispatch = useDispatch();
     const [isLoading, setIsLoading] = useState(true);
     const [transactions, setTransactions] = useState<TransactionsByCategory[]>([]);
-    const [totalSaldo, setTotalSaldo] = useState(0);
+    const [totalSaldo, setTotalSaldo] = useState({
+        in: 0,
+        out: 0
+    });
 
     // Select Date
     const dateTrxParent = JSON.parse(dateTrxParam as any) as DateTrx;
@@ -45,12 +49,16 @@ export default function TransactionByCategory() {
         if (!isLoading) {
             if (transactions.length > 0) {
                 let total = 0;
-                transactions.map((trx) => {
-                    total += trx.money_spent
-                });
-                setTotalSaldo(total);
+                const { totalIn, totalOut } = totalByType(transactions)
+                setTotalSaldo({
+                    in: totalIn,
+                    out: totalOut
+                })
             } else {
-                setTotalSaldo(0)
+                setTotalSaldo({
+                    in: 0,
+                    out: 0
+                })
             }
         }
     }, [transactions])
@@ -87,7 +95,8 @@ export default function TransactionByCategory() {
                 <View style={styles.monthTrxContainer}>
                     <CustomText style={{ fontWeight: 500, fontSize: 15 }}>Total :</CustomText>
                     <View>
-                        <CustomText style={styles.textSaldo}>{formatRupiah(totalSaldo)}</CustomText>
+                        <CustomText style={styles.textSaldo}>Saldo in: {formatRupiah(totalSaldo.in)}</CustomText>
+                        <CustomText style={styles.textSaldo}>Saldo out: {formatRupiah(totalSaldo.out)}</CustomText>
                     </View>
                 </View>
                 <FlatList<TransactionsByCategory | undefined>

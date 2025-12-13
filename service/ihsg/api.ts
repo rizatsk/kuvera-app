@@ -1,4 +1,5 @@
 import environment from '@/constants/environment';
+import closeOrBidIHSG from '@/helper/closeOrBidIHSG';
 import { DataStocksIDXType } from '@/states/stock-idx/type';
 import axios from 'axios';
 
@@ -11,11 +12,12 @@ export async function ApiIHSGPrice(): Promise<DataStocksIDXType[]> {
 
         const dataIhsg: DataStocksIDXType[] = result.data.map((ihsg: any) => {
             const percentage = (ihsg.Change / ihsg.Previous) * 100;
+            const key = closeOrBidIHSG();
             return {
                 No: ihsg.No,
                 StockName: ihsg.StockName,
                 StockCode: ihsg.StockCode,
-                Close: ihsg.Close,
+                Close: ihsg[key],
                 Previous: ihsg.Previous,
                 Change: ihsg.Change,
                 Percentage: Math.floor(percentage * 100) / 100,
